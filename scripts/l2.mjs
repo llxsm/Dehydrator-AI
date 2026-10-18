@@ -16,6 +16,16 @@ import path from 'node:path';
 import { loadDotEnv, resolveInput } from '../lib/env.mjs';
 import { dehydrate } from '../lib/pipeline.mjs';
 import { PARTY_NAMES } from '../lib/engine.mjs';
+
+const CONS = {
+  lose_qualification: '失去资格/身份',
+  lose_right: '失去权利/救济',
+  lose_money: '失去钱',
+  lose_data: '交出数据',
+  requirement: '要你动手',
+  procedural: '程序性',
+  other: '其他',
+};
 import { hasLLM, describeConfig } from '../lib/llm.mjs';
 
 loadDotEnv();
@@ -86,8 +96,9 @@ const ms = Date.now() - t0;
 console.log('');
 console.log('模式    ' + r.mode + (r.model ? '（' + r.model + '）' : ''));
 console.log('耗时    ' + ms + ' ms');
-console.log('漏斗    ' + r.stats.chars.toLocaleString() + ' 字 → 候选 ' + r.stats.candidates
-  + ' 条 → 有后果 ' + r.stats.consequential + ' 条 → 输出 ' + r.picks.length + ' 条');
+console.log('漏斗    ' + r.stats.chars.toLocaleString() + ' 字 → 候选 ' + r.stats.candidatesRaw + ' 条'
+  + (r.stats.duplicates ? '（去重 ' + r.stats.duplicates + ' 条）' : '')
+  + ' → ' + r.stats.candidates + ' 组 → 有后果 ' + r.stats.consequential + ' 条 → 输出 ' + r.picks.length + ' 条');
 if (r.error) console.log('错误    ' + r.error);
 console.log('');
 console.log(r.summary);
@@ -110,7 +121,8 @@ if (!r.picks.length) {
     console.log(badge + p.rank + '. ' + p.title + (flags.length ? '   [' + flags.join(' · ') + ']' : ''));
     if (p.plain) console.log('   ' + p.plain);
     console.log('   「' + p.text.replace(/\s+/g, ' ').slice(0, 70) + (p.text.length > 70 ? '…' : '') + '」');
-    console.log('   ' + p.consequence);
+    console.log('   ' + (CONS[p.consequence] || p.consequence)
+      + (p.occurrences > 1 ? '　·　这条规则在文中出现 ' + p.occurrences + ' 次' : ''));
     console.log('');
   }
 }
