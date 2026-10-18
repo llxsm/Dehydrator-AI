@@ -13,7 +13,7 @@
 //   --offline                   强制不调模型，只看 L1 结果
 import fs from 'node:fs';
 import path from 'node:path';
-import { loadDotEnv } from '../lib/env.mjs';
+import { loadDotEnv, resolveInput } from '../lib/env.mjs';
 import { dehydrate } from '../lib/pipeline.mjs';
 import { PARTY_NAMES } from '../lib/engine.mjs';
 import { hasLLM, describeConfig } from '../lib/llm.mjs';
@@ -21,7 +21,7 @@ import { hasLLM, describeConfig } from '../lib/llm.mjs';
 loadDotEnv();
 
 const args = process.argv.slice(2);
-const file = args.find((a) => !a.startsWith('--'));
+const file = resolveInput(args.find((a) => !a.startsWith('--')));
 const opt = Object.fromEntries(
   args.filter((a) => a.startsWith('--')).map((a) => {
     const [k, v] = a.replace(/^--/, '').split('=');

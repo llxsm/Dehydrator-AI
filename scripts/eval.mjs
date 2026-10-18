@@ -4,9 +4,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { scan } from '../lib/match.mjs';
+import { resolveInput, resolveRoot } from '../lib/env.mjs';
 
 const detail = process.argv.includes('--detail');
-const goldPath = 'corpus/gold.tsv';
+const goldPath = resolveInput('corpus/gold.tsv');
 const raw = fs.readFileSync(goldPath, 'utf8');
 
 const rows = raw.split('\n')
@@ -16,7 +17,7 @@ const rows = raw.split('\n')
     return { id, doc, label, myCategory, prefix };
   });
 
-const dir = 'corpus/raw';
+const dir = resolveRoot('corpus/raw');
 const cache = new Map();
 
 // 去掉所有空白后的副本 + 位置映射，用来对抗 PDF 转换插入的空格

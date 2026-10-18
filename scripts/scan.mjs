@@ -2,8 +2,9 @@
 // 用法: node scripts/scan.mjs <文件> [--top=6] [--show=8]
 import fs from 'node:fs';
 import { scan } from '../lib/match.mjs';
+import { resolveInput } from '../lib/env.mjs';
 
-const file = process.argv[2];
+const file = resolveInput(process.argv[2]);
 if (!file) { console.error('用法: node scripts/scan.mjs <文件>'); process.exit(1); }
 const opt = Object.fromEntries(process.argv.slice(3).map((a) => {
   const [k, v] = a.replace(/^--/, '').split('=');
