@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Dehydrator AI · 文字脱水机（离线版）</title>
+<title>Dehydrator AI · 文字脱水机</title>
 <style>
   :root{
     --bg:#0d0f12; --panel:#15181d; --line:#242a33; --text:#e8eaed; --dim:#8b95a5;
@@ -67,8 +67,8 @@
 <body>
 <div class="wrap">
   <header>
-    <h1>文字<span>脱水</span>机 <span class="badge">离线版 · 零 API</span></h1>
-    <p>把长文本榨成一句真话和一个动作。本页面不联网、不调用任何模型，断网也能用。</p>
+    <h1>文字<span>脱水</span>机 <span class="badge">零依赖 · 断网可用</span></h1>
+    <p>把长文本榨成一句真话和一个动作。纯前端运行，不上传你的文本。</p>
   </header>
 
   <div class="panel">
@@ -87,13 +87,13 @@
       </select>
       <button class="primary" id="run">开始脱水</button>
     </div>
-    <div class="note" id="hint">提示：也可以把 corpus/raw/ 里那 10 万字的学生手册拖进来试试。</div>
+    <div class="note" id="hint">也可以把任意 .txt 拖进来——学生手册、租房合同、用户协议都行。文本不会离开你的浏览器。</div>
   </div>
 
   <div id="out" class="hidden">
     <div class="stats" id="stats"></div>
 
-    <h2>你真该看的这几句 <em id="candCount"></em></h2>
+    <h2>你真该看的这几句 <em id="candCount"></em> <em>离线排序 · 只给事实，不含模型撰写的一句话</em></h2>
     <div id="cands"></div>
 
     <h2>原文 <em>命中处已标出，红=高危，橙=中，蓝=泡泡词</em></h2>
