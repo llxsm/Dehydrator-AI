@@ -1,0 +1,21 @@
+// === 密钥与环境变量：这些永远不能进仓库 ===
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets.json
+
+// === 依赖与构建产物 ===
+node_modules/
+.next/
+out/
+dist/*
+!dist/dehydrator-offline.html
+*.log
+.DS_Store
+Thumbs.db
+
+// === 本地数据：语料可能含敏感内容，默认不入库 ===
+input/
+corpus/private/

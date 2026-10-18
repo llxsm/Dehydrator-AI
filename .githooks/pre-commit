@@ -1,0 +1,24 @@
+#!/bin/sh
+# 启用方式（每个人各跑一次）：
+#   git config core.hooksPath .githooks
+#
+# 这个钩子只做快速检查：词典 JSON 格式 + 密钥泄露。
+# 不跑构建，避免提交过程中改动工作区文件。
+
+echo "[pre-commit] 正在检查词典格式与密钥..."
+
+if ! command -v node >/dev/null 2>&1; then
+  echo "[pre-commit] 没找到 node，跳过检查。"
+  echo "[pre-commit] 提醒：请自己确认没有把 .env / key 提交上去。"
+  exit 0
+fi
+
+node scripts/check-all.mjs --fast
+if [ $? -ne 0 ]; then
+  echo ""
+  echo "[pre-commit] 检查未通过，提交已阻止。"
+  echo "[pre-commit] 如果确认是误报，可以用：git commit --no-verify"
+  exit 1
+fi
+
+echo "[pre-commit] 通过。"
