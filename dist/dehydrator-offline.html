@@ -137,7 +137,7 @@
         <b>123</b><span>条候选</span><span class="arw">→</span>
         <b>33</b><span>条有后果</span><span class="arw">→</span>
         <span class="end">9 条你该看的</span>
-        <span class="speed"><b>2.8</b><span>秒<em>含模型排序</em></span></span>
+        <span class="speed"><b>约 3</b><span>秒<em>含模型排序</em></span></span>
       </div>
       <div class="bench">同样的内容，你按 300 字/分钟读完，要 <b>11 小时</b>。</div>
     </div>
@@ -532,7 +532,7 @@ function render(r) {
     ['#', r.text.length.toLocaleString(), '字数'],
     ['#', r.sentences.toLocaleString(), '句'],
     ['#', r.candidates.length, '候选句'],
-    ['#', pct(r.candidates.length, real.length) + '%', '压缩到'],
+    ['#', r.candidates.length + ' / ' + real.length, '句候选'],
     ['#', r.clusters.length, '命中簇'],
     ['#', r.gaps.name, '判定语域'],
   ].map(function (x) {
