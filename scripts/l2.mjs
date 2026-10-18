@@ -78,7 +78,7 @@ else if (!hasLLM()) {
   console.log('⚠ 没有检测到 key，会自动走离线降级。');
   console.log('  在项目根目录建 .env.local，写入其中一种：');
   console.log('    LLM_BASE_URL=https://api.deepseek.com');
-  console.log('    LLM_API_KEY=sk-你的key');
+  console.log('    LLM_API_KEY=<粘贴你的 key>');
   console.log('    LLM_MODEL=deepseek-chat');
   console.log('  或者只写一行：DEEPSEEK_API_KEY=sk-你的key');
   console.log('');

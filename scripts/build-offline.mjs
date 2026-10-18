@@ -42,11 +42,82 @@ try {
   if (real.length > 900) presets[1] = { name: '用户协议（真实节选 1400 字）', text: real.slice(0, 1400) };
 } catch { /* 没语料就用手写那段 */ }
 
+// 示例卡上的数字与两条要点：构建时从语料真跑一遍，避免写着「真实运行」却对不上
+const RANK = { lose_qualification: 5, requirement: 4, lose_money: 3, lose_data: 3, procedural: 1, other: 2 };
+// 卡片主条（示例）对应的原文，用来避免下面两条和它撞车
+const HERO_PROBE = '从处理、处分决定或者复查决定送达之日起，学生在10日内未提出申诉的视为放弃申诉，学校不再受理其提出的申诉';
+
+// 去掉「第X条」「1.」「（一）」这类编号前缀，压成一行，过长截断
+function tidy(s, max = 42) {
+  let x = String(s).replace(/\s+/g, '');
+  x = x.replace(/^第[一二三四五六七八九十百零〇\d]+条/, '');
+  x = x.replace(/^[（(][一二三四五六七八九十\d]+[)）]/, '');
+  x = x.replace(/^\d+[.．、]/, '');
+  x = x.replace(/^[、，。；：]/, '');
+  return x.length > max ? x.slice(0, max) + '…' : x;
+}
+
+// 后果键：不同触发条件但后果相同（都是「放弃入学资格」），只算一件事
+function consequenceKey(s) {
+  const x = String(s).replace(/\s+/g, '');
+  const m = x.match(/(取消[^，。；：、]{0,8}|视为放弃[^，。；：、]{0,8}|视为[^，。；：、]{0,8}|不予[^，。；：、]{0,8}|不再受理[^，。；：、]{0,8}|作废|开除学籍|退学)/);
+  return m ? m[1] : null;
+}
+
+let HC = { chars: '198,931', cand: '123', cons: '33', m1: '重修报名逾期视为自动放弃', m2: '缺考或作弊取消下学期补考资格' };
+try {
+  const { scan } = await import('../lib/match.mjs');
+  const { consequenceOf, dedupeCandidates, bigrams, jaccard } = await import('../lib/pipeline.mjs');
+  const rawTxt = fs.readFileSync(R('corpus/raw/学生手册2025.txt'), 'utf8');
+  const r = scan(rawTxt);
+  const withC = r.candidates.map((c) => ({ ...c, consequence: consequenceOf(c.text, 'student') }));
+  const deduped = dedupeCandidates(withC);
+  const cons = deduped.filter((c) => c.consequence.kind !== 'other' && c.consequence.kind !== 'procedural').length;
+
+  // 排序：优先「要求你行动」的（读起来最像一句提醒），再按后果轻重
+  const heroGrams = bigrams(HERO_PROBE);
+  const ranked = deduped
+    .filter((c) => c.consequence.kind !== 'other' && c.consequence.kind !== 'procedural')
+    .filter((c) => jaccard(bigrams(c.text), heroGrams) < 0.45)   // 不和示例撞车
+    .sort((a, b) => (Number(b.consequence.requiresAction) - Number(a.consequence.requiresAction))
+      || (RANK[b.consequence.kind] - RANK[a.consequence.kind])
+      || (b.weight - a.weight));
+
+  const picked = [];
+  const usedKeys = new Set();   // 后果键：后果相同的只留一条
+  for (const c of ranked) {
+    if (picked.length >= 2) break;
+    const key = consequenceKey(c.text);
+    if (key && usedKeys.has(key)) continue;
+    if (picked.some((p) => jaccard(bigrams(c.text), bigrams(p.text)) >= 0.45)) continue;
+    if (key) usedKeys.add(key);
+    picked.push(c);
+  }
+
+  HC = {
+    chars: rawTxt.length.toLocaleString('en-US'),
+    cand: String(r.candidates.length),
+    cons: String(cons),
+    m1: picked[0] ? tidy(picked[0].text) : HC.m1,
+    m2: picked[1] ? tidy(picked[1].text) : HC.m2,
+  };
+  console.log('  示例卡（实测）：' + HC.chars + ' 字 / 候选 ' + HC.cand + ' / 有后果 ' + HC.cons);
+  console.log('  要点 1：' + HC.m1);
+  console.log('  要点 2：' + HC.m2);
+} catch (e) {
+  console.log('  ! 语料不可用，示例卡沿用固定内容：' + e.message.slice(0, 60));
+}
+
 const out = tpl
   .replace('__LEXICON__', () => JSON.stringify(lex))
   .replace('__RULES__', () => JSON.stringify(rules))
   .replace('__PRESETS__', () => JSON.stringify(presets))
   .replace('__ENGINE__', () => engineBundle)
+  .replace('__HC_CHARS__', HC.chars)
+  .replace('__HC_CAND__', HC.cand)
+  .replace('__HC_CONS__', HC.cons)
+  .replace('__HC_M1__', () => HC.m1)
+  .replace('__HC_M2__', () => HC.m2)
   .replace('__LEXVER__', String(lex.entries.length))
   .replace('__RULEVER__', String(rules.rules.length));
 

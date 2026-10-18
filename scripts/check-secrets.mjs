@@ -3,7 +3,7 @@
 // 用法: node scripts/check-secrets.mjs
 import fs from 'node:fs';
 import path from 'node:path';
-import { execSync } from 'node:child_process';
+import { execSync, execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -24,8 +24,21 @@ const walk = (dir) => {
     const full = path.join(dir, e.name);
     if (e.isDirectory()) { walk(full); continue; }
     if (e.name === '.env.example') continue;
-    if (e.name.startsWith('.env') && e.name !== '.env.example') {
-      problems.push({ file: path.relative(ROOT, full), name: '.env 文件存在', fix: '确认它被 .gitignore 覆盖（本项目已覆盖）' });
+    if (e.name.startsWith('.env')) {
+      // .env 类文件按设计就要放密钥，跳过内容扫描；
+      // 只确认它没有被 git 跟踪（一旦被跟踪才是真事故）
+      const rel = path.relative(ROOT, full);
+      let tracked = false;
+      try {
+        execFileSync('git', ['ls-files', '--error-unmatch', rel], { cwd: ROOT, stdio: 'ignore' });
+        tracked = true;
+      } catch { tracked = false; }
+      if (tracked) {
+        problems.push({ file: rel, name: '.env 文件已被 git 跟踪', fix: '立刻 git rm --cached 它，并从历史中清除；然后轮换 key' });
+      } else {
+        console.log('  – ' + rel + ' 存在，但未被 git 跟踪（正确）');
+      }
+      continue;
     }
     if (!TEXT_EXT.has(path.extname(e.name)) && !e.name.startsWith('.env')) continue;
     if (fs.statSync(full).size > 2_000_000) continue;
@@ -45,7 +58,7 @@ walk(ROOT);
 let history = [];
 try {
   execSync('git rev-parse --is-inside-work-tree', { cwd: ROOT, stdio: 'ignore' });
-  const out = execSync('git log -p --all -S "sk-" --oneline', { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] });
+  const out = execSync('git log -p --all -G "sk-[A-Za-z0-9_-]{16,}" --oneline', { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] });
   history = out.split('\n').filter(Boolean);
 } catch { /* 不是 git 仓库，跳过 */ }
 
