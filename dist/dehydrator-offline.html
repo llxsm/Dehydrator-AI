@@ -6,8 +6,8 @@
 <title>Dehydrator AI · 文字脱水机</title>
 <style>
   :root{
-    --bg:#0d0f12; --panel:#15181d; --line:#242a33; --text:#e8eaed; --dim:#8b95a5;
-    --w3:#ff5c5c; --w2:#ffa94d; --w1:#8b95a5; --dil:#7aa2f7; --ok:#4ade80;
+    --bg:#0a1018; --panel:#111a24; --line:#1e2a38; --text:#e6edf5; --dim:#7e93a8;
+    --w3:#ff6b6b; --w2:#e8b04b; --w1:#7e93a8; --dil:#a78bfa; --ok:#4ade80;
   }
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--text);
@@ -20,7 +20,7 @@
   .badge{display:inline-block;margin-left:10px;padding:2px 8px;border:1px solid var(--line);
     border-radius:99px;font-size:11px;color:var(--dim);vertical-align:middle}
   .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;margin-top:22px}
-  textarea{width:100%;min-height:170px;background:#0b0d10;color:var(--text);border:1px solid var(--line);
+  textarea{width:100%;min-height:170px;background:#070c12;color:var(--text);border:1px solid var(--line);
     border-radius:10px;padding:14px;font:14px/1.75 inherit;resize:vertical;outline:none}
   textarea:focus{border-color:#3a4452}
   .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
@@ -28,33 +28,33 @@
     color:var(--dim);font-size:13px;cursor:pointer;transition:.15s}
   .chip:hover{border-color:#3a4452;color:var(--text)}
   .grow{flex:1}
-  button.primary{padding:10px 22px;border:0;border-radius:10px;background:linear-gradient(180deg,#ffb454,#ff9f2e);
-    color:#1a1205;font-weight:700;font-size:15px;cursor:pointer}
+  button.primary{padding:10px 22px;border:0;border-radius:10px;background:linear-gradient(180deg,#79c8ff,#3aa6f0);
+    color:#04121e;font-weight:700;font-size:15px;cursor:pointer}
   button.primary:disabled{opacity:.45;cursor:default}
   button.ghost{padding:8px 14px;border:1px solid var(--line);border-radius:9px;background:transparent;
     color:var(--dim);font-size:13px;cursor:pointer}
   button.ghost:hover{color:var(--text);border-color:#3a4452}
-  select{background:#0b0d10;color:var(--text);border:1px solid var(--line);border-radius:9px;
+  select{background:#070c12;color:var(--text);border:1px solid var(--line);border-radius:9px;
     padding:8px 10px;font-size:13px;outline:none}
   .stats{display:flex;flex-wrap:wrap;gap:26px;margin-top:20px;padding:16px 18px;border-radius:12px;
-    background:#101317;border:1px solid var(--line)}
+    background:#0d1620;border:1px solid var(--line)}
   .stat b{display:block;font-size:24px;line-height:1.2;letter-spacing:-.5px}
   .stat s{display:block;text-decoration:none;color:var(--dim);font-size:12px;margin-top:2px}
   h2{font-size:16px;margin:26px 0 10px;display:flex;align-items:center;gap:10px}
   h2 em{font-style:normal;color:var(--dim);font-weight:400;font-size:13px}
   .cand{border:1px solid var(--line);border-left:3px solid var(--w2);border-radius:10px;
-    padding:12px 14px;margin-bottom:9px;background:#101317}
+    padding:12px 14px;margin-bottom:9px;background:#0d1620}
   .cand.w3{border-left-color:var(--w3)} .cand.w2{border-left-color:var(--w2)} .cand.w1{border-left-color:var(--w1)}
   .cand.dil{border-left-color:var(--dil)}
   .cand .meta{font-size:12px;color:var(--dim);margin-bottom:5px}
   .cand .meta b{color:var(--text);font-weight:600}
-  .cand .tag{display:inline-block;padding:1px 7px;border-radius:5px;background:#1d222a;
+  .cand .tag{display:inline-block;padding:1px 7px;border-radius:5px;background:#16202b;
     color:var(--dim);font-size:11px;margin-right:6px}
-  .cand .hit{color:#ffd8a8;background:#2a1f10;padding:0 3px;border-radius:3px}
+  .cand .hit{color:#bfe3ff;background:#10263a;padding:0 3px;border-radius:3px}
   .cand .sentence{font-size:14px;color:#c9cfd8}
   .doc{max-height:420px;overflow:auto;background:#0b0d10;border:1px solid var(--line);
     border-radius:10px;padding:16px;font-size:14px;line-height:1.9;white-space:pre-wrap}
-  mark{background:#2a1f10;color:#ffd8a8;border-radius:3px;padding:0 2px}
+  mark{background:#10263a;color:#bfe3ff;border-radius:3px;padding:0 2px}
   mark.w3{background:#31181a;color:#ff9d9d}
   .gaps{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
   .gap{padding:5px 11px;border-radius:8px;font-size:13px;border:1px solid #3a2226;background:#1d1417;color:#ff9d9d}
@@ -481,11 +481,11 @@ function render(r) {
       var fact = b.kind === 'power'
         ? DH.PARTY_NAMES[b.holder] + ' 有权'
         : '后果由 ' + DH.PARTY_NAMES[b.bearing] + ' 承担';
-      tags.push('<span class="tag" style="color:#9db8ff;background:#141c2b">' + fact + '</span>');
+      tags.push('<span class="tag" style="color:#bfe3ff;background:#10263a">' + fact + '</span>');
     }
     var sent = esc(c.text).replace(new RegExp(esc(top.matched).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')), '<span class="hit">$&</span>');
     return '<div class="cand ' + cls + '"><div class="meta">' + tags.join('') +
-      (top.needsStance ? '<span class="tag" style="color:#ffd8a8">需判立场</span>' : '') +
+      (top.needsStance ? '<span class="tag" style="color:#e8b04b">需判立场</span>' : '') +
       '</div><div class="sentence">' + sent + '</div></div>';
   }).join('') || '<div class="note">这段没有命中任何套路。</div>';
 
