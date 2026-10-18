@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env node
+#!/usr/bin/env node
 // 一条命令证明这个仓库是活的：不需要装依赖、不需要 key。
 // 用法: node scripts/selftest.mjs
 import fs from 'node:fs';
@@ -7,6 +7,10 @@ import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { dehydrate } from '../lib/pipeline.mjs';
 import { hasLLM, describeConfig } from '../lib/llm.mjs';
+import { loadDotEnv } from '../lib/env.mjs';
+
+// 先把 .env.local 读进 process.env，否则第 7 步永远显示「未配置」
+const envLoaded = loadDotEnv();
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const R = (p) => path.join(ROOT, p);
@@ -89,6 +93,7 @@ step('6/7', '模型传输自检（本地 mock，不需要 key）');
 }
 
 step('7/7', '模型配置');
+console.log('  – ' + (envLoaded ? '.env.local 已读取' : '没有 .env.local 文件，只读环境变量'));
 console.log('  – ' + describeConfig());
 if (hasLLM()) {
   ok('检测到 key，L2 排序可用');
