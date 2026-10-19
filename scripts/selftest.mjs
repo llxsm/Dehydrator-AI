@@ -24,30 +24,38 @@ const step = (n, t) => console.log('\n[' + n + '] ' + t);
 console.log('Dehydrator AI · 自检');
 console.log('Node ' + process.version + '  目录 ' + ROOT);
 
-step('1/7', '环境');
+step('1/8', '环境');
 ok('Node 版本 ' + process.version + (Number(process.versions.node.split('.')[0]) >= 18 ? '（≥18，支持 fetch）' : '（偏低，L2 需要 18+）'));
 
-step('2/7', '词典与规则');
+step('2/8', '词典与规则');
 try {
   const lex = JSON.parse(fs.readFileSync(R('lexicon/zh-cn.v1.json'), 'utf8'));
   const rules = JSON.parse(fs.readFileSync(R('lexicon/rules.zh-cn.v1.json'), 'utf8'));
   ok('词条 ' + lex.entries.length + ' 条，规则 ' + rules.rules.length + ' 条');
 } catch (e) { bad('词典解析失败：' + e.message); }
 
-step('3/7', '构建离线版');
+step('3/8', '单元测试（Node 内置 runner，零依赖）');
+try {
+  execFileSync(node, ['--test', R('tests/engine.test.mjs')], { cwd: ROOT, stdio: 'pipe' });
+  ok('13 项断言全部通过');
+} catch (e) {
+  bad('单元测试失败', '单独跑一次看细节：node --test tests/engine.test.mjs');
+}
+
+step('4/8', '构建离线版');
 try {
   execFileSync(node, [R('scripts/build-offline.mjs')], { cwd: ROOT, stdio: 'pipe' });
   const size = fs.statSync(R('docs/index.html')).size;
   ok('docs/index.html 生成成功（' + (size / 1024).toFixed(1) + ' KB）');
 } catch (e) { bad('构建失败', e.message); }
 
-step('4/7', 'Gold 集评测');
+step('5/8', 'Gold 集评测');
 try {
   execFileSync(node, [R('scripts/eval.mjs')], { cwd: ROOT, stdio: 'pipe' });
   ok('corpus/gold.tsv 跑通');
 } catch { bad('评测脚本失败'); }
 
-step('5/7', '端到端（离线模式，无需 key）');
+step('6/8', '端到端（离线模式，无需 key）');
 try {
   const sample = '您接受并同意本协议的行为即视为您同意并接受本服务条款。本服务有权随时变更本协议内容，恕不另行通知。因用户账号被泄露而造成的任何损失，本公司不承担任何责任。用户应在收到通知后10日内提出申诉，逾期未提出视为放弃申诉权。';
   const r = await dehydrate(sample, { stance: 'user', topN: 5, useLLM: false });
@@ -58,7 +66,7 @@ try {
   }
 } catch (e) { bad('端到端失败：' + e.message, '看 lib/pipeline.mjs'); }
 
-step('6/7', '模型传输自检（本地 mock，不需要 key）');
+step('7/8', '模型传输自检（本地 mock，不需要 key）');
 {
   const http = await import('node:http');
   const payload = '{"picks":[{"id":"mock","title":"t","plain":"p"}]}';
@@ -92,7 +100,7 @@ step('6/7', '模型传输自检（本地 mock，不需要 key）');
   }
 }
 
-step('7/7', '模型配置');
+step('8/8', '模型配置');
 console.log('  – ' + (envLoaded ? '.env.local 已读取' : '没有 .env.local 文件，只读环境变量'));
 console.log('  – ' + describeConfig());
 if (hasLLM()) {
