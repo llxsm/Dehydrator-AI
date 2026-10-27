@@ -59,6 +59,19 @@ const server = http.createServer(async (req, res) => {
   const url = new URL(req.url, 'http://' + (req.headers.host || 'localhost'));
 
   if (req.method === 'POST' && url.pathname === '/api/dehydrate') {
+    // 只服务同源的页面：别的网站不能借用户的浏览器 POST 过来烧 key。
+    // curl / 脚本没有 Origin 头，照常可用。
+    const origin = req.headers.origin;
+    if (origin) {
+      try {
+        if (new URL(origin).host !== req.headers.host) {
+          return send(res, 403, 'application/json', JSON.stringify({ error: '跨源请求已拒绝' }));
+        }
+      } catch {
+        return send(res, 400, 'application/json', JSON.stringify({ error: 'Origin 不合法' }));
+      }
+    }
+
     const ip = req.socket.remoteAddress || '?';
     const limited = rateLimited(ip);
     if (limited) {
@@ -78,7 +91,9 @@ const server = http.createServer(async (req, res) => {
         topN: Number(payload.topN || 10),
         useLLM: !limited,
       });
-      send(res, 200, 'application/json', JSON.stringify(out));
+      // pool 是内部候选池，页面用不到，别往网络上送
+      const { pool, ...wire } = out;
+      send(res, 200, 'application/json', JSON.stringify(wire));
     } catch (e) {
       send(res, 500, 'application/json', JSON.stringify({ error: String(e.message || e) }));
     }

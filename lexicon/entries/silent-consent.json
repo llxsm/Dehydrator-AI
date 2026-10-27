@@ -1,0 +1,238 @@
+{
+  "category": "silent_consent",
+  "registers": [
+    "legal",
+    "client"
+  ],
+  "note": "沉默即同意：不回复、不操作、继续使用，就被算作答应。",
+  "entries": [
+    {
+      "id": "sc-01",
+      "category": "silent_consent",
+      "subtype": "renewal",
+      "label": "自动续约",
+      "weight": 3,
+      "terms": [
+        "自动续约",
+        "自动顺延",
+        "到期自动续期",
+        "自动展期"
+      ],
+      "why": "一次不吭声，就多绑你一年。",
+      "advice": "在日历上标出异议窗口的截止日，提前一周提醒自己。",
+      "example": "本协议到期前三十日双方未提出异议的，自动续约一年。"
+    },
+    {
+      "id": "sc-02",
+      "category": "silent_consent",
+      "subtype": "deemed",
+      "label": "未提异议视为同意",
+      "weight": 3,
+      "terms": [
+        "未提出书面异议视为",
+        "未提出异议视为同意",
+        "视为同意并继续",
+        "未提出书面异议",
+        "未提出异议"
+      ],
+      "why": "你的沉默被条款写成了你的同意。",
+      "advice": "任何『视为同意』的窗口，都要留一次书面回复。",
+      "example": "逾期未提出书面异议的，视为同意变更。"
+    },
+    {
+      "id": "sc-03",
+      "category": "silent_consent",
+      "subtype": "deemed",
+      "label": "逾期未回复视为确认",
+      "weight": 3,
+      "terms": [
+        "逾期未回复视为",
+        "未回复视为确认",
+        "未答复视为认可"
+      ],
+      "why": "等你忙完再回，已经默认通过了。",
+      "advice": "设自动提醒，不要靠记性。",
+      "example": "三个工作日内未回复，视为确认。"
+    },
+    {
+      "id": "sc-04",
+      "category": "silent_consent",
+      "subtype": "usage",
+      "label": "继续使用视为接受",
+      "weight": 2,
+      "terms": [
+        "继续使用视为接受",
+        "使用即视为同意",
+        "视为您已同意"
+      ],
+      "why": "你只是继续用它，就被算作签署了一份新条款。",
+      "advice": "收到条款变更通知时，主动回一句『不同意』。",
+      "example": "您继续使用本服务，即视为接受更新后的协议。"
+    },
+    {
+      "id": "sc-05",
+      "category": "silent_consent",
+      "subtype": "ui",
+      "label": "默认勾选",
+      "weight": 2,
+      "terms": [
+        "默认勾选",
+        "已为您勾选",
+        "自动勾选"
+      ],
+      "why": "你没有主动选择，但系统记录你选择过。",
+      "advice": "注册和续费时手动取消勾选，并截图留证。",
+      "example": "已为您勾选开通自动续费，可随时关闭。"
+    },
+    {
+      "id": "sc-06",
+      "category": "silent_consent",
+      "subtype": "no_refund",
+      "label": "一经售出不退",
+      "weight": 3,
+      "terms": [
+        "一经售出不退",
+        "概不退款",
+        "不支持退款",
+        "售出后不予退还"
+      ],
+      "why": "交易的全部风险单向由你承担。",
+      "advice": "先买最小额度试，不要一次充年费。",
+      "example": "虚拟商品一经售出，概不退款。"
+    },
+    {
+      "id": "sc-07",
+      "category": "silent_consent",
+      "subtype": "waiver",
+      "label": "视为放弃",
+      "weight": 3,
+      "terms": [
+        "视为放弃",
+        "视为您放弃",
+        "未申请视为放弃"
+      ],
+      "why": "你没抓住的窗口，被定义为主动放弃。",
+      "advice": "把关键期限一次性写进项目日历。",
+      "example": "期满未申请续期的，视为放弃相关权益。"
+    },
+    {
+      "id": "sc-08",
+      "category": "silent_consent",
+      "subtype": "deadline",
+      "label": "逾期不予受理",
+      "weight": 2,
+      "terms": [
+        "逾期不予受理",
+        "超过期限不再受理",
+        "逾期作废"
+      ],
+      "why": "一次错过，就没有第二次机会。",
+      "advice": "确认『逾期』的起算点是什么事件。",
+      "example": "超过七个工作日提交的申诉，逾期不予受理。"
+    },
+    {
+      "id": "sc-09",
+      "category": "silent_consent",
+      "subtype": "notice",
+      "label": "通知发出即送达",
+      "weight": 3,
+      "terms": [
+        "通知发出即视为送达",
+        "发送即视为送达",
+        "公告即视为通知"
+      ],
+      "why": "你没看到，也算收到了。",
+      "advice": "绑定真实在用的邮箱，并养成定期检查的习惯。",
+      "example": "通知一经发送至预留邮箱，即视为送达。"
+    },
+    {
+      "id": "sc-10",
+      "category": "silent_consent",
+      "subtype": "subscription",
+      "label": "未取消即视为订阅",
+      "weight": 3,
+      "terms": [
+        "未取消即视为",
+        "到期未取消"
+      ],
+      "why": "『不取消』成为默认的付费意愿表达。",
+      "advice": "订阅当天就设取消提醒，不要等到月底。",
+      "example": "到期未取消的，视为继续订阅并按月扣费。"
+    },
+    {
+      "id": "sc-11",
+      "category": "silent_consent",
+      "subtype": "consent",
+      "label": "视为已充分理解",
+      "weight": 2,
+      "terms": [
+        "视为您已充分理解",
+        "视为已阅读并同意",
+        "您已确认知悉"
+      ],
+      "why": "一次点击，覆盖了你从没读过的全部条款。",
+      "advice": "至少读『责任』和『终止』两节，其余可略。",
+      "example": "点击即视为您已充分理解并同意全部条款。"
+    },
+    {
+      "id": "sc-12",
+      "category": "silent_consent",
+      "subtype": "trial",
+      "label": "试用自动转付费",
+      "weight": 3,
+      "terms": [
+        "试用期结束自动转为",
+        "免费期结束自动",
+        "自动转为付费"
+      ],
+      "why": "从免费变付费，不需要你再同意一次。",
+      "advice": "试用当天就设取消提醒，别等系统通知。",
+      "example": "七日试用期结束后自动转为付费套餐。"
+    },
+    {
+      "id": "sc-13",
+      "category": "silent_consent",
+      "subtype": "deemed",
+      "label": "N 日内未提出视为认可",
+      "weight": 3,
+      "terms": [
+        "日内未提出视为",
+        "未在日内提出"
+      ],
+      "regex": "未在.{0,6}日内提出|.{0,4}日内未提出",
+      "why": "极短的窗口加上沉默同意，你几乎必然错过。",
+      "advice": "把具体天数抄下来，换算成自己的最后期限。",
+      "example": "交付后三日内未提出异议的，视为认可。"
+    },
+    {
+      "id": "sc-14",
+      "category": "silent_consent",
+      "subtype": "change",
+      "label": "公告即时生效",
+      "weight": 3,
+      "terms": [
+        "公告后即生效",
+        "自公告之日起生效",
+        "发布即生效"
+      ],
+      "why": "生效时间早于你知情的时间。",
+      "advice": "要求变更设过渡期，并保留按旧条款履约的权利。",
+      "example": "本规则自公告之日起生效，不另行通知。"
+    },
+    {
+      "id": "sc-15",
+      "category": "silent_consent",
+      "subtype": "termination",
+      "label": "单方解除且不担责",
+      "weight": 3,
+      "terms": [
+        "有权单方解除",
+        "解除本协议且不承担",
+        "终止服务且无需"
+      ],
+      "why": "对方可以随时退出，而且不用为你已投入的成本负责。",
+      "advice": "要求对等解除权，并写明已发生工作的结算方式。",
+      "example": "平台有权单方解除本协议且不承担任何责任。"
+    }
+  ]
+}
