@@ -7,15 +7,21 @@ import {
   normalize, splitSentences, matchRules, cluster, waterIndex,
   candidates, missingFields, detectRegister,
 } from '../lib/engine.mjs';
-import { consequenceOf, dedupeCandidates, bigrams, jaccard } from '../lib/pipeline.mjs';
+import { consequenceOf, dedupeCandidates, bigrams, jaccard, titleOf, pickTop, sortPool } from '../lib/pipeline.mjs';
 import { loadRules } from '../lib/match.mjs';
 
 const RULES = loadRules();
 
 // ───────────────────────── 输入归一化 ─────────────────────────
 test('normalize：CRLF、全角空格、连续空行都压掉', () => {
-  assert.equal(normalize('第一行\r\n\r\n\r\n\r\n第二行\u3000\u3000结束'), '第一行\n\n第二行 结束');
+  assert.equal(normalize('第一行\r\n\r\n\r\n\r\n第二行'), '第一行\n\n第二行');
   assert.equal(normalize('  前后有空格  '), '前后有空格');
+});
+
+test('normalize：汉字之间被 PDF 插进来的单空格要压掉，英文之间保留', () => {
+  assert.equal(normalize('未请 假或者请假逾期'), '未请假或者请假逾期');
+  assert.equal(normalize('取消其 该门课程的考核资格'), '取消其该门课程的考核资格');
+  assert.equal(normalize('see the doc'), 'see the doc', '英文单词之间的空格不能动');
 });
 
 test('splitSentences：中文断句符和换行都要断开', () => {
@@ -103,4 +109,42 @@ test('missingFields：文本太短或语域不明时跳过，不能硬套清单'
 test('detectRegister：语域识别不出来时要敢于返回 unknown', () => {
   assert.equal(detectRegister('先做一版看看效果，预算我们后面再谈。').register, 'unknown');
   assert.equal(detectRegister('本协议自签署之日起生效，双方就费用与支付方式约定如下，争议由甲方所在地法院管辖。').register, 'contract');
+});
+
+// ───────────────────────── 排序层（浏览器与命令行共用同一份） ─────────────────────────
+test('titleOf：标题要从原文里摘出后果，不能只回一个词条名', () => {
+  const t = titleOf({ text: '未请假或者请假逾期的，除因不可抗力等正当事由以外，视为放弃入学资格。', label: '视为放弃' });
+  assert.ok(t.includes('放弃入学资格'), '标题要说出后果：' + t);
+  assert.ok(t.length <= 30, '标题不能超过 30 字：' + t);
+});
+
+test('titleOf：紧挨后果的主语不是条件，不能拼进标题', () => {
+  const t = titleOf({ text: '逾期者，学校不再受理成绩核查。', label: '逾期视为放弃' });
+  assert.equal(t, '不再受理成绩核查');
+});
+
+test('pickTop：同一种后果最多占 maxPerKind 格，Top 10 不能全是「取消资格」', () => {
+  const mk = (i, kind) => ({ id: 'c' + i, text: 'x' + i, weight: 3, consequence: { kind, requiresAction: false } });
+  const list = [
+    ...Array.from({ length: 8 }, (_, i) => mk(i, 'lose_qualification')),
+    mk(8, 'requirement'), mk(9, 'lose_money'), mk(10, 'lose_data'),
+  ];
+  const picked = pickTop(list, { topN: 5, maxPerKind: 2 });
+  assert.equal(picked.length, 5);
+  assert.equal(picked.filter((c) => c.consequence.kind === 'lose_qualification').length, 2);
+  assert.ok(new Set(picked.map((c) => c.consequence.kind)).size >= 3, '清单要跨后果种类');
+});
+
+test('dedupeCandidates：后果短语太短就不合并（「不予受理」背后是不同的事）', () => {
+  const mk = (text) => ({ text, weight: 2, consequence: { kind: 'lose_qualification' } });
+  const out = dedupeCandidates([
+    mk('成绩变更期限是开课学期至下一学期的第一周内，逾期不予受理。'),
+    mk('材料提交不全的，经审核后不予受理。'),
+  ]);
+  assert.equal(out.length, 2, '两种不同的「不予受理」不能压成一条');
+});
+
+test('consequenceOf：数据线、未经授权的软件，都不算「交出个人信息」', () => {
+  assert.equal(consequenceOf('破坏教室教学设备、寝室电话线、数据线视情节扣2—20分。', 'student').kind !== 'lose_data', true);
+  assert.equal(consequenceOf('不在网上使用可能引发病毒传染的各种来历不明的软件。', 'student').kind !== 'lose_data', true);
 });

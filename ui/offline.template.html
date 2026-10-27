@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230a1018'/%3E%3Crect x='7' y='10' width='18' height='3' rx='1.5' fill='%235eb8ff'/%3E%3Crect x='7' y='15' width='11' height='3' rx='1.5' fill='%235eb8ff' opacity='.75'/%3E%3Crect x='7' y='20' width='5' height='3' rx='1.5' fill='%235eb8ff' opacity='.45'/%3E%3C/svg%3E">
-<meta name="description" content="把读不完的长文，变成 9 句你必须看的话。19.9 万字的学生手册，本地 3 秒内筛出你真正要看的那几条。纯前端，文本不出浏览器。">
+<meta name="description" content="把读不完的长文，变成 10 条你必须看的话。19.9 万字的学生手册，本地 3 秒内筛出你真正要看的那几条。纯前端，文本不出浏览器。">
 <meta property="og:title" content="Dehydrator AI · 文字脱水机">
-<meta property="og:description" content="把读不完的长文，变成 9 句你必须看的话。">
+<meta property="og:description" content="把读不完的长文，变成 10 条你必须看的话。">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary">
 <title>Dehydrator AI · 文字脱水机</title>
@@ -110,6 +110,28 @@
   .bench{text-align:right;font-size:11.5px;color:var(--dim);margin-top:8px}
   .bench b{color:var(--w2);font-weight:700}
 
+  /* 清单卡片（SPEC 3.2：标题 / 人话 / 原文 / 事实标签） */
+  .cards{display:flex;flex-direction:column;gap:10px}
+  .card{border:1px solid var(--line);border-left:3px solid var(--w2);border-radius:12px;
+    padding:13px 16px;background:#0d1620}
+  .card.first{border-left-color:var(--w3);background:#121a22}
+  .card .head{display:flex;align-items:baseline;gap:9px}
+  .card .n{color:var(--dim);font-size:12px;min-width:16px;font-variant-numeric:tabular-nums}
+  .card .t{font-size:15px;font-weight:700;letter-spacing:-.2px;line-height:1.45}
+  .card .p{color:#c9d4e0;font-size:13.5px;margin:6px 0 0 25px}
+  .card .q{color:var(--dim);font-size:12.5px;border-left:1px dashed var(--line);
+    padding-left:11px;margin:10px 0 0 25px;line-height:1.7}
+  .card .q mark{background:#10263a;color:#bfe3ff;padding:0 2px;border-radius:3px}
+  .card .tags{display:flex;flex-wrap:wrap;gap:6px;margin:9px 0 0 25px}
+  .card .tags span{font-size:11px;padding:2px 8px;border-radius:5px;background:#16202b;color:var(--dim)}
+  .card .tags span.warn{background:#31181a;color:#ff9d9d}
+  .card .tags span.act{background:#2a2410;color:#e8b04b}
+  .flag{font-size:11px;color:#ff9d9d;border:1px solid #3a2226;background:#1d1417;
+    border-radius:5px;padding:1px 7px;white-space:nowrap}
+  details.cos{margin-top:20px;border-top:1px solid var(--line);padding-top:14px}
+  details.cos summary{cursor:pointer;color:var(--dim);font-size:13px;outline:none}
+  details.cos summary:hover{color:var(--text)}
+
   /* 主按钮 */
   .cta{display:block;width:100%;margin-top:14px;padding:15px;border:0;border-radius:11px;
     background:linear-gradient(180deg,#79c8ff,#3aa6f0);color:#04121e;
@@ -124,7 +146,7 @@
       <div class="mark"><i></i><i></i><i></i></div>
       <div>
         <h1 class="big">文字<span>脱水</span>机</h1>
-        <div class="sub">Dehydrator AI　·　把读不完的长文，变成 9 句你必须看的话</div>
+        <div class="sub">Dehydrator AI　·　把读不完的长文，变成 10 条你必须看的话</div>
       </div>
       <span class="badge">零依赖 · 断网可用</span>
     </div>
@@ -146,7 +168,7 @@
         <b>__HC_CHARS__</b><span>字</span><span class="arw">→</span>
         <b>__HC_CAND__</b><span>条候选</span><span class="arw">→</span>
         <b>__HC_CONS__</b><span>条有后果</span><span class="arw">→</span>
-        <span class="end">9 条你该看的</span>
+        <span class="end">10 条你该看的</span>
         <span class="speed"><b>约 3</b><span>秒<em>含模型排序</em></span></span>
       </div>
       <div class="bench">同样的内容，你按 300 字/分钟读完，要 <b>11 小时</b>。</div>
@@ -162,6 +184,12 @@
       <span class="chip" data-preset="2">甲方·先做一版看看</span>
       <span class="grow"></span>
       <label class="chip">载入 .txt<input id="file" type="file" accept=".txt,.md" style="display:none"></label>
+      <select id="stance" title="同一句话，站的位置不同，结论就不同">
+        <option value="student">我的立场：学生</option>
+        <option value="user" selected>我的立场：用户</option>
+        <option value="a">我的立场：甲方</option>
+        <option value="b">我的立场：乙方</option>
+      </select>
       <select id="reg">
         <option value="auto">自动识别语域</option>
         <option value="recruit">招聘 / 招募</option>
@@ -176,9 +204,16 @@
   <div id="out" class="hidden">
     <div id="warn" class="warnbox hidden"></div>
     <div class="stats" id="stats"></div>
+    <div class="note" id="modeNote"></div>
 
-    <h2>你真该看的这几句 <em id="candCount"></em> <em>离线排序 · 只给事实，不含模型撰写的一句话</em></h2>
-    <div id="cands"></div>
+    <h2>你真该看的这几句 <em id="repCount"></em></h2>
+    <div class="cards" id="cards"></div>
+    <div class="note" id="stanceNote"></div>
+
+    <details class="cos">
+      <summary>没进清单的命中 <em id="restCount"></em>　·　展开看全文命中了什么</summary>
+      <div id="rest" style="margin-top:10px"></div>
+    </details>
 
     <h2>原文 <em>命中处已标出，红=高危，橙=中，蓝=泡泡词</em></h2>
     <div class="doc" id="doc"></div>
@@ -197,7 +232,8 @@
     <div><b>__LEXVER__</b><span>条套路词条</span></div>
     <div><b>__RULEVER__</b><span>条共现规则</span></div>
     <div><b>29</b><span>条人工标注</span></div>
-    <div><b>0</b><span>条误报</span></div>
+    <div><b>0</b><span>条硬误报</span></div>
+    <div><b>8</b><span>条边界样本（另计）</span></div>
     <div><b>本地</b><span>文本不出浏览器</span></div>
   </footer>
 </div>
@@ -232,23 +268,51 @@ $('file').onchange = function (e) {
 
 $('clear').onclick = function () { $('input').value = ''; $('out').classList.add('hidden'); last = null; };
 
+// 页面被 serve.mjs 服务着的时候，能借到模型排序（L2）；双击打开或断网时，
+// 下面这套纯函数排序照样出完整报告。两条路径共用 lib/rank.mjs 的同一份判断。
+var API = null;
+fetch('/api/health').then(function (r) { return r.json(); })
+  .then(function (j) { if (j && j.ok) API = j; })
+  .catch(function () { API = null; });
+
+function analyze(raw, stance) {
+  var r = DH.scanText(LEX, RULES, raw);
+  var reg = $('reg').value;
+  if (reg !== 'auto') r.gaps = DH.missingFields(r.text, reg);
+  var prep = DH.preparePool(r, { stance: stance, lexicon: LEX, rulebook: RULES });
+  return { scan: r, report: DH.buildOfflineReport(prep, { stance: stance, topN: 10 }) };
+}
+
 function runNow() {
   var raw = $('input').value.trim();
   var btn = $('run');
   if (!raw) { $('hint').textContent = '先粘一段文本进来。'; return; }
   if (raw.length < 40) { $('hint').textContent = '太短了，至少 40 个字才看得出结构。'; return; }
   var label = btn.textContent;
+  var stance = $('stance').value;
   btn.disabled = true;
   btn.textContent = '脱水中…';
   // 先让浏览器画出禁用态，再跑同步计算，否则看不到任何反馈
   requestAnimationFrame(function () {
-    var r = DH.scanText(LEX, RULES, raw);
-    var reg = $('reg').value;
-    if (reg !== 'auto') r.gaps = DH.missingFields(r.text, reg);
-    last = r;
-    render(r);
+    var out = analyze(raw, stance);
+    last = { scan: out.scan, report: out.report };
+    render(out.scan, out.report);
     btn.disabled = false;
     btn.textContent = label;
+
+    if (API && API.llm && raw.length <= (API.maxChars || 20000)) {
+      $('modeNote').textContent = '模型排序中…（' + (API.config || '') + '）';
+      fetch('/api/dehydrate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: raw, stance: stance, topN: 10, name: '粘贴的文本' }),
+      }).then(function (r) { return r.json(); })
+        .then(function (rep) {
+          if (rep && rep.picks && rep.picks.length) { last.report = rep; render(last.scan, rep); }
+          else { $('modeNote').textContent = '模型没给出结果，以上是离线排序。'; }
+        })
+        .catch(function () { $('modeNote').textContent = '模型没应答，以上是离线排序。'; });
+    }
   });
 }
 $('run').onclick = runNow;
@@ -256,8 +320,38 @@ $('input').addEventListener('keydown', function (e) {
   if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') { e.preventDefault(); runNow(); }
 });
 
-function render(r) {
+var STANCE_NAME = { student: '学生', user: '用户', a: '甲方', b: '乙方' };
+var MODE_TEXT = {
+  live: '模型排序 · 标题和人话由模型按原文写，每条都能逐字校验',
+  fallback: '离线排序 · 本地词典 + 确定性规则挑出，未经模型改写',
+  fallback_error: '离线排序 · 模型调用失败，已自动降级（报告依然完整）',
+};
+
+function cardHTML(p, i) {
+  var tags = [];
+  if (p.consequenceName) {
+    tags.push('<span class="' + (p.consequence === 'lose_qualification' ? 'warn' : '') + '">' + p.consequenceName + '</span>');
+  }
+  if (p.requiresAction) tags.push('<span class="act">要求你行动</span>');
+  if (p.bearing && DH.PARTY_NAMES[p.bearing]) {
+    tags.push('<span>' + (p.bearingKind === 'power'
+      ? DH.PARTY_NAMES[p.bearingHolder] + ' 有权'
+      : '后果由 ' + DH.PARTY_NAMES[p.bearing] + ' 承担') + '</span>');
+  }
+  if (p.favorsReader) tags.push('<span>这条对你是保护</span>');
+  if (p.occurrences > 1) tags.push('<span>同后果 ' + p.occurrences + ' 处</span>');
+  return '<div class="card' + (i === 0 ? ' first' : '') + '">'
+    + '<div class="head"><span class="n">' + (i + 1) + '</span><span class="t">' + esc(p.title) + '</span>'
+    + (i === 0 ? '<span class="flag">如果只看一条</span>' : '') + '</div>'
+    + (p.plain ? '<div class="p">' + esc(p.plain) + '</div>' : '')
+    + '<div class="q">「' + esc(p.text) + '」</div>'
+    + (tags.length ? '<div class="tags">' + tags.join('') + '</div>' : '')
+    + '</div>';
+}
+
+function render(r, report) {
   $('out').classList.remove('hidden');
+  var st = report.stats;
 
   // 低命中不等于干净，可能是我还不认识这类文本 —— 必须说出来
   var warn = $('warn');
@@ -273,48 +367,32 @@ function render(r) {
   var real = DH.splitSentences(r.text).filter(function (s) {
     return r.text.slice(s.start, s.end).trim().length >= 15;
   });
-  var byCat = {};
-  r.clusters.forEach(function (c) { byCat[c.primary.category] = (byCat[c.primary.category] || 0) + 1; });
 
   $('stats').innerHTML = [
-    ['#', r.text.length.toLocaleString(), '字数'],
-    ['#', r.sentences.toLocaleString(), '句'],
-    ['#', r.candidates.length, '候选句'],
-    ['#', r.candidates.length + ' / ' + real.length, '句候选'],
-    ['#', r.clusters.length, '命中簇'],
-    ['#', r.gaps.name, '判定语域'],
+    [st.chars.toLocaleString(), '字数'],
+    [st.sentences.toLocaleString(), '句'],
+    [st.candidates + ' / ' + real.length, '候选句 / 实质句'],
+    [st.duplicates, '同一条规则已合并'],
+    [st.consequential, '有后果'],
+    [st.shown, '进清单'],
   ].map(function (x) {
-    return '<div class="stat"><b>' + x[1] + '</b><s>' + x[2] + '</s></div>';
+    return '<div class="stat"><b>' + x[0] + '</b><s>' + x[1] + '</s></div>';
   }).join('');
 
-  // 候选句：按最高权重排序
-  var cands = r.candidates.slice().sort(function (a, b) {
-    var wa = Math.max.apply(null, a.hits.map(function (h) { return h.weight; }));
-    var wb = Math.max.apply(null, b.hits.map(function (h) { return h.weight; }));
-    return wb - wa || b.hits.length - a.hits.length;
-  });
-  $('candCount').textContent = '共 ' + cands.length + ' 句 / 全文 ' + real.length + ' 句';
-  $('cands').innerHTML = cands.slice(0, 60).map(function (c) {
-    var top = c.hits.reduce(function (a, b) { return b.weight > a.weight ? b : a; }, c.hits[0]);
-    var w = top.weight;
-    var role = CAT[top.category].role;
-    var cls = role === 'dilution' ? 'dil' : 'w' + w;
-    var tags = c.hits.map(function (h) {
-      return '<span class="tag">' + CAT[h.category].name + '·' + h.label + '</span>';
-    });
-    // 只报事实，不下结论：谁有权 / 后果由谁承担
-    var b = DH.bearingOfSentence(c.text);
-    if (b.bearing) {
-      var fact = b.kind === 'power'
-        ? DH.PARTY_NAMES[b.holder] + ' 有权'
-        : '后果由 ' + DH.PARTY_NAMES[b.bearing] + ' 承担';
-      tags.push('<span class="tag" style="color:#bfe3ff;background:#10263a">' + fact + '</span>');
-    }
-    var sent = esc(c.text).replace(new RegExp(esc(top.matched).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')), '<span class="hit">$&</span>');
-    return '<div class="cand ' + cls + '"><div class="meta">' + tags.join('') +
-      (top.needsStance ? '<span class="tag" style="color:#e8b04b">需判立场</span>' : '') +
-      '</div><div class="sentence">' + sent + '</div></div>';
-  }).join('') || '<div class="note">这段没有命中任何套路。</div>';
+  $('modeNote').textContent = MODE_TEXT[report.mode] || '';
+  $('repCount').textContent = '全文 ' + st.consequential + ' 处有后果，这里挑了最该看的 ' + report.picks.length + ' 条';
+  $('cards').innerHTML = report.picks.map(cardHTML).join('')
+    || '<div class="note">这段没有找到有后果的句子——可能它真的干净，也可能是我还不认识这类文本。</div>';
+  $('stanceNote').textContent = '以上按「' + (STANCE_NAME[report.stance] || report.stance)
+    + '」的立场判断。同一句话，站的位置不同，结论就不同。';
+
+  // 未进清单的命中照样列出来：免得用户以为「没进这 10 条就是没事」
+  var rest = (report.rest || []).slice(0, 30);
+  $('restCount').textContent = (report.rest || []).length ? '（共 ' + report.rest.length + ' 条，显示前 30）' : '（无）';
+  $('rest').innerHTML = rest.map(function (c) {
+    return '<div class="cand w1"><div class="meta"><span class="tag">' + esc(c.categoryName || '') + '</span></div>'
+      + '<div class="sentence">' + esc(c.text) + '</div></div>';
+  }).join('') || '<div class="note">全文命中都已进清单。</div>';
 
   $('doc').innerHTML = DH.segments(r.text, r.clusters).map(function (g) {
     if (g.type === 'text') return esc(g.text);
@@ -335,12 +413,23 @@ function render(r) {
 
 $('copy').onclick = function () {
   if (!last) return;
-  var lines = ['【文字脱水机 · 离线报告】', '字数 ' + last.text.length + ' / 句 ' + last.sentences + ' / 候选 ' + last.candidates.length + ' 句', ''];
-  last.candidates.slice(0, 20).forEach(function (c, i) {
-    var top = c.hits.reduce(function (a, b) { return b.weight > a.weight ? b : a; }, c.hits[0]);
-    lines.push((i + 1) + '. [' + CAT[top.category].name + '] ' + c.text);
+  var rep = last.report;
+  var lines = ['【文字脱水机】' + rep.summary, ''];
+  rep.picks.forEach(function (p) {
+    lines.push(p.rank + '. ' + p.title);
+    if (p.plain) lines.push('   ' + p.plain);
+    lines.push('   「' + p.text + '」');
+    var tags = [];
+    if (p.consequenceName) tags.push(p.consequenceName);
+    if (p.requiresAction) tags.push('要求你行动');
+    if (p.occurrences > 1) tags.push('同后果 ' + p.occurrences + ' 处');
+    if (tags.length) lines.push('   [' + tags.join(' · ') + ']');
+    lines.push('');
   });
-  lines.push('', '没写：' + last.gaps.missing.join('、'));
+  var g = last.scan.gaps;
+  if (g && !g.skipped) lines.push('没写：' + (g.missing.length ? g.missing.join('、') : '（必备项齐全）'));
+  else if (g) lines.push('缺口检查跳过：' + g.reason);
+  lines.push('', '以上按「' + (STANCE_NAME[rep.stance] || rep.stance) + '」的立场判断。');
   navigator.clipboard.writeText(lines.join('\n')).then(function () { $('copy').textContent = '已复制 ✓'; });
 };
 </script>

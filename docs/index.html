@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230a1018'/%3E%3Crect x='7' y='10' width='18' height='3' rx='1.5' fill='%235eb8ff'/%3E%3Crect x='7' y='15' width='11' height='3' rx='1.5' fill='%235eb8ff' opacity='.75'/%3E%3Crect x='7' y='20' width='5' height='3' rx='1.5' fill='%235eb8ff' opacity='.45'/%3E%3C/svg%3E">
-<meta name="description" content="把读不完的长文，变成 9 句你必须看的话。19.9 万字的学生手册，本地 3 秒内筛出你真正要看的那几条。纯前端，文本不出浏览器。">
+<meta name="description" content="把读不完的长文，变成 10 条你必须看的话。19.9 万字的学生手册，本地 3 秒内筛出你真正要看的那几条。纯前端，文本不出浏览器。">
 <meta property="og:title" content="Dehydrator AI · 文字脱水机">
-<meta property="og:description" content="把读不完的长文，变成 9 句你必须看的话。">
+<meta property="og:description" content="把读不完的长文，变成 10 条你必须看的话。">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary">
 <title>Dehydrator AI · 文字脱水机</title>
@@ -110,6 +110,28 @@
   .bench{text-align:right;font-size:11.5px;color:var(--dim);margin-top:8px}
   .bench b{color:var(--w2);font-weight:700}
 
+  /* 清单卡片（SPEC 3.2：标题 / 人话 / 原文 / 事实标签） */
+  .cards{display:flex;flex-direction:column;gap:10px}
+  .card{border:1px solid var(--line);border-left:3px solid var(--w2);border-radius:12px;
+    padding:13px 16px;background:#0d1620}
+  .card.first{border-left-color:var(--w3);background:#121a22}
+  .card .head{display:flex;align-items:baseline;gap:9px}
+  .card .n{color:var(--dim);font-size:12px;min-width:16px;font-variant-numeric:tabular-nums}
+  .card .t{font-size:15px;font-weight:700;letter-spacing:-.2px;line-height:1.45}
+  .card .p{color:#c9d4e0;font-size:13.5px;margin:6px 0 0 25px}
+  .card .q{color:var(--dim);font-size:12.5px;border-left:1px dashed var(--line);
+    padding-left:11px;margin:10px 0 0 25px;line-height:1.7}
+  .card .q mark{background:#10263a;color:#bfe3ff;padding:0 2px;border-radius:3px}
+  .card .tags{display:flex;flex-wrap:wrap;gap:6px;margin:9px 0 0 25px}
+  .card .tags span{font-size:11px;padding:2px 8px;border-radius:5px;background:#16202b;color:var(--dim)}
+  .card .tags span.warn{background:#31181a;color:#ff9d9d}
+  .card .tags span.act{background:#2a2410;color:#e8b04b}
+  .flag{font-size:11px;color:#ff9d9d;border:1px solid #3a2226;background:#1d1417;
+    border-radius:5px;padding:1px 7px;white-space:nowrap}
+  details.cos{margin-top:20px;border-top:1px solid var(--line);padding-top:14px}
+  details.cos summary{cursor:pointer;color:var(--dim);font-size:13px;outline:none}
+  details.cos summary:hover{color:var(--text)}
+
   /* 主按钮 */
   .cta{display:block;width:100%;margin-top:14px;padding:15px;border:0;border-radius:11px;
     background:linear-gradient(180deg,#79c8ff,#3aa6f0);color:#04121e;
@@ -124,7 +146,7 @@
       <div class="mark"><i></i><i></i><i></i></div>
       <div>
         <h1 class="big">文字<span>脱水</span>机</h1>
-        <div class="sub">Dehydrator AI　·　把读不完的长文，变成 9 句你必须看的话</div>
+        <div class="sub">Dehydrator AI　·　把读不完的长文，变成 10 条你必须看的话</div>
       </div>
       <span class="badge">零依赖 · 断网可用</span>
     </div>
@@ -141,12 +163,12 @@
         <div class="q">「第九十二条　从处理、处分决定或者复查决定送达之日起，学生在 10 日内未提出申诉的，视为放弃申诉，学校不再受理其提出的申诉。」</div>
       </div>
       <div class="mini"><em>￭</em><span>每学期的第2-3周为学生办理重修报名的时间，逾期视为自动放弃报名资格，不予补报。</span></div>
-      <div class="mini"><em>￭</em><span>未请假或者请假逾期的，除因不可抗力等正当事由以外，视为放弃入学资格。</span></div>
+      <div class="mini"><em>￭</em><span>学生返校后应尽快办理课程成绩转换，否则后续导致的学业后果由学生承担。</span></div>
       <div class="funnel">
         <b>198,931</b><span>字</span><span class="arw">→</span>
-        <b>123</b><span>条候选</span><span class="arw">→</span>
-        <b>33</b><span>条有后果</span><span class="arw">→</span>
-        <span class="end">9 条你该看的</span>
+        <b>131</b><span>条候选</span><span class="arw">→</span>
+        <b>30</b><span>条有后果</span><span class="arw">→</span>
+        <span class="end">10 条你该看的</span>
         <span class="speed"><b>约 3</b><span>秒<em>含模型排序</em></span></span>
       </div>
       <div class="bench">同样的内容，你按 300 字/分钟读完，要 <b>11 小时</b>。</div>
@@ -162,6 +184,12 @@
       <span class="chip" data-preset="2">甲方·先做一版看看</span>
       <span class="grow"></span>
       <label class="chip">载入 .txt<input id="file" type="file" accept=".txt,.md" style="display:none"></label>
+      <select id="stance" title="同一句话，站的位置不同，结论就不同">
+        <option value="student">我的立场：学生</option>
+        <option value="user" selected>我的立场：用户</option>
+        <option value="a">我的立场：甲方</option>
+        <option value="b">我的立场：乙方</option>
+      </select>
       <select id="reg">
         <option value="auto">自动识别语域</option>
         <option value="recruit">招聘 / 招募</option>
@@ -176,9 +204,16 @@
   <div id="out" class="hidden">
     <div id="warn" class="warnbox hidden"></div>
     <div class="stats" id="stats"></div>
+    <div class="note" id="modeNote"></div>
 
-    <h2>你真该看的这几句 <em id="candCount"></em> <em>离线排序 · 只给事实，不含模型撰写的一句话</em></h2>
-    <div id="cands"></div>
+    <h2>你真该看的这几句 <em id="repCount"></em></h2>
+    <div class="cards" id="cards"></div>
+    <div class="note" id="stanceNote"></div>
+
+    <details class="cos">
+      <summary>没进清单的命中 <em id="restCount"></em>　·　展开看全文命中了什么</summary>
+      <div id="rest" style="margin-top:10px"></div>
+    </details>
 
     <h2>原文 <em>命中处已标出，红=高危，橙=中，蓝=泡泡词</em></h2>
     <div class="doc" id="doc"></div>
@@ -197,14 +232,15 @@
     <div><b>91</b><span>条套路词条</span></div>
     <div><b>12</b><span>条共现规则</span></div>
     <div><b>29</b><span>条人工标注</span></div>
-    <div><b>0</b><span>条误报</span></div>
+    <div><b>0</b><span>条硬误报</span></div>
+    <div><b>8</b><span>条边界样本（另计）</span></div>
     <div><b>本地</b><span>文本不出浏览器</span></div>
   </footer>
 </div>
 
 <script>
 /* ---- 词表 ---- */
-var LEX = {"version":"0.3.0","locale":"zh-CN","name":"一人公司套路词典","license":"MIT","disclaimer":"本文件中的 example 为中文商业文本中的典型表述，用于模式匹配演示，并非引用任何特定公司、平台或个人的原文。命中结果只描述文本特征，不对任何主体作出道德或法律判断。","design_rules":["宁可漏，不可误：陷阱类单字或通用词不入库，每条 pattern 必须能自证。","多字优先：『有权』不入库，『有权随时』『有权扣除』才入库。","陷阱类要精度，泡泡词可以要召回：前者是指控，后者只影响水份计数。","每条必须能回答『为什么算套路』（why 字段），答不出的删掉。","v0.3 起，新增词条必须带 evidence 字段，指向真实语料里的具体句子；没有证据的不准入库。","只描述文本特征，不升级为对主体动机的指控。"],"categories":{"fuzzy_promise":{"name":"模糊承诺","role":"trap","register":["client","recruit"],"icon":"target","desc":"把不确定的未来当成现在的筹码：画饼、白嫖、范围蔓延、模糊验收、不可验证的承诺。"},"unilateral":{"name":"单方裁量","role":"trap","register":["legal","client","recruit"],"icon":"gavel","desc":"规则的解释权、判定权、变更权单向归对方；或者把规定伸进你的私人领域。"},"silent_consent":{"name":"沉默即同意","role":"trap","register":["legal","client"],"icon":"clock","desc":"不回复、不操作、继续使用，就等于你答应了。"},"liability_shift":{"name":"责任转移","role":"trap","register":["legal","client"],"icon":"shield-off","desc":"出了事，责任与损失被单向推到你这边的条款。"},"duty_vague":{"name":"虚化要求","role":"trap","register":["recruit","client"],"icon":"help-circle","desc":"职责用『协助/参与/配合』开头，要求落在『积极/踏实/有执行力』上，读完还是不知道每天要做什么。"},"comp_erosion":{"name":"待遇缩水","role":"trap","register":["recruit","client"],"icon":"trending-down","desc":"钱的实感被稀释：非现金补贴、押薪、折算、面议、以后再说。"},"pressure":{"name":"隐性压力","role":"trap","register":["recruit","client"],"icon":"zap","desc":"没说出口的加班与加急：抗压、随时响应、能接受高强度、今天就要。"},"buzzword":{"name":"泡泡词","role":"dilution","register":["client","recruit"],"icon":"bubbles","desc":"说了等于没说：无法验收、无法证伪、无法落地的抽象概念。只计入水份，不计入套路。"}},"entries":[{"id":"fp-01","category":"fuzzy_promise","subtype":"pie","label":"画饼·后续放量","weight":3,"terms":["后面量很大","后续量很大","量会很大","后面还有很多","后面单很多"],"regex":"后面.{0,6}(量很|量会|量也)大|后续.{0,4}量(很|会)大|后面.{0,4}很多(单|活|需求|项目)","why":"未来的量不可验证，却被用来换你现在的折扣和投入。","advice":"把『后面』换成具体数字和日期；写不进合同，就当不存在。","example":"先做一版看看效果，跑通了后面量很大。"},{"id":"fp-02","category":"fuzzy_promise","subtype":"pie","label":"画饼·长期合作","weight":2,"terms":["长期合作","长期稳定","以后还有很多","会持续下单","长期需求"],"why":"『长期』是承诺，不是付款条件。","advice":"长期合作的兑现方式只有一种：先把第一单签下来。","example":"这次价格先给到位，我们是长期合作。"},{"id":"fp-03","category":"fuzzy_promise","subtype":"freebie","label":"白嫖·先做看看","weight":3,"terms":["先做一版看看","先做个demo","先看看效果","先试做","先做出来看看"],"why":"没有预算、没有验收标准就让你先干活，等于免费投标。","advice":"POC 也要报价，或明确写清楚『本阶段不对交付结果负责』。","example":"你先做一版看看效果，合适我们再谈钱。"},{"id":"fp-04","category":"fuzzy_promise","subtype":"freebie","label":"白嫖·预算后谈","weight":3,"terms":["预算后面再谈","价格好说","钱不是问题","预算还没定","回头批预算"],"why":"预算『后谈』意味着谈的时候你已经有沉没成本。","advice":"先问预算区间；问不到区间就不开工。","example":"这个先做，预算后面再谈，钱不是问题。"},{"id":"fp-05","category":"fuzzy_promise","subtype":"freebie","label":"白嫖·举手之劳","weight":2,"terms":["举手之劳","顺手的事","占用几分钟","免费帮个忙","帮我们试用"],"why":"把一次真实工作包装成『顺便』，抹掉它的成本。","advice":"给一个低价的小活套餐；别用免费换关系。","example":"这个对你来说就是举手之劳，帮我们弄一下呗。"},{"id":"fp-06","category":"pressure","subtype":"urgency","label":"催命·今天就给","weight":2,"terms":["今天之内","尽快给我","越快越好","明天就要","今天晚上"],"why":"时间压力单向落在你身上，加急却不加价。","advice":"加急是一个可售选项，要单独定价。","example":"这个客户明天就要，今天之内能给我吗。"},{"id":"fp-07","category":"pressure","subtype":"urgency","label":"催命·这不是很基础吗","weight":2,"terms":["这个很简单吧","别人都能做","不是很简单吗","这么基础"],"why":"用『简单』否定工作量，为压价和后续加需求铺路。","advice":"把工作量拆成清单，让对方看见『简单』里的步骤。","example":"这个很简单吧，别人一晚上就做出来了。"},{"id":"fp-08","category":"fuzzy_promise","subtype":"vague_acceptance","label":"模糊验收·感觉不对","weight":3,"terms":["感觉不太对","没有那种感觉","整体挺好但是","再优化一下","说不上来哪里不对"],"why":"没有可判定的标准，验收权就变成了无限循环。","advice":"把『感觉』翻译成三条可勾选的标准，写进确认单。","example":"整体挺好的，就是感觉不太对，你再优化一下。"},{"id":"fp-09","category":"fuzzy_promise","subtype":"vague_acceptance","label":"模糊验收·调性","weight":2,"terms":["大气一点","高端一点","有档次","符合我们调性","年轻化一点"],"why":"形容词不是验收标准，改到什么时候都算『不够』。","advice":"要参考物：让对方给出三个他喜欢的例子。","example":"现在这个不够大气，要再高端一点。"},{"id":"fp-10","category":"fuzzy_promise","subtype":"scope_creep","label":"蔓延·顺便加个","weight":3,"terms":["顺便加个","顺手改一下","再加个小功能","就一句话的事","多不了多少"],"why":"每一次『顺便』都是一次免费追加，且会累积成工期灾难。","advice":"需求变更走变更单，明确写清对工期和报价的影响。","example":"顺便再加个小功能，对你来说就一句话的事。"},{"id":"fp-11","category":"fuzzy_promise","subtype":"scope_creep","label":"蔓延·都算一起","weight":2,"terms":["都一起做了","一起弄了","包含在里面了吧","都算一起"],"why":"把新需求塞进已经定好价钱的旧范围。","advice":"在合同里写死『不包含项』，比写包含项更有效。","example":"这些都一起做了吧，反正你会这个。"},{"id":"fp-12","category":"fuzzy_promise","subtype":"vague_price","label":"模糊报价·有竞争力","weight":2,"terms":["有竞争力的价格","性价比高","友情价","内部价","给个实在价"],"why":"用形容词代替数字，只压价，不给条件。","advice":"只回具体的报价单，不回形容词。","example":"报个有竞争力的价格，后面还有合作机会。"},{"id":"fp-13","category":"fuzzy_promise","subtype":"verbal","label":"口头共识·不是说好了吗","weight":2,"terms":["我们说好的","当时不是这样说的","之前不是答应了吗"],"why":"用一个没有记录存在的『共识』否定书面约定。","advice":"所有变更先落成一条消息或一封邮件，再动手。","example":"之前不是答应了吗，怎么现在又要加钱。"},{"id":"fp-14","category":"fuzzy_promise","subtype":"payment_delay","label":"拖款·走流程","weight":3,"terms":["走流程","财务在审","下个月统一结","回头一起付","排款中"],"why":"『流程』没有终点，『下个月』没有日期。","advice":"约定具体付款日和逾期违约金比例。","example":"钱已经在走流程了，下个月统一结给你。"},{"id":"fp-15","category":"fuzzy_promise","subtype":"risk_share","label":"共担风险","weight":3,"terms":["共担风险","一起把这事做成","做好了大家一起赚","做好了再分"],"why":"赚了要分，亏了只有你；『风险共担』通常等于报酬后置。","advice":"分成可以谈，底价不能没有。","example":"前期我们先不给钱，做好了利润大家一起分。"},{"id":"un-01","category":"unilateral","subtype":"interpretation","label":"最终解释权","weight":3,"terms":["最终解释权"],"why":"规则的解释权单向归对方，等于规则可以被随时改写。","advice":"要求写明解释依据；争议时以书面沟通记录为准。","example":"本活动的最终解释权归主办方所有。"},{"id":"un-02","category":"unilateral","subtype":"discretion","label":"以实际判定为准","weight":3,"terms":["以实际判定为准","以平台判定为准","以实际为准","具体以实际为准","以审核结果为准"],"why":"判定标准不可预知，事后几乎没有可申诉的依据。","advice":"要求写明判定依据和复核渠道。","example":"是否属于违规，以平台判定为准。"},{"id":"un-03","category":"unilateral","subtype":"change","label":"有权随时变更","weight":3,"terms":["有权随时变更","有权随时修改","有权单方变更","有权调整"],"why":"你同意的是一个对方可以随时改掉的条款。","advice":"要求变更须提前书面通知，并给你无条件退出的权利。","example":"本平台有权随时变更本协议内容。"},{"id":"un-04","category":"unilateral","subtype":"termination","label":"有权单方处置","weight":3,"terms":["有权直接","有权单方","有权自行","有权先行处置","有权处置"],"regex":"有权[^，。；、]{0,6}(扣除|扣押|冻结|下架|封禁|清退|划扣|没收|删除|暂停|限制)","why":"不必经你同意，对方即可采取对你不利的动作。","advice":"要求『处置前通知 + 可申辩 + 可复核』三道流程。","example":"平台有权直接冻结账户内全部款项。"},{"id":"un-05","category":"unilateral","subtype":"discretion","label":"视情节","weight":2,"terms":["视情节","视情况而定","情节严重","酌情处理"],"why":"弹性区间的两端都由对方掌握。","advice":"要求具体档位：什么情节对应什么后果。","example":"视情节轻重，平台可采取相应措施。"},{"id":"un-06","category":"unilateral","subtype":"notice","label":"不另行通知","weight":3,"terms":["不另行通知","无需另行通知","恕不通知","不再单独通知"],"why":"你承担了『不知道』的全部后果。","advice":"要求变更通过你真实在用的邮箱或站内信送达。","example":"上述调整恕不另行通知。"},{"id":"un-07","category":"unilateral","subtype":"acceptance","label":"以我方验收为准","weight":3,"terms":["以我方验收为准","由我方验收","验收由甲方决定","以甲方确认为准"],"why":"验收权单向，付款条件被无限延后。","advice":"要求加入对称条款：逾期未反馈视为验收通过。","example":"最终交付是否合格，以我方验收为准。"},{"id":"un-08","category":"unilateral","subtype":"decision","label":"保留最终决定权","weight":2,"terms":["保留最终决定权","我方保留决定权","由我方决定是否"],"why":"结果既不可预期，也不可协商。","advice":"要求写明决定所依据的具体条件。","example":"是否录用，我方保留最终决定权。"},{"id":"un-09","category":"unilateral","subtype":"catch_all","label":"兜底口径·以最终版为准","weight":2,"terms":["具体以合同为准","以最终版本为准","以官方公告为准","以最新规则为准"],"why":"一条兜底，前面所有口头承诺全部失效。","advice":"落笔之前先拿到那个『最终版本』再谈。","example":"以上内容仅供参考，具体以最终合同为准。"},{"id":"un-10","category":"unilateral","subtype":"standard","label":"按我方标准","weight":2,"terms":["按我方标准","按公司规定","按内部标准","按平台规则执行"],"why":"标准不公开，你无法预先满足。","advice":"索要书面的标准清单，拿不到就按最坏情况报价。","example":"具体执行标准按公司规定处理。"},{"id":"un-11","category":"unilateral","subtype":"boundary","label":"必要时 / 合理范围内","weight":1,"terms":["必要时","在合理范围内","适当调整"],"why":"边界由对方定义，『合理』是一个可伸缩的词。","advice":"要求量化：次数、金额、期限，三个都要数字。","example":"必要时平台可在合理范围内调整服务内容。"},{"id":"un-12","category":"unilateral","subtype":"evidence","label":"以平台数据为准","weight":3,"terms":["以平台数据为准","以系统记录为准","以后台数据为准"],"why":"你读不到、也核对不了的记录，成了唯一证据。","advice":"要求提供可导出、可核对的原始数据。","example":"结算金额以系统后台记录为准。"},{"id":"un-13","category":"unilateral","subtype":"silence","label":"不通过不告知","weight":1,"terms":["不另行告知","不再单独通知结果","择优录取","招满即止"],"why":"你付出了成本，拿不到任何反馈，也无法改进。","advice":"给自己设一个止损时间，到点就撤。","example":"未通过者不再单独通知结果。"},{"id":"un-14","category":"unilateral","subtype":"termination","label":"有权下架 / 封禁","weight":3,"terms":["有权下架","有权封禁","有权冻结","有权清退"],"why":"你的收入来源可以被单方面切断。","advice":"在合同外单独确认触发条件和申诉窗口时长。","example":"对违规用户，平台有权下架商品并冻结账号。"},{"id":"un-15","category":"unilateral","subtype":"pricing","label":"单方定价权","weight":3,"terms":["有权调整价格","价格以结算时为准","按届时价格执行"],"why":"你的成本可以被单方面抬高，你的报价会立刻失效。","advice":"报价单里写明有效期，并注明上游涨价则同步调整。","example":"服务价格可能调整，以结算时价格为准。"},{"id":"sc-01","category":"silent_consent","subtype":"renewal","label":"自动续约","weight":3,"terms":["自动续约","自动顺延","到期自动续期","自动展期"],"why":"一次不吭声，就多绑你一年。","advice":"在日历上标出异议窗口的截止日，提前一周提醒自己。","example":"本协议到期前三十日双方未提出异议的，自动续约一年。"},{"id":"sc-02","category":"silent_consent","subtype":"deemed","label":"未提异议视为同意","weight":3,"terms":["未提出书面异议视为","未提出异议视为同意","视为同意并继续","未提出书面异议","未提出异议"],"why":"你的沉默被条款写成了你的同意。","advice":"任何『视为同意』的窗口，都要留一次书面回复。","example":"逾期未提出书面异议的，视为同意变更。"},{"id":"sc-03","category":"silent_consent","subtype":"deemed","label":"逾期未回复视为确认","weight":3,"terms":["逾期未回复视为","未回复视为确认","未答复视为认可"],"why":"等你忙完再回，已经默认通过了。","advice":"设自动提醒，不要靠记性。","example":"三个工作日内未回复，视为确认。"},{"id":"sc-04","category":"silent_consent","subtype":"usage","label":"继续使用视为接受","weight":2,"terms":["继续使用视为接受","使用即视为同意","视为您已同意"],"why":"你只是继续用它，就被算作签署了一份新条款。","advice":"收到条款变更通知时，主动回一句『不同意』。","example":"您继续使用本服务，即视为接受更新后的协议。"},{"id":"sc-05","category":"silent_consent","subtype":"ui","label":"默认勾选","weight":2,"terms":["默认勾选","已为您勾选","自动勾选"],"why":"你没有主动选择，但系统记录你选择过。","advice":"注册和续费时手动取消勾选，并截图留证。","example":"已为您勾选开通自动续费，可随时关闭。"},{"id":"sc-06","category":"silent_consent","subtype":"no_refund","label":"一经售出不退","weight":3,"terms":["一经售出不退","概不退款","不支持退款","售出后不予退还"],"why":"交易的全部风险单向由你承担。","advice":"先买最小额度试，不要一次充年费。","example":"虚拟商品一经售出，概不退款。"},{"id":"sc-07","category":"silent_consent","subtype":"waiver","label":"视为放弃","weight":3,"terms":["视为放弃","视为您放弃","未申请视为放弃"],"why":"你没抓住的窗口，被定义为主动放弃。","advice":"把关键期限一次性写进项目日历。","example":"期满未申请续期的，视为放弃相关权益。"},{"id":"sc-08","category":"silent_consent","subtype":"deadline","label":"逾期不予受理","weight":2,"terms":["逾期不予受理","超过期限不再受理","逾期作废"],"why":"一次错过，就没有第二次机会。","advice":"确认『逾期』的起算点是什么事件。","example":"超过七个工作日提交的申诉，逾期不予受理。"},{"id":"sc-09","category":"silent_consent","subtype":"notice","label":"通知发出即送达","weight":3,"terms":["通知发出即视为送达","发送即视为送达","公告即视为通知"],"why":"你没看到，也算收到了。","advice":"绑定真实在用的邮箱，并养成定期检查的习惯。","example":"通知一经发送至预留邮箱，即视为送达。"},{"id":"sc-10","category":"silent_consent","subtype":"subscription","label":"未取消即视为订阅","weight":3,"terms":["未取消即视为","到期未取消"],"why":"『不取消』成为默认的付费意愿表达。","advice":"订阅当天就设取消提醒，不要等到月底。","example":"到期未取消的，视为继续订阅并按月扣费。"},{"id":"sc-11","category":"silent_consent","subtype":"consent","label":"视为已充分理解","weight":2,"terms":["视为您已充分理解","视为已阅读并同意","您已确认知悉"],"why":"一次点击，覆盖了你从没读过的全部条款。","advice":"至少读『责任』和『终止』两节，其余可略。","example":"点击即视为您已充分理解并同意全部条款。"},{"id":"sc-12","category":"silent_consent","subtype":"trial","label":"试用自动转付费","weight":3,"terms":["试用期结束自动转为","免费期结束自动","自动转为付费"],"why":"从免费变付费，不需要你再同意一次。","advice":"试用当天就设取消提醒，别等系统通知。","example":"七日试用期结束后自动转为付费套餐。"},{"id":"sc-13","category":"silent_consent","subtype":"deemed","label":"N 日内未提出视为认可","weight":3,"terms":["日内未提出视为","未在日内提出"],"regex":"未在.{0,6}日内提出|.{0,4}日内未提出","why":"极短的窗口加上沉默同意，你几乎必然错过。","advice":"把具体天数抄下来，换算成自己的最后期限。","example":"交付后三日内未提出异议的，视为认可。"},{"id":"sc-14","category":"silent_consent","subtype":"change","label":"公告即时生效","weight":3,"terms":["公告后即生效","自公告之日起生效","发布即生效"],"why":"生效时间早于你知情的时间。","advice":"要求变更设过渡期，并保留按旧条款履约的权利。","example":"本规则自公告之日起生效，不另行通知。"},{"id":"sc-15","category":"silent_consent","subtype":"termination","label":"单方解除且不担责","weight":3,"terms":["有权单方解除","解除本协议且不承担","终止服务且无需"],"why":"对方可以随时退出，而且不用为你已投入的成本负责。","advice":"要求对等解除权，并写明已发生工作的结算方式。","example":"平台有权单方解除本协议且不承担任何责任。"},{"id":"li-01","category":"liability_shift","subtype":"force_majeure","label":"不可抗力","weight":2,"terms":["不可抗力"],"why":"口袋足够大，几乎所有延误都能装进去。","advice":"要求列举具体情形，并约定通知义务和时限。","example":"因不可抗力导致的延误，双方互不承担责任。"},{"id":"li-02","category":"liability_shift","subtype":"disclaimer","label":"概不负责","weight":3,"terms":["概不负责","不承担任何责任","不承担任何赔偿责任","不负任何责任"],"why":"把对方能做到的全部责任一次性清零。","advice":"要求至少保留『故意或重大过失』不免责。","example":"因此造成的任何损失，本公司概不负责。"},{"id":"li-03","category":"liability_shift","subtype":"risk_shift","label":"风险由你承担","weight":3,"terms":["风险由乙方承担","风险由商家承担","风险由用户承担","由您自行承担风险"],"why":"风险被单向划到没有议价能力的那一方。","advice":"风险和控制权要对齐：管不到的事，不承担后果。","example":"使用本服务产生的一切风险由用户自行承担。"},{"id":"li-04","category":"liability_shift","subtype":"loss","label":"一切损失由你承担","weight":3,"terms":["一切损失由","全部损失由","所有损失由"],"why":"『一切』没有上限，也无法预估。","advice":"要求把赔偿范围限定为『直接损失』并设金额上限。","example":"由此造成的一切损失由乙方承担。"},{"id":"li-05","category":"liability_shift","subtype":"cap","label":"赔偿上限","weight":3,"terms":["赔偿总额不超过","赔偿上限为","最高不超过"],"why":"你的实际损失可能远超这个上限，差额只能自己吞。","advice":"要求上限与实际合同金额挂钩，而不是一个固定小额。","example":"我方赔偿总额不超过您实际支付的服务费。"},{"id":"li-06","category":"liability_shift","subtype":"indirect","label":"不赔间接损失","weight":2,"terms":["不承担间接损失","不包括利润损失","不赔偿可得利益"],"why":"对服务商来说，你的停工损失永远算『间接』。","advice":"关键业务上，把可用性承诺写成独立的服务等级条款。","example":"包括但不限于利润损失在内的间接损失，不予赔偿。"},{"id":"li-07","category":"liability_shift","subtype":"as_is","label":"按现状提供","weight":3,"terms":["按现状提供","按现有状态提供","不提供任何保证","不作任何明示或默示的保证"],"why":"明确放弃了对质量的全部承诺。","advice":"关键链路不要单点依赖，准备好降级方案。","example":"本服务按现状提供，不提供任何形式的保证。"},{"id":"li-08","category":"liability_shift","subtype":"third_party","label":"第三方原因","weight":2,"terms":["第三方原因导致","非我方原因","因银行或运营商原因"],"why":"把责任推给一个你无法追责的主体。","advice":"要求明确『第三方』的清单和替代方案。","example":"因第三方原因导致的服务中断，我方不承担责任。"},{"id":"li-09","category":"liability_shift","subtype":"fault","label":"因你操作不当","weight":2,"terms":["因您操作不当","因用户自身原因","由于您的过错"],"why":"『操作不当』的解释权在对方手里。","advice":"保留自己的操作日志和截图，作为反证材料。","example":"因您操作不当造成的损失，由您自行承担。"},{"id":"li-10","category":"liability_shift","subtype":"burden","label":"由你负责解决","weight":2,"terms":["由您负责解决","由乙方自行解决","须由您自行处理"],"why":"把本该共同承担的处置成本，全部转成你的工作量。","advice":"在报价时把这部分工作量显式计入。","example":"因内容引发的争议，须由您自行处理并承担费用。"},{"id":"li-11","category":"liability_shift","subtype":"cost","label":"费用转嫁","weight":3,"terms":["费用由乙方承担","费用由商家承担","由此产生的费用由"],"why":"成本发生了，但账记在你头上。","advice":"要求费用发生前需经你书面确认。","example":"由此产生的全部费用由商家承担。"},{"id":"li-12","category":"liability_shift","subtype":"deduction","label":"从保证金扣除","weight":3,"terms":["从保证金中扣除","从余额中扣除","直接从账户划扣","有权扣划","扣除保证金","划扣"],"why":"你的钱在对方手里，扣款不需要经过你同意。","advice":"只放最低必要金额，流水定期提现。","example":"平台有权直接从账户余额中扣除相应款项。"},{"id":"li-13","category":"liability_shift","subtype":"indemnity","label":"单向赔偿义务","weight":3,"terms":["您应赔偿我方","乙方应赔偿甲方","须赔偿由此造成的"],"why":"只有你有赔偿义务，对方没有对等条款。","advice":"要求改为双向对等赔偿。","example":"如造成我方损失，您应全额赔偿。"},{"id":"li-14","category":"liability_shift","subtype":"disclaimer","label":"免责声明","weight":2,"terms":["免责声明","本公司不承担","平台不承担"],"why":"一句话，把前面所有承诺都变成『仅供参考』。","advice":"看它写在承诺之前还是之后——写在前面的承诺基本作废。","example":"免责声明：本平台不承担因使用本内容产生的任何后果。"},{"id":"li-15","category":"liability_shift","subtype":"jurisdiction","label":"管辖与解释权","weight":2,"terms":["本条款的解释权","以我方所在地法院管辖","争议由我方所在地"],"why":"管辖地直接决定维权成本，而成本高到你通常会放弃。","advice":"金额再小也要看一眼争议解决条款。","example":"因本协议产生的争议，由我方所在地法院管辖。"},{"id":"bw-01","category":"buzzword","subtype":"verb","label":"赋能","weight":1,"terms":["赋能"],"why":"『赋能』没有说明赋什么能、怎么赋、怎么验收。","advice":"要求换成：具体给谁、给了什么、怎么算给了。","example":"用 AI 赋能商家经营，实现全链路提效。"},{"id":"bw-02","category":"buzzword","subtype":"noun","label":"抓手","weight":1,"terms":["抓手"],"why":"不说清具体动作的『抓手』，等于没给方案。","advice":"问一句：这个抓手，下周由谁做什么。","example":"以内容为抓手，打开新的增长空间。"},{"id":"bw-03","category":"buzzword","subtype":"noun","label":"闭环","weight":1,"terms":["闭环"],"why":"闭环听起来完整，但没有任何一处可被检验。","advice":"要求画出从进入到退出的每一步。","example":"打通从流量到转化的完整闭环。"},{"id":"bw-04","category":"buzzword","subtype":"verb","label":"打通","weight":1,"terms":["全链路打通","打通全链路","打通上下游","链路打通"],"why":"『打通』掩盖了接口、字段、权限这些真正的工作量。","advice":"要求列出要打通的具体系统清单。","example":"本季度重点是打通全链路的业务数据。"},{"id":"bw-05","category":"buzzword","subtype":"verb","label":"沉淀","weight":1,"terms":["沉淀方法论","能力沉淀","沉淀下来","数据沉淀"],"why":"『沉淀』把『没有产出』说成了一种收获。","advice":"问一句：沉淀在哪，谁可以复用。","example":"把这次的经验沉淀成可复用的方法论。"},{"id":"bw-06","category":"buzzword","subtype":"adj","label":"全域","weight":1,"terms":["全域经营","全域营销","全域增长","全渠道"],"why":"『全域』通常意味着每个域都没做透。","advice":"要求指定优先的单一渠道和验证周期。","example":"构建全域经营能力，覆盖所有触点。"},{"id":"bw-07","category":"buzzword","subtype":"noun","label":"生态","weight":1,"terms":["生态位","构建生态","生态闭环","开放生态"],"why":"『生态』是一个没有边界的承诺。","advice":"要求说清你在生态里的确切位置和收益方式。","example":"共同构建开放共赢的内容生态。"},{"id":"bw-08","category":"buzzword","subtype":"noun","label":"颗粒度","weight":1,"terms":["颗粒度"],"why":"『颗粒度』常用来要求更细，但从不定义细到什么程度。","advice":"要求给出一个具体的示例输出。","example":"这个需求的颗粒度还不够，再细一点。"},{"id":"bw-09","category":"buzzword","subtype":"noun","label":"顶层设计","weight":1,"terms":["顶层设计"],"why":"『顶层设计』常常是一份没人执行的文档。","advice":"要求指明这次要落地的第一个具体模块。","example":"先做好顶层设计，再谈落地。"},{"id":"bw-10","category":"buzzword","subtype":"verb","label":"对齐 / 拉齐","weight":1,"terms":["对齐一下","拉齐认知","对齐目标","对齐预期"],"why":"『对齐』经常是没有结论的会议的委婉说法。","advice":"要求会后产出一句可执行的结论。","example":"我们下周先对齐一下目标。"},{"id":"bw-11","category":"buzzword","subtype":"verb","label":"降本增效","weight":1,"terms":["降本增效","提质增效","提效降本"],"why":"四个字同时承诺了降本和增效，通常两样都没做到。","advice":"要求指定一个可量化的指标和一个时间点。","example":"通过数字化手段实现降本增效。"},{"id":"bw-12","category":"buzzword","subtype":"adj","label":"精细化运营","weight":1,"terms":["精细化运营","精细化","精益运营"],"why":"『精细化』是一个方向，不是一个动作。","advice":"要求给出第一步的具体动作。","example":"用数据驱动精细化运营。"},{"id":"bw-13","category":"buzzword","subtype":"noun","label":"组合拳","weight":1,"terms":["组合拳","一套组合拳"],"why":"『组合拳』把多个不确定的动作打包成一个确定的承诺。","advice":"要求拆开：每一个动作各自的目标是什么。","example":"我们这次打一套组合拳。"},{"id":"bw-14","category":"buzzword","subtype":"verb","label":"复盘","weight":1,"terms":["复盘一下","做个复盘","复盘会"],"why":"『复盘』常被用来代替『结论』。","advice":"要求复盘必须落到一条要改的事上。","example":"这件事我们先复盘一下再说。"},{"id":"bw-15","category":"buzzword","subtype":"verb","label":"全面拥抱 AI / 数智化","weight":1,"terms":["全面拥抱AI","全面拥抱 AI","数智化","全面接入AI","All in AI"],"why":"『全面』与『拥抱』都是态度词，不是工作内容。","advice":"要求指出第一个要上 AI 的具体环节。","example":"公司决定全面拥抱 AI，实现数智化转型。"},{"id":"un-16","category":"unilateral","subtype":"private_life","label":"规定伸进私人领域","weight":2,"terms":["发色","不得染发","着装要求","仪容","妆容","不得纹身"],"evidence":"JD-02｜能够做好情绪管理和自我管理，无明显发色等违背职业素养情况。","why":"把对工作结果的评价，扩大到对你身体和外表的支配。","advice":"能接受就接受，但要意识到这是一条越界条款，不是行业惯例。","example":"能够做好情绪管理和自我管理，无明显发色等违背职业素养情况。"},{"id":"dv-01","category":"duty_vague","subtype":"work_scope","label":"协助式职责","weight":2,"terms":["协助完成","协助整理","协助处理","协助开展","协助跟进","协助收集"],"evidence":"JD-01｜协助完成招聘流程中的简历筛选、电话沟通及面试安排等工作；JD-03｜协助整理二手车的关键资料形成台账；JD-04｜协助线上线下市场活动执行。","why":"『协助』意味着你没有决定权，却要为结果负责。","advice":"问清两件事：这件事最终谁拍板，我具体负责哪一段。","example":"协助完成招聘流程中的简历筛选、电话沟通及面试安排等工作。"},{"id":"dv-02","category":"duty_vague","subtype":"work_scope","label":"参与式职责","weight":2,"terms":["参与撰写","参与制定","参与策划","参与设计","参与讨论"],"evidence":"JD-03｜参与撰写官方二手车介绍文案、卖点提炼、车源介绍等。","why":"『参与』既可以被解释成主力，也可以被解释成旁观，责任范围完全弹性。","advice":"确认产出物署名和决策权归属。","example":"参与撰写官方二手车介绍文案、卖点提炼、车源介绍等。"},{"id":"dv-03","category":"duty_vague","subtype":"work_scope","label":"配合式职责","weight":2,"terms":["配合完成","落地配合","配合执行","配合工作","协同完成"],"evidence":"JD-04｜协助线上线下市场活动执行、物料整理、活动落地配合。","why":"『配合』把执行责任放在你身上，把决定权留给别人。","advice":"问清配合的对象是谁、他负责什么、你负责什么。","example":"协助线上线下市场活动执行、物料整理、活动落地配合。"},{"id":"dv-04","category":"duty_vague","subtype":"scope_unbounded","label":"全面协助","weight":3,"terms":["全面协助","日常辅助工作","协助日常","各项事务","日常事务"],"evidence":"JD-03｜全面协助总部团队开展……业务运营、数据整理、品牌推广及用户运营工作；JD-04｜协助渠道、用户对接及市场部日常辅助工作。","why":"『全面协助 + 日常事务』是没有边界的工作范围，等于什么都要做。","advice":"要求列出每周固定要做的事，而不是职位范围。","example":"全面协助总部团队开展岚图直营官方认证二手车的业务运营、数据整理、品牌推广及用户运营工作。"},{"id":"dv-05","category":"duty_vague","subtype":"catch_all","label":"上级交办的其他工作","weight":3,"terms":["上级交办","领导交办","交办的其他","安排的其他工作","其他临时事项","临时性工作"],"evidence":"JD-01｜善于沟通，能够高效完成上级交办的任务。","why":"这一句可以吞掉任何工作内容，是职责清单里的万能兜底。","advice":"把它当成一个信号：这里的岗位边界由上级随时定义。","example":"善于沟通，能够高效完成上级交办的任务。"},{"id":"dv-06","category":"duty_vague","subtype":"personality","label":"人格要求替代工作标准","weight":1,"terms":["积极主动","做事踏实","有执行力","责任心强","较真","细致耐心","善于沟通","热爱教育事业","学习意愿强"],"evidence":"JD-01｜善于沟通、有团队合作意识；JD-02｜较强的心理素质、热爱教育事业；JD-03｜态度积极、抗压、学习意愿强；JD-04｜沟通顺畅、做事踏实，积极主动，有执行力；JD-05｜做事细致耐心，责任心强。","why":"性格形容词无法被验收，也无法被反驳——它只说明了这份工作靠自觉补位。","advice":"把每一条性格要求翻译成一个具体场景：什么时候需要它。","example":"沟通顺畅、做事踏实，积极主动，有执行力。"},{"id":"dv-07","category":"duty_vague","subtype":"workload","label":"工作量伪装","weight":2,"terms":["海量信息处理","繁琐的","多任务并行","高强度重复","高度重复"],"evidence":"JD-05｜沟通协调能力优秀，能适应繁琐的海量信息处理。","why":"用『适应』把高强度重复劳动说成一种能力要求。","advice":"问清每天大概处理多少条，换算成单条耗时。","example":"沟通协调能力优秀，能适应繁琐的海量信息处理。"},{"id":"ce-01","category":"comp_erosion","subtype":"non_cash","label":"非现金补贴","weight":3,"terms":["以优惠券形式发放","以券形式","以积分形式","可抵扣","折抵"],"regex":"以.{0,6}形式发放","evidence":"JD-01｜工资150元/天+28餐补(餐补以美团优惠券形式发放，可直接在美团点外卖or团购)。","why":"名义上是钱，实际只能在指定地方花，等于暗中打了折。","advice":"把补贴折算成真实现金重算一遍月收入，再决定。","example":"工资150元/天+28餐补(餐补以美团优惠券形式发放，可直接在美团点外卖or团购)。"},{"id":"ce-02","category":"comp_erosion","subtype":"payment_delay","label":"押薪","weight":3,"terms":["发上月薪资","次月发放工资","押一个月","次月结算"],"regex":"\\d+号发.{0,3}月|次月.{0,6}发(放)?(工资|薪资)","evidence":"JD-01｜每个月20号发上月薪资。","why":"押薪二十天等于无息占用你的钱，离职那个月最容易卡住。","advice":"确认发薪日，以及离职当月怎么结、什么时候结。","example":"每个月20号发上月薪资。"},{"id":"pr-01","category":"pressure","subtype":"overtime","label":"抗压 = 加班预警","weight":3,"terms":["抗压","承压能力强","高压环境","能接受高强度","适应快节奏"],"evidence":"JD-02｜具备较强的心理素质、良好的表达沟通能力、抗压能力及反馈意识；JD-03｜态度积极、抗压、学习意愿强。","why":"『抗压』是加班和情绪劳动的委婉说法，而且通常不配补偿。","advice":"直接问：最近一个月，团队平均几点下班。","example":"具备较强的心理素质、良好的表达沟通能力、抗压能力及反馈意识。"},{"id":"pr-02","category":"pressure","subtype":"attendance","label":"出勤绑定","weight":2,"terms":["每周出勤","一周要出勤","至少一周","每周工作5天","能全职实习最好","实习时间到年底"],"evidence":"JD-05｜实习时间到年底，能全职实习最好，至少一周要出勤4天；JD-06｜每周出勤至少4天；JD-03｜实习4个月以上，每周工作5天。","why":"出勤和实习期是硬约束，却常被写成『最好』『优先』这样的软承诺。","advice":"把时薪算出来，再和别家的时薪比。","example":"实习时间到年底，能全职实习最好，至少一周要出勤4天。"},{"id":"pr-03","category":"pressure","subtype":"obedience","label":"服从性要求","weight":2,"terms":["服从安排","服从调配","听从安排","随时响应","保持在线"],"evidence":"JD-01｜有团队合作意识，能积极融入集体协作；JD-02｜能够做好情绪管理和自我管理。","why":"把『配合度』写进要求，通常意味着工作安排由对方单方面决定。","advice":"问清临时加派任务的频率，以及你是否可以拒绝。","example":"有团队合作意识，能积极融入集体协作。"},{"id":"fp-16","category":"fuzzy_promise","subtype":"unverifiable","label":"有人带教 / 不卡经验","weight":2,"terms":["有人带教","有师傅带","手把手教","零基础可学","不卡经验","接受无相关经验","无需经验"],"evidence":"JD-04｜适合在校大学生的市场岗实习，零基础可学，有人带教，可开实习证明、不卡经验。","why":"『有人带教 / 不卡经验』通常是低薪的理由，而不是培养的承诺。","advice":"问清带教的人是谁、每周几小时、带多久。","example":"零基础可学，有人带教，可开实习证明、不卡经验。"},{"id":"fp-17","category":"fuzzy_promise","subtype":"unverifiable","label":"用一张纸替代报酬","weight":1,"terms":["可开实习证明","提供实习证明","开具实习证明","可开证明"],"evidence":"JD-04｜零基础可学，有人带教，可开实习证明、不卡经验。","why":"把实习证明当成待遇的一部分，但它既不值钱也不可转让。","advice":"先确认证明上的岗位名称、起止时间和盖章主体。","example":"零基础可学，有人带教，可开实习证明、不卡经验。"},{"id":"fp-18","category":"fuzzy_promise","subtype":"unverifiable","label":"『者优先』","weight":1,"terms":["学历优先","经验优先","专业优先","能力者优先"],"regex":"[^，。；、]{0,6}者优先","evidence":"JD-01｜有汽车行业研发招聘背景优先；JD-02｜本科及以上学历优先；JD-03｜有较强汇报呈现能力者优先；JD-04｜电气专业优先；JD-05｜能保证稳定实习时间者优先。","why":"『优先』让筛选标准无法核对，你无从判断自己到底够不够。","advice":"直接问一句：这个优先，是加分项还是硬门槛。","example":"有较强汇报呈现能力者优先。"}]};
+var LEX = {"version":"0.3.0","locale":"zh-CN","name":"一人公司套路词典","license":"MIT","disclaimer":"本文件中的 example 为中文商业文本中的典型表述，用于模式匹配演示，并非引用任何特定公司、平台或个人的原文。命中结果只描述文本特征，不对任何主体作出道德或法律判断。","design_rules":["宁可漏，不可误：陷阱类单字或通用词不入库，每条 pattern 必须能自证。","多字优先：『有权』不入库，『有权随时』『有权扣除』才入库。","陷阱类要精度，泡泡词可以要召回：前者是指控，后者只影响水份计数。","每条必须能回答『为什么算套路』（why 字段），答不出的删掉。","v0.3 起，新增词条必须带 evidence 字段，指向真实语料里的具体句子；没有证据的不准入库。","只描述文本特征，不升级为对主体动机的指控。"],"categories":{"fuzzy_promise":{"name":"模糊承诺","role":"trap","register":["client","recruit"],"icon":"target","desc":"把不确定的未来当成现在的筹码：画饼、白嫖、范围蔓延、模糊验收、不可验证的承诺。"},"unilateral":{"name":"单方裁量","role":"trap","register":["legal","client","recruit"],"icon":"gavel","desc":"规则的解释权、判定权、变更权单向归对方；或者把规定伸进你的私人领域。"},"silent_consent":{"name":"沉默即同意","role":"trap","register":["legal","client"],"icon":"clock","desc":"不回复、不操作、继续使用，就等于你答应了。"},"liability_shift":{"name":"责任转移","role":"trap","register":["legal","client"],"icon":"shield-off","desc":"出了事，责任与损失被单向推到你这边的条款。"},"duty_vague":{"name":"虚化要求","role":"trap","register":["recruit","client"],"icon":"help-circle","desc":"职责用『协助/参与/配合』开头，要求落在『积极/踏实/有执行力』上，读完还是不知道每天要做什么。"},"comp_erosion":{"name":"待遇缩水","role":"trap","register":["recruit","client"],"icon":"trending-down","desc":"钱的实感被稀释：非现金补贴、押薪、折算、面议、以后再说。"},"pressure":{"name":"隐性压力","role":"trap","register":["recruit","client"],"icon":"zap","desc":"没说出口的加班与加急：抗压、随时响应、能接受高强度、今天就要。"},"buzzword":{"name":"泡泡词","role":"dilution","register":["client","recruit"],"icon":"bubbles","desc":"说了等于没说：无法验收、无法证伪、无法落地的抽象概念。只计入水份，不计入套路。"}},"entries":[{"id":"fp-01","category":"fuzzy_promise","subtype":"pie","label":"画饼·后续放量","weight":3,"terms":["后面量很大","后续量很大","量会很大","后面还有很多","后面单很多"],"regex":"后面.{0,6}(量很|量会|量也)大|后续.{0,4}量(很|会)大|后面.{0,4}很多(单|活|需求|项目)","why":"未来的量不可验证，却被用来换你现在的折扣和投入。","advice":"把『后面』换成具体数字和日期；写不进合同，就当不存在。","example":"先做一版看看效果，跑通了后面量很大。"},{"id":"fp-02","category":"fuzzy_promise","subtype":"pie","label":"画饼·长期合作","weight":2,"terms":["长期合作","长期稳定","以后还有很多","会持续下单","长期需求"],"why":"『长期』是承诺，不是付款条件。","advice":"长期合作的兑现方式只有一种：先把第一单签下来。","example":"这次价格先给到位，我们是长期合作。"},{"id":"fp-03","category":"fuzzy_promise","subtype":"freebie","label":"白嫖·先做看看","weight":3,"terms":["先做一版看看","先做个demo","先看看效果","先试做","先做出来看看"],"why":"没有预算、没有验收标准就让你先干活，等于免费投标。","advice":"POC 也要报价，或明确写清楚『本阶段不对交付结果负责』。","example":"你先做一版看看效果，合适我们再谈钱。"},{"id":"fp-04","category":"fuzzy_promise","subtype":"freebie","label":"白嫖·预算后谈","weight":3,"terms":["预算后面再谈","价格好说","钱不是问题","预算还没定","回头批预算"],"why":"预算『后谈』意味着谈的时候你已经有沉没成本。","advice":"先问预算区间；问不到区间就不开工。","example":"这个先做，预算后面再谈，钱不是问题。"},{"id":"fp-05","category":"fuzzy_promise","subtype":"freebie","label":"白嫖·举手之劳","weight":2,"terms":["举手之劳","顺手的事","占用几分钟","免费帮个忙","帮我们试用"],"why":"把一次真实工作包装成『顺便』，抹掉它的成本。","advice":"给一个低价的小活套餐；别用免费换关系。","example":"这个对你来说就是举手之劳，帮我们弄一下呗。"},{"id":"fp-08","category":"fuzzy_promise","subtype":"vague_acceptance","label":"模糊验收·感觉不对","weight":3,"terms":["感觉不太对","没有那种感觉","整体挺好但是","再优化一下","说不上来哪里不对"],"why":"没有可判定的标准，验收权就变成了无限循环。","advice":"把『感觉』翻译成三条可勾选的标准，写进确认单。","example":"整体挺好的，就是感觉不太对，你再优化一下。"},{"id":"fp-09","category":"fuzzy_promise","subtype":"vague_acceptance","label":"模糊验收·调性","weight":2,"terms":["大气一点","高端一点","有档次","符合我们调性","年轻化一点"],"why":"形容词不是验收标准，改到什么时候都算『不够』。","advice":"要参考物：让对方给出三个他喜欢的例子。","example":"现在这个不够大气，要再高端一点。"},{"id":"fp-10","category":"fuzzy_promise","subtype":"scope_creep","label":"蔓延·顺便加个","weight":3,"terms":["顺便加个","顺手改一下","再加个小功能","就一句话的事","多不了多少"],"why":"每一次『顺便』都是一次免费追加，且会累积成工期灾难。","advice":"需求变更走变更单，明确写清对工期和报价的影响。","example":"顺便再加个小功能，对你来说就一句话的事。"},{"id":"fp-11","category":"fuzzy_promise","subtype":"scope_creep","label":"蔓延·都算一起","weight":2,"terms":["都一起做了","一起弄了","包含在里面了吧","都算一起"],"why":"把新需求塞进已经定好价钱的旧范围。","advice":"在合同里写死『不包含项』，比写包含项更有效。","example":"这些都一起做了吧，反正你会这个。"},{"id":"fp-12","category":"fuzzy_promise","subtype":"vague_price","label":"模糊报价·有竞争力","weight":2,"terms":["有竞争力的价格","性价比高","友情价","内部价","给个实在价"],"why":"用形容词代替数字，只压价，不给条件。","advice":"只回具体的报价单，不回形容词。","example":"报个有竞争力的价格，后面还有合作机会。"},{"id":"fp-13","category":"fuzzy_promise","subtype":"verbal","label":"口头共识·不是说好了吗","weight":2,"terms":["我们说好的","当时不是这样说的","之前不是答应了吗"],"why":"用一个没有记录存在的『共识』否定书面约定。","advice":"所有变更先落成一条消息或一封邮件，再动手。","example":"之前不是答应了吗，怎么现在又要加钱。"},{"id":"fp-14","category":"fuzzy_promise","subtype":"payment_delay","label":"拖款·走流程","weight":3,"terms":["走流程","财务在审","下个月统一结","回头一起付","排款中"],"why":"『流程』没有终点，『下个月』没有日期。","advice":"约定具体付款日和逾期违约金比例。","example":"钱已经在走流程了，下个月统一结给你。"},{"id":"fp-15","category":"fuzzy_promise","subtype":"risk_share","label":"共担风险","weight":3,"terms":["共担风险","一起把这事做成","做好了大家一起赚","做好了再分"],"why":"赚了要分，亏了只有你；『风险共担』通常等于报酬后置。","advice":"分成可以谈，底价不能没有。","example":"前期我们先不给钱，做好了利润大家一起分。"},{"id":"fp-16","category":"fuzzy_promise","subtype":"unverifiable","label":"有人带教 / 不卡经验","weight":2,"terms":["有人带教","有师傅带","手把手教","零基础可学","不卡经验","接受无相关经验","无需经验"],"evidence":"JD-04｜适合在校大学生的市场岗实习，零基础可学，有人带教，可开实习证明、不卡经验。","why":"『有人带教 / 不卡经验』通常是低薪的理由，而不是培养的承诺。","advice":"问清带教的人是谁、每周几小时、带多久。","example":"零基础可学，有人带教，可开实习证明、不卡经验。"},{"id":"fp-17","category":"fuzzy_promise","subtype":"unverifiable","label":"用一张纸替代报酬","weight":1,"terms":["可开实习证明","提供实习证明","开具实习证明","可开证明"],"evidence":"JD-04｜零基础可学，有人带教，可开实习证明、不卡经验。","why":"把实习证明当成待遇的一部分，但它既不值钱也不可转让。","advice":"先确认证明上的岗位名称、起止时间和盖章主体。","example":"零基础可学，有人带教，可开实习证明、不卡经验。"},{"id":"fp-18","category":"fuzzy_promise","subtype":"unverifiable","label":"『者优先』","weight":1,"terms":["学历优先","经验优先","专业优先","能力者优先"],"regex":"[^，。；、]{0,6}者优先","evidence":"JD-01｜有汽车行业研发招聘背景优先；JD-02｜本科及以上学历优先；JD-03｜有较强汇报呈现能力者优先；JD-04｜电气专业优先；JD-05｜能保证稳定实习时间者优先。","why":"『优先』让筛选标准无法核对，你无从判断自己到底够不够。","advice":"直接问一句：这个优先，是加分项还是硬门槛。","example":"有较强汇报呈现能力者优先。"},{"id":"un-01","category":"unilateral","subtype":"interpretation","label":"最终解释权","weight":3,"terms":["最终解释权"],"why":"规则的解释权单向归对方，等于规则可以被随时改写。","advice":"要求写明解释依据；争议时以书面沟通记录为准。","example":"本活动的最终解释权归主办方所有。"},{"id":"un-02","category":"unilateral","subtype":"discretion","label":"以实际判定为准","weight":3,"terms":["以实际判定为准","以平台判定为准","以实际为准","具体以实际为准","以审核结果为准"],"why":"判定标准不可预知，事后几乎没有可申诉的依据。","advice":"要求写明判定依据和复核渠道。","example":"是否属于违规，以平台判定为准。"},{"id":"un-03","category":"unilateral","subtype":"change","label":"有权随时变更","weight":3,"terms":["有权随时变更","有权随时修改","有权单方变更","有权调整"],"why":"你同意的是一个对方可以随时改掉的条款。","advice":"要求变更须提前书面通知，并给你无条件退出的权利。","example":"本平台有权随时变更本协议内容。"},{"id":"un-04","category":"unilateral","subtype":"termination","label":"有权单方处置","weight":3,"terms":["有权直接","有权单方","有权自行","有权先行处置","有权处置"],"regex":"有权[^，。；、]{0,6}(扣除|扣押|冻结|下架|封禁|清退|划扣|没收|删除|暂停|限制)","why":"不必经你同意，对方即可采取对你不利的动作。","advice":"要求『处置前通知 + 可申辩 + 可复核』三道流程。","example":"平台有权直接冻结账户内全部款项。"},{"id":"un-05","category":"unilateral","subtype":"discretion","label":"视情节","weight":2,"terms":["视情节","视情况而定","情节严重","酌情处理"],"why":"弹性区间的两端都由对方掌握。","advice":"要求具体档位：什么情节对应什么后果。","example":"视情节轻重，平台可采取相应措施。"},{"id":"un-06","category":"unilateral","subtype":"notice","label":"不另行通知","weight":3,"terms":["不另行通知","无需另行通知","恕不通知","不再单独通知"],"why":"你承担了『不知道』的全部后果。","advice":"要求变更通过你真实在用的邮箱或站内信送达。","example":"上述调整恕不另行通知。"},{"id":"un-07","category":"unilateral","subtype":"acceptance","label":"以我方验收为准","weight":3,"terms":["以我方验收为准","由我方验收","验收由甲方决定","以甲方确认为准"],"why":"验收权单向，付款条件被无限延后。","advice":"要求加入对称条款：逾期未反馈视为验收通过。","example":"最终交付是否合格，以我方验收为准。"},{"id":"un-08","category":"unilateral","subtype":"decision","label":"保留最终决定权","weight":2,"terms":["保留最终决定权","我方保留决定权","由我方决定是否"],"why":"结果既不可预期，也不可协商。","advice":"要求写明决定所依据的具体条件。","example":"是否录用，我方保留最终决定权。"},{"id":"un-09","category":"unilateral","subtype":"catch_all","label":"兜底口径·以最终版为准","weight":2,"terms":["具体以合同为准","以最终版本为准","以官方公告为准","以最新规则为准"],"why":"一条兜底，前面所有口头承诺全部失效。","advice":"落笔之前先拿到那个『最终版本』再谈。","example":"以上内容仅供参考，具体以最终合同为准。"},{"id":"un-10","category":"unilateral","subtype":"standard","label":"按我方标准","weight":2,"terms":["按我方标准","按公司规定","按内部标准","按平台规则执行"],"why":"标准不公开，你无法预先满足。","advice":"索要书面的标准清单，拿不到就按最坏情况报价。","example":"具体执行标准按公司规定处理。"},{"id":"un-11","category":"unilateral","subtype":"boundary","label":"必要时 / 合理范围内","weight":1,"terms":["必要时","在合理范围内","适当调整"],"why":"边界由对方定义，『合理』是一个可伸缩的词。","advice":"要求量化：次数、金额、期限，三个都要数字。","example":"必要时平台可在合理范围内调整服务内容。"},{"id":"un-12","category":"unilateral","subtype":"evidence","label":"以平台数据为准","weight":3,"terms":["以平台数据为准","以系统记录为准","以后台数据为准"],"why":"你读不到、也核对不了的记录，成了唯一证据。","advice":"要求提供可导出、可核对的原始数据。","example":"结算金额以系统后台记录为准。"},{"id":"un-13","category":"unilateral","subtype":"silence","label":"不通过不告知","weight":1,"terms":["不另行告知","不再单独通知结果","择优录取","招满即止"],"why":"你付出了成本，拿不到任何反馈，也无法改进。","advice":"给自己设一个止损时间，到点就撤。","example":"未通过者不再单独通知结果。"},{"id":"un-14","category":"unilateral","subtype":"termination","label":"有权下架 / 封禁","weight":3,"terms":["有权下架","有权封禁","有权冻结","有权清退"],"why":"你的收入来源可以被单方面切断。","advice":"在合同外单独确认触发条件和申诉窗口时长。","example":"对违规用户，平台有权下架商品并冻结账号。"},{"id":"un-15","category":"unilateral","subtype":"pricing","label":"单方定价权","weight":3,"terms":["有权调整价格","价格以结算时为准","按届时价格执行"],"why":"你的成本可以被单方面抬高，你的报价会立刻失效。","advice":"报价单里写明有效期，并注明上游涨价则同步调整。","example":"服务价格可能调整，以结算时价格为准。"},{"id":"un-16","category":"unilateral","subtype":"private_life","label":"规定伸进私人领域","weight":2,"terms":["发色","不得染发","着装要求","仪容","妆容","不得纹身"],"evidence":"JD-02｜能够做好情绪管理和自我管理，无明显发色等违背职业素养情况。","why":"把对工作结果的评价，扩大到对你身体和外表的支配。","advice":"能接受就接受，但要意识到这是一条越界条款，不是行业惯例。","example":"能够做好情绪管理和自我管理，无明显发色等违背职业素养情况。"},{"id":"sc-01","category":"silent_consent","subtype":"renewal","label":"自动续约","weight":3,"terms":["自动续约","自动顺延","到期自动续期","自动展期"],"why":"一次不吭声，就多绑你一年。","advice":"在日历上标出异议窗口的截止日，提前一周提醒自己。","example":"本协议到期前三十日双方未提出异议的，自动续约一年。"},{"id":"sc-02","category":"silent_consent","subtype":"deemed","label":"未提异议视为同意","weight":3,"terms":["未提出书面异议视为","未提出异议视为同意","视为同意并继续","未提出书面异议","未提出异议"],"why":"你的沉默被条款写成了你的同意。","advice":"任何『视为同意』的窗口，都要留一次书面回复。","example":"逾期未提出书面异议的，视为同意变更。"},{"id":"sc-03","category":"silent_consent","subtype":"deemed","label":"逾期未回复视为确认","weight":3,"terms":["逾期未回复视为","未回复视为确认","未答复视为认可"],"why":"等你忙完再回，已经默认通过了。","advice":"设自动提醒，不要靠记性。","example":"三个工作日内未回复，视为确认。"},{"id":"sc-04","category":"silent_consent","subtype":"usage","label":"继续使用视为接受","weight":2,"terms":["继续使用视为接受","使用即视为同意","视为您已同意"],"why":"你只是继续用它，就被算作签署了一份新条款。","advice":"收到条款变更通知时，主动回一句『不同意』。","example":"您继续使用本服务，即视为接受更新后的协议。"},{"id":"sc-05","category":"silent_consent","subtype":"ui","label":"默认勾选","weight":2,"terms":["默认勾选","已为您勾选","自动勾选"],"why":"你没有主动选择，但系统记录你选择过。","advice":"注册和续费时手动取消勾选，并截图留证。","example":"已为您勾选开通自动续费，可随时关闭。"},{"id":"sc-06","category":"silent_consent","subtype":"no_refund","label":"一经售出不退","weight":3,"terms":["一经售出不退","概不退款","不支持退款","售出后不予退还"],"why":"交易的全部风险单向由你承担。","advice":"先买最小额度试，不要一次充年费。","example":"虚拟商品一经售出，概不退款。"},{"id":"sc-07","category":"silent_consent","subtype":"waiver","label":"视为放弃","weight":3,"terms":["视为放弃","视为您放弃","未申请视为放弃"],"why":"你没抓住的窗口，被定义为主动放弃。","advice":"把关键期限一次性写进项目日历。","example":"期满未申请续期的，视为放弃相关权益。"},{"id":"sc-08","category":"silent_consent","subtype":"deadline","label":"逾期不予受理","weight":2,"terms":["逾期不予受理","超过期限不再受理","逾期作废"],"why":"一次错过，就没有第二次机会。","advice":"确认『逾期』的起算点是什么事件。","example":"超过七个工作日提交的申诉，逾期不予受理。"},{"id":"sc-09","category":"silent_consent","subtype":"notice","label":"通知发出即送达","weight":3,"terms":["通知发出即视为送达","发送即视为送达","公告即视为通知"],"why":"你没看到，也算收到了。","advice":"绑定真实在用的邮箱，并养成定期检查的习惯。","example":"通知一经发送至预留邮箱，即视为送达。"},{"id":"sc-10","category":"silent_consent","subtype":"subscription","label":"未取消即视为订阅","weight":3,"terms":["未取消即视为","到期未取消"],"why":"『不取消』成为默认的付费意愿表达。","advice":"订阅当天就设取消提醒，不要等到月底。","example":"到期未取消的，视为继续订阅并按月扣费。"},{"id":"sc-11","category":"silent_consent","subtype":"consent","label":"视为已充分理解","weight":2,"terms":["视为您已充分理解","视为已阅读并同意","您已确认知悉"],"why":"一次点击，覆盖了你从没读过的全部条款。","advice":"至少读『责任』和『终止』两节，其余可略。","example":"点击即视为您已充分理解并同意全部条款。"},{"id":"sc-12","category":"silent_consent","subtype":"trial","label":"试用自动转付费","weight":3,"terms":["试用期结束自动转为","免费期结束自动","自动转为付费"],"why":"从免费变付费，不需要你再同意一次。","advice":"试用当天就设取消提醒，别等系统通知。","example":"七日试用期结束后自动转为付费套餐。"},{"id":"sc-13","category":"silent_consent","subtype":"deemed","label":"N 日内未提出视为认可","weight":3,"terms":["日内未提出视为","未在日内提出"],"regex":"未在.{0,6}日内提出|.{0,4}日内未提出","why":"极短的窗口加上沉默同意，你几乎必然错过。","advice":"把具体天数抄下来，换算成自己的最后期限。","example":"交付后三日内未提出异议的，视为认可。"},{"id":"sc-14","category":"silent_consent","subtype":"change","label":"公告即时生效","weight":3,"terms":["公告后即生效","自公告之日起生效","发布即生效"],"why":"生效时间早于你知情的时间。","advice":"要求变更设过渡期，并保留按旧条款履约的权利。","example":"本规则自公告之日起生效，不另行通知。"},{"id":"sc-15","category":"silent_consent","subtype":"termination","label":"单方解除且不担责","weight":3,"terms":["有权单方解除","解除本协议且不承担","终止服务且无需"],"why":"对方可以随时退出，而且不用为你已投入的成本负责。","advice":"要求对等解除权，并写明已发生工作的结算方式。","example":"平台有权单方解除本协议且不承担任何责任。"},{"id":"li-01","category":"liability_shift","subtype":"force_majeure","label":"不可抗力","weight":2,"terms":["不可抗力"],"why":"口袋足够大，几乎所有延误都能装进去。","advice":"要求列举具体情形，并约定通知义务和时限。","example":"因不可抗力导致的延误，双方互不承担责任。"},{"id":"li-02","category":"liability_shift","subtype":"disclaimer","label":"概不负责","weight":3,"terms":["概不负责","不承担任何责任","不承担任何赔偿责任","不负任何责任"],"why":"把对方能做到的全部责任一次性清零。","advice":"要求至少保留『故意或重大过失』不免责。","example":"因此造成的任何损失，本公司概不负责。"},{"id":"li-03","category":"liability_shift","subtype":"risk_shift","label":"风险由你承担","weight":3,"terms":["风险由乙方承担","风险由商家承担","风险由用户承担","由您自行承担风险"],"why":"风险被单向划到没有议价能力的那一方。","advice":"风险和控制权要对齐：管不到的事，不承担后果。","example":"使用本服务产生的一切风险由用户自行承担。"},{"id":"li-04","category":"liability_shift","subtype":"loss","label":"一切损失由你承担","weight":3,"terms":["一切损失由","全部损失由","所有损失由"],"why":"『一切』没有上限，也无法预估。","advice":"要求把赔偿范围限定为『直接损失』并设金额上限。","example":"由此造成的一切损失由乙方承担。"},{"id":"li-05","category":"liability_shift","subtype":"cap","label":"赔偿上限","weight":3,"terms":["赔偿总额不超过","赔偿上限为","最高不超过"],"why":"你的实际损失可能远超这个上限，差额只能自己吞。","advice":"要求上限与实际合同金额挂钩，而不是一个固定小额。","example":"我方赔偿总额不超过您实际支付的服务费。"},{"id":"li-06","category":"liability_shift","subtype":"indirect","label":"不赔间接损失","weight":2,"terms":["不承担间接损失","不包括利润损失","不赔偿可得利益"],"why":"对服务商来说，你的停工损失永远算『间接』。","advice":"关键业务上，把可用性承诺写成独立的服务等级条款。","example":"包括但不限于利润损失在内的间接损失，不予赔偿。"},{"id":"li-07","category":"liability_shift","subtype":"as_is","label":"按现状提供","weight":3,"terms":["按现状提供","按现有状态提供","不提供任何保证","不作任何明示或默示的保证"],"why":"明确放弃了对质量的全部承诺。","advice":"关键链路不要单点依赖，准备好降级方案。","example":"本服务按现状提供，不提供任何形式的保证。"},{"id":"li-08","category":"liability_shift","subtype":"third_party","label":"第三方原因","weight":2,"terms":["第三方原因导致","非我方原因","因银行或运营商原因"],"why":"把责任推给一个你无法追责的主体。","advice":"要求明确『第三方』的清单和替代方案。","example":"因第三方原因导致的服务中断，我方不承担责任。"},{"id":"li-09","category":"liability_shift","subtype":"fault","label":"因你操作不当","weight":2,"terms":["因您操作不当","因用户自身原因","由于您的过错"],"why":"『操作不当』的解释权在对方手里。","advice":"保留自己的操作日志和截图，作为反证材料。","example":"因您操作不当造成的损失，由您自行承担。"},{"id":"li-10","category":"liability_shift","subtype":"burden","label":"由你负责解决","weight":2,"terms":["由您负责解决","由乙方自行解决","须由您自行处理"],"why":"把本该共同承担的处置成本，全部转成你的工作量。","advice":"在报价时把这部分工作量显式计入。","example":"因内容引发的争议，须由您自行处理并承担费用。"},{"id":"li-11","category":"liability_shift","subtype":"cost","label":"费用转嫁","weight":3,"terms":["费用由乙方承担","费用由商家承担","由此产生的费用由"],"why":"成本发生了，但账记在你头上。","advice":"要求费用发生前需经你书面确认。","example":"由此产生的全部费用由商家承担。"},{"id":"li-12","category":"liability_shift","subtype":"deduction","label":"从保证金扣除","weight":3,"terms":["从保证金中扣除","从余额中扣除","直接从账户划扣","有权扣划","扣除保证金","划扣"],"why":"你的钱在对方手里，扣款不需要经过你同意。","advice":"只放最低必要金额，流水定期提现。","example":"平台有权直接从账户余额中扣除相应款项。"},{"id":"li-13","category":"liability_shift","subtype":"indemnity","label":"单向赔偿义务","weight":3,"terms":["您应赔偿我方","乙方应赔偿甲方","须赔偿由此造成的"],"why":"只有你有赔偿义务，对方没有对等条款。","advice":"要求改为双向对等赔偿。","example":"如造成我方损失，您应全额赔偿。"},{"id":"li-14","category":"liability_shift","subtype":"disclaimer","label":"免责声明","weight":2,"terms":["免责声明","本公司不承担","平台不承担"],"why":"一句话，把前面所有承诺都变成『仅供参考』。","advice":"看它写在承诺之前还是之后——写在前面的承诺基本作废。","example":"免责声明：本平台不承担因使用本内容产生的任何后果。"},{"id":"li-15","category":"liability_shift","subtype":"jurisdiction","label":"管辖与解释权","weight":2,"terms":["本条款的解释权","以我方所在地法院管辖","争议由我方所在地"],"why":"管辖地直接决定维权成本，而成本高到你通常会放弃。","advice":"金额再小也要看一眼争议解决条款。","example":"因本协议产生的争议，由我方所在地法院管辖。"},{"id":"dv-01","category":"duty_vague","subtype":"work_scope","label":"协助式职责","weight":2,"terms":["协助完成","协助整理","协助处理","协助开展","协助跟进","协助收集"],"evidence":"JD-01｜协助完成招聘流程中的简历筛选、电话沟通及面试安排等工作；JD-03｜协助整理二手车的关键资料形成台账；JD-04｜协助线上线下市场活动执行。","why":"『协助』意味着你没有决定权，却要为结果负责。","advice":"问清两件事：这件事最终谁拍板，我具体负责哪一段。","example":"协助完成招聘流程中的简历筛选、电话沟通及面试安排等工作。"},{"id":"dv-02","category":"duty_vague","subtype":"work_scope","label":"参与式职责","weight":2,"terms":["参与撰写","参与制定","参与策划","参与设计","参与讨论"],"evidence":"JD-03｜参与撰写官方二手车介绍文案、卖点提炼、车源介绍等。","why":"『参与』既可以被解释成主力，也可以被解释成旁观，责任范围完全弹性。","advice":"确认产出物署名和决策权归属。","example":"参与撰写官方二手车介绍文案、卖点提炼、车源介绍等。"},{"id":"dv-03","category":"duty_vague","subtype":"work_scope","label":"配合式职责","weight":2,"terms":["配合完成","落地配合","配合执行","配合工作","协同完成"],"evidence":"JD-04｜协助线上线下市场活动执行、物料整理、活动落地配合。","why":"『配合』把执行责任放在你身上，把决定权留给别人。","advice":"问清配合的对象是谁、他负责什么、你负责什么。","example":"协助线上线下市场活动执行、物料整理、活动落地配合。"},{"id":"dv-04","category":"duty_vague","subtype":"scope_unbounded","label":"全面协助","weight":3,"terms":["全面协助","日常辅助工作","协助日常","各项事务","日常事务"],"evidence":"JD-03｜全面协助总部团队开展……业务运营、数据整理、品牌推广及用户运营工作；JD-04｜协助渠道、用户对接及市场部日常辅助工作。","why":"『全面协助 + 日常事务』是没有边界的工作范围，等于什么都要做。","advice":"要求列出每周固定要做的事，而不是职位范围。","example":"全面协助总部团队开展岚图直营官方认证二手车的业务运营、数据整理、品牌推广及用户运营工作。"},{"id":"dv-05","category":"duty_vague","subtype":"catch_all","label":"上级交办的其他工作","weight":3,"terms":["上级交办","领导交办","交办的其他","安排的其他工作","其他临时事项","临时性工作"],"evidence":"JD-01｜善于沟通，能够高效完成上级交办的任务。","why":"这一句可以吞掉任何工作内容，是职责清单里的万能兜底。","advice":"把它当成一个信号：这里的岗位边界由上级随时定义。","example":"善于沟通，能够高效完成上级交办的任务。"},{"id":"dv-06","category":"duty_vague","subtype":"personality","label":"人格要求替代工作标准","weight":1,"terms":["积极主动","做事踏实","有执行力","责任心强","较真","细致耐心","善于沟通","热爱教育事业","学习意愿强"],"evidence":"JD-01｜善于沟通、有团队合作意识；JD-02｜较强的心理素质、热爱教育事业；JD-03｜态度积极、抗压、学习意愿强；JD-04｜沟通顺畅、做事踏实，积极主动，有执行力；JD-05｜做事细致耐心，责任心强。","why":"性格形容词无法被验收，也无法被反驳——它只说明了这份工作靠自觉补位。","advice":"把每一条性格要求翻译成一个具体场景：什么时候需要它。","example":"沟通顺畅、做事踏实，积极主动，有执行力。"},{"id":"dv-07","category":"duty_vague","subtype":"workload","label":"工作量伪装","weight":2,"terms":["海量信息处理","繁琐的","多任务并行","高强度重复","高度重复"],"evidence":"JD-05｜沟通协调能力优秀，能适应繁琐的海量信息处理。","why":"用『适应』把高强度重复劳动说成一种能力要求。","advice":"问清每天大概处理多少条，换算成单条耗时。","example":"沟通协调能力优秀，能适应繁琐的海量信息处理。"},{"id":"ce-01","category":"comp_erosion","subtype":"non_cash","label":"非现金补贴","weight":3,"terms":["以优惠券形式发放","以券形式","以积分形式","可抵扣","折抵"],"regex":"以.{0,6}形式发放","evidence":"JD-01｜工资150元/天+28餐补(餐补以美团优惠券形式发放，可直接在美团点外卖or团购)。","why":"名义上是钱，实际只能在指定地方花，等于暗中打了折。","advice":"把补贴折算成真实现金重算一遍月收入，再决定。","example":"工资150元/天+28餐补(餐补以美团优惠券形式发放，可直接在美团点外卖or团购)。"},{"id":"ce-02","category":"comp_erosion","subtype":"payment_delay","label":"押薪","weight":3,"terms":["发上月薪资","次月发放工资","押一个月","次月结算"],"regex":"\\d+号发.{0,3}月|次月.{0,6}发(放)?(工资|薪资)","evidence":"JD-01｜每个月20号发上月薪资。","why":"押薪二十天等于无息占用你的钱，离职那个月最容易卡住。","advice":"确认发薪日，以及离职当月怎么结、什么时候结。","example":"每个月20号发上月薪资。"},{"id":"fp-06","category":"pressure","subtype":"urgency","label":"催命·今天就给","weight":2,"terms":["今天之内","尽快给我","越快越好","明天就要","今天晚上"],"why":"时间压力单向落在你身上，加急却不加价。","advice":"加急是一个可售选项，要单独定价。","example":"这个客户明天就要，今天之内能给我吗。"},{"id":"fp-07","category":"pressure","subtype":"urgency","label":"催命·这不是很基础吗","weight":2,"terms":["这个很简单吧","别人都能做","不是很简单吗","这么基础"],"why":"用『简单』否定工作量，为压价和后续加需求铺路。","advice":"把工作量拆成清单，让对方看见『简单』里的步骤。","example":"这个很简单吧，别人一晚上就做出来了。"},{"id":"pr-01","category":"pressure","subtype":"overtime","label":"抗压 = 加班预警","weight":3,"terms":["抗压","承压能力强","高压环境","能接受高强度","适应快节奏"],"evidence":"JD-02｜具备较强的心理素质、良好的表达沟通能力、抗压能力及反馈意识；JD-03｜态度积极、抗压、学习意愿强。","why":"『抗压』是加班和情绪劳动的委婉说法，而且通常不配补偿。","advice":"直接问：最近一个月，团队平均几点下班。","example":"具备较强的心理素质、良好的表达沟通能力、抗压能力及反馈意识。"},{"id":"pr-02","category":"pressure","subtype":"attendance","label":"出勤绑定","weight":2,"terms":["每周出勤","一周要出勤","至少一周","每周工作5天","能全职实习最好","实习时间到年底"],"evidence":"JD-05｜实习时间到年底，能全职实习最好，至少一周要出勤4天；JD-06｜每周出勤至少4天；JD-03｜实习4个月以上，每周工作5天。","why":"出勤和实习期是硬约束，却常被写成『最好』『优先』这样的软承诺。","advice":"把时薪算出来，再和别家的时薪比。","example":"实习时间到年底，能全职实习最好，至少一周要出勤4天。"},{"id":"pr-03","category":"pressure","subtype":"obedience","label":"服从性要求","weight":2,"terms":["服从安排","服从调配","听从安排","随时响应","保持在线"],"evidence":"JD-01｜有团队合作意识，能积极融入集体协作；JD-02｜能够做好情绪管理和自我管理。","why":"把『配合度』写进要求，通常意味着工作安排由对方单方面决定。","advice":"问清临时加派任务的频率，以及你是否可以拒绝。","example":"有团队合作意识，能积极融入集体协作。"},{"id":"bw-01","category":"buzzword","subtype":"verb","label":"赋能","weight":3,"terms":["赋能"],"why":"『赋能』没有说明赋什么能、怎么赋、怎么验收。","advice":"要求换成：具体给谁、给了什么、怎么算给了。","example":"用 AI 赋能商家经营，实现全链路提效。"},{"id":"bw-02","category":"buzzword","subtype":"noun","label":"抓手","weight":1,"terms":["抓手"],"why":"不说清具体动作的『抓手』，等于没给方案。","advice":"问一句：这个抓手，下周由谁做什么。","example":"以内容为抓手，打开新的增长空间。"},{"id":"bw-03","category":"buzzword","subtype":"noun","label":"闭环","weight":1,"terms":["闭环"],"why":"闭环听起来完整，但没有任何一处可被检验。","advice":"要求画出从进入到退出的每一步。","example":"打通从流量到转化的完整闭环。"},{"id":"bw-04","category":"buzzword","subtype":"verb","label":"打通","weight":1,"terms":["全链路打通","打通全链路","打通上下游","链路打通"],"why":"『打通』掩盖了接口、字段、权限这些真正的工作量。","advice":"要求列出要打通的具体系统清单。","example":"本季度重点是打通全链路的业务数据。"},{"id":"bw-05","category":"buzzword","subtype":"verb","label":"沉淀","weight":1,"terms":["沉淀方法论","能力沉淀","沉淀下来","数据沉淀"],"why":"『沉淀』把『没有产出』说成了一种收获。","advice":"问一句：沉淀在哪，谁可以复用。","example":"把这次的经验沉淀成可复用的方法论。"},{"id":"bw-06","category":"buzzword","subtype":"adj","label":"全域","weight":1,"terms":["全域经营","全域营销","全域增长","全渠道"],"why":"『全域』通常意味着每个域都没做透。","advice":"要求指定优先的单一渠道和验证周期。","example":"构建全域经营能力，覆盖所有触点。"},{"id":"bw-07","category":"buzzword","subtype":"noun","label":"生态","weight":1,"terms":["生态位","构建生态","生态闭环","开放生态"],"why":"『生态』是一个没有边界的承诺。","advice":"要求说清你在生态里的确切位置和收益方式。","example":"共同构建开放共赢的内容生态。"},{"id":"bw-08","category":"buzzword","subtype":"noun","label":"颗粒度","weight":1,"terms":["颗粒度"],"why":"『颗粒度』常用来要求更细，但从不定义细到什么程度。","advice":"要求给出一个具体的示例输出。","example":"这个需求的颗粒度还不够，再细一点。"},{"id":"bw-09","category":"buzzword","subtype":"noun","label":"顶层设计","weight":1,"terms":["顶层设计"],"why":"『顶层设计』常常是一份没人执行的文档。","advice":"要求指明这次要落地的第一个具体模块。","example":"先做好顶层设计，再谈落地。"},{"id":"bw-10","category":"buzzword","subtype":"verb","label":"对齐 / 拉齐","weight":1,"terms":["对齐一下","拉齐认知","对齐目标","对齐预期"],"why":"『对齐』经常是没有结论的会议的委婉说法。","advice":"要求会后产出一句可执行的结论。","example":"我们下周先对齐一下目标。"},{"id":"bw-11","category":"buzzword","subtype":"verb","label":"降本增效","weight":1,"terms":["降本增效","提质增效","提效降本"],"why":"四个字同时承诺了降本和增效，通常两样都没做到。","advice":"要求指定一个可量化的指标和一个时间点。","example":"通过数字化手段实现降本增效。"},{"id":"bw-12","category":"buzzword","subtype":"adj","label":"精细化运营","weight":1,"terms":["精细化运营","精细化","精益运营"],"why":"『精细化』是一个方向，不是一个动作。","advice":"要求给出第一步的具体动作。","example":"用数据驱动精细化运营。"},{"id":"bw-13","category":"buzzword","subtype":"noun","label":"组合拳","weight":1,"terms":["组合拳","一套组合拳"],"why":"『组合拳』把多个不确定的动作打包成一个确定的承诺。","advice":"要求拆开：每一个动作各自的目标是什么。","example":"我们这次打一套组合拳。"},{"id":"bw-14","category":"buzzword","subtype":"verb","label":"复盘","weight":1,"terms":["复盘一下","做个复盘","复盘会"],"why":"『复盘』常被用来代替『结论』。","advice":"要求复盘必须落到一条要改的事上。","example":"这件事我们先复盘一下再说。"},{"id":"bw-15","category":"buzzword","subtype":"verb","label":"全面拥抱 AI / 数智化","weight":1,"terms":["全面拥抱AI","全面拥抱 AI","数智化","全面接入AI","All in AI"],"why":"『全面』与『拥抱』都是态度词，不是工作内容。","advice":"要求指出第一个要上 AI 的具体环节。","example":"公司决定全面拥抱 AI，实现数智化转型。"}]};
 var RULES = {"version":"0.1.0","locale":"zh-CN","note":"同句共现规则。定位：只做召回（L1），不做立场判断。立场由 L2 模型根据 matched 原文判定。needsStance=true 表示这条规则单独不能定性，必须由 L2 判断谁对谁不利。","rules":[{"id":"R1","category":"silent_consent","label":"行为即视为同意","weight":3,"groups":[["视为","即表示"],["同意","接受"]],"gap":30,"needsStance":true,"why":"不用你签字，一个动作或一句不吭声就被算作同意。","advice":"确认『视为同意』的触发条件是什么动作，以及你有没有反悔窗口。"},{"id":"R2","category":"silent_consent","label":"继续使用即视为接受","weight":3,"groups":[["继续使用","使用本服务"],["视为","即表示"]],"gap":40,"needsStance":true,"why":"条款变了，你不退出就等于同意新条款。","advice":"变动时主动留一次书面『不同意』，是最便宜的退出方式。"},{"id":"R3","category":"unilateral","label":"有权单方变更/终止","weight":3,"groups":[["有权","可自行"],["变更","修改","调整","终止","暂停","删除","冻结","限制","下架"]],"gap":20,"excludeAfter":["时","后","前","起","之前","之后","期间"],"excludeWords":["格式","表格","排版","字体","字号"],"needsStance":true,"why":"动作与单方权限挨在一起，通常意味着规则可以被随时改写。","advice":"看主语是谁：『学校有权』是对你不利，『你有权』是对你有益。"},{"id":"R4","category":"liability_shift","label":"不承担 / 概不负责","weight":3,"groups":[["不承担","概不负责","不予承担","无需承担"],["责任","损失","后果","赔偿"]],"gap":30,"needsStance":true,"why":"把对方的责任一次性清空。","advice":"至少要求保留『故意或重大过失』不免责。"},{"id":"R5","category":"liability_shift","label":"风险/损失由你自行承担","weight":3,"groups":[["自行承担","由您承担","由学生承担","由用户承担"],["风险","损失","费用","责任","后果"]],"gap":30,"needsStance":true,"why":"风险与控制权不对等，全落在没有议价权的一方。","advice":"管不到的事，不承担后果。"},{"id":"R6","category":"unilateral","label":"保留权利","weight":2,"groups":[["保留"],["权利","解释","追究","采取","进一步"]],"gap":20,"needsStance":true,"why":"『保留』= 现在还不想承诺，以后再说。","advice":"追问一句：什么情况下会行使这项权利。"},{"id":"R7","category":"silent_consent","label":"视为送达/确认/放弃","weight":3,"groups":[["视为"],["送达","确认","认可","放弃","已知悉","无异议"]],"gap":30,"needsStance":true,"why":"你没看到也算收到，你没拒绝也算同意。","advice":"查清送达渠道是不是你真正在用的那个。"},{"id":"R8","category":"fuzzy_promise","label":"毫无保留地接受","weight":2,"groups":[["毫无保留"],["接受","同意"]],"gap":15,"needsStance":false,"why":"要求你无条件全盘接受，并预先放弃后续异议。","advice":"无条件条款越靠前，后面的例外越多。"},{"id":"R9","category":"unilateral","label":"未经同意即处置","weight":2,"groups":[["未经","无需经"],["同意","许可","授权"]],"gap":25,"needsStance":true,"why":"对方可以在不经过你的情况下做决定。注意：主语是你的时候（『未经您同意，我们不会…』）反而是保护条款，必须由 L2 判断。","advice":"看谁被限制：限制对方是保护你，限制你是剥夺你。"},{"id":"R10","category":"liability_shift","label":"不保证 / 不作承诺","weight":2,"groups":[["不保证","不作任何","不提供任何"],["准确","完整","及时","适用","保证","承诺"]],"gap":25,"needsStance":true,"why":"对质量不作任何承诺。","advice":"关键用途上，把这一条当成『没有服务承诺』来算风险。"},{"id":"R11","category":"comp_erosion","label":"取消资格 / 不予发放","weight":3,"groups":[["取消"],["资格","评定","发放","名额","奖励","评优"]],"gap":20,"needsStance":false,"why":"触发条件通常写得很宽，后果却是终局性的。","advice":"把触发条件逐条抄下来，看自己会不会踩到。"},{"id":"R12","category":"pressure","label":"逾期视为放弃","weight":3,"groups":[["逾期","过期","超期"],["视为","不予受理","作废","自动放弃","不再受理"]],"gap":25,"needsStance":false,"why":"短窗口加上沉默即同意，你几乎必然错过。","advice":"把截止日换成自己的日历提醒，并且提前一周。"}]};
 var PRESETS = [{"name":"学生手册·会挂科的那几条","text":"新生保留入学资格期满前应向学校申请入学，经学校审查合格后，办理入学手续。审查不合格的，取消入学资格；逾期不办理入学手续且无因不可抗力延迟等正当理由的，视为放弃入学资格。在全程考勤情况下，学生无故缺课累计达到或超过该门课程学期总学时数的1/3时，取消其该课程的考核资格。在随机抽查考勤的情况下，抽查三次无故缺课者，取消其该门课程的考核资格。学生对学校作出的涉及处理或处分决定存有异议的，须自决定送达之日起10日内提出申诉。学生在申诉期内未提出申诉的，视为放弃申诉，学校或者省级教育行政部门不再受理。"},{"name":"用户协议（真实节选 1400 字）","text":"哔哩哔哩弹幕网用户使用协议 更新时间：2025年4月30日 生效时间：2025年5月7日 【首部及导言】 《哔哩哔哩弹幕网用户使用协议》（以下简称“本协议”）是您与哔哩哔哩之间关于使用哔哩哔哩各项服务的法律协议。“哔哩哔哩”是指哔哩哔哩弹幕网的运营公司上海宽娱数码科技有限公司及其关联公司。 本协议中与您的权益（可能）存在重大关系的条款（包括免除哔哩哔哩责任的条款、限制您权利的条款、争议解决条款及司法管辖条款等），哔哩哔哩已采用字体加粗等方式来特别提醒您，请您留意重点查阅。请您确保您在使用哔哩哔哩服务前已仔细阅读、充分理解并毫无保留地接受本协议所有条款。 《哔哩哔哩隐私政策》 《帮助中心》 《社区公约》 《小黑屋处罚条例》 以及哔哩哔哩公布的其他协议规范、规则、声明、公告、政策等（以下统称“哔哩哔哩服务条款”）是本协议不可分割的组成部分，您在使用哔哩哔哩服务时应同样遵守。您接受并同意本协议的行为即视为您同意并接受哔哩哔哩服务条款，您接受并同意任一哔哩哔哩服务条款的行为亦视为您接受并同意本协议。 您确认您具备完全民事权利能力和完全民事行为能力，有能力同意并遵守本协议，并对您本协议项下的全部行为独立承担法律责任。若您不具备前述与您行为相适应的民事行为能力，则应获得法定监护人的知情同意。 如您尚未成年，请在法定监护人的陪同下阅读和判断是否同意本协议，请特别注意未成年人条款。未成年人行使和履行本协议项下的权利和义务视为已获得法定监护人的认可。 1. 服务说明 1.1 哔哩哔哩向您提供包括但不限于如下服务： (1) 哔哩哔哩弹幕网网站：www.bilibili.com（及其他由哔哩哔哩运营的任何网站）； (2) 哔哩哔哩直接运营或与第三方合作运营的客户端应用程序，包括但不限于PC、平板、手机、电视、机顶盒、穿戴设备、车内平板设备、智能音箱设备等全部终端客户端产品； (3) 哔哩哔哩用户个人中心、硬币、钱包； (4) 哔哩哔哩直接拥有或运营的服务器、网络存储空间； (5) 哔哩哔哩提供给您的各类增值服务； (6) 哔哩哔哩提供给您的其他技术和/或服务，具体以哔哩哔哩实际提供的为准。 1.2 哔哩哔哩所提供的服务，均限于在上述1.1条（1）、（2）所述平台（以下简称“哔哩哔哩平台”）内使用，任何以恶意破解等非法手段将哔哩哔哩所提供的服务与哔哩哔哩平台分离的行为，皆不属于本协议约定的由哔哩哔哩提供的服务。由此引起的一切后果由行为人负责，哔哩哔哩将保留依法追究行为人法律责任的权利。哔哩哔哩所提供的服务仅供用户非商业性使用，用户在未经哔哩哔哩事先书面同意的情况下，不得以商业性目的使用哔哩哔哩所提供的服务。 1.3 哔哩哔哩官方所公布的方式为注册、登录、下载客户端（包括但不限于iOS、Android、HarmonyOS等智能平台）、使用哔哩哔哩服务的唯一合法方式，用户通过其他任何途径、任何渠道、任何方式获取的哔哩哔哩服务（包括但不限于账号、硬币、客户端下载等）均为非法所得，哔哩哔哩概不承认其效力，且一经发现，哔哩哔哩有权立即作出删除、清零、封号等处理，任何因此导致的一切不利后果均由用户自行承担。请用户妥善保管自己的账号和密码，加强密码安全性，谨防账号泄露或被盗。因用户账号被泄露或被盗而造成的任何损失，哔哩哔哩不承担补偿责任。 1.4 根据国家法律法规、监管政策及行业规范变化"},{"name":"甲方·先做一版看看","text":"先做一版看看效果，预算我们后面再谈，这个项目跑通了后面量很大，我们还有很多类似需求。整体挺好的，就是感觉不太对，你再优化一下，明天想看新版本。顺便再加个小功能，对你来说就一句话的事。报个有竞争力的价格，我们是长期合作。"}];
 (function(){
@@ -218,6 +254,9 @@ function normalize(text) {
   return String(text)
     .replace(/\r\n?/g, '\n')
     .replace(/\u3000/g, ' ')
+    // PDF / Word 转出来的文本会在汉字之间插空格，「未请 假」「数据 线」都是这么来的。
+    // 不压掉，一是引用块里难看，二是「多字优先」的短语词条会直接漏匹配。
+    .replace(/([\u4e00-\u9fff])[ \t]+(?=[\u4e00-\u9fff])/g, '$1')
     .replace(/[ \t]+\n/g, '\n')
     .replace(/\n{3,}/g, '\n\n')
     .replace(/[ \t]{2,}/g, ' ')
@@ -337,7 +376,9 @@ function candidates(text, spans) {
   for (const sen of sents) {
     const hits = spans.filter((s) => s.start >= sen.start && s.end <= sen.end);
     if (!hits.length) continue;
-    list.push({ start: sen.start, end: sen.end, text: text.slice(sen.start, sen.end).trim(), hits });
+    const seg = text.slice(sen.start, sen.end).trim();
+    // 后果落在谁头上，是 L1 就能算的事实，排序层不必再算一遍
+    list.push({ start: sen.start, end: sen.end, text: seg, hits, bearing: bearingOfSentence(seg) });
   }
   return { total: sents.length, list };
 }
@@ -411,6 +452,7 @@ function missingFields(text, register, checklists = CHECKLISTS) {
 }
 
 function scanText(lex, rules, raw) {
+  const rawChars = String(raw).length;
   const text = normalize(raw);
   const dict = matchLexicon(lex, text);
   const rule = matchRules(rules, text);
@@ -420,6 +462,8 @@ function scanText(lex, rules, raw) {
   const reg = detectRegister(text);
   return {
     text, dict, rule, spans, clusters,
+    // 报告里说「这份 X 字」应该等于文件本身的字数，不是压完空白之后的长度
+    rawChars,
     water: waterIndex(text, clusters),
     sentences: cand.total,
     candidates: cand.list,
@@ -495,7 +539,319 @@ function segments(text, clusters) {
   return out;
 }
 
-window.DH={normalize,splitSentences,matchLexicon,matchRules,cluster,waterIndex,candidates,detectRegister,missingFields,scanText,segments,CHECKLISTS,bearingOfSentence,relationTo,PARTY_NAMES};
+// 纯函数排序层：没有任何 import、不碰文件系统、不联网。
+// 浏览器（离线版）、命令行、接口三处共用同一套「挑哪 10 条」的判断。
+// 责任边界：只决定「哪些句子该看、按什么顺序、标题怎么写」，不编造原文里的字。
+
+// ---------- L1.5 代价门槛 ----------
+const ACTION = ['申请', '提交', '办理', '报名', '报到', '申诉', '复核', '备案', '提出', '续期', '反馈', '确认', '回复', '逾期', '日内', '期限内', '截止'];
+const IRREV = ['取消资格', '视为放弃', '不予受理', '不再受理', '作废', '退学', '开除', '失效', '不再享有', '取消其', '注销'];
+const MONEY = ['承担', '费用', '违约金', '押金', '扣除', '赔偿', '支付', '补足', '不退'];
+// 只留真正的个人信息词。早先写的 '数据' '授权' '收集' 太泛：
+// 「寝室电话线、数据线视情节扣分」「不进入未经授权的计算机」都被算成了「交出数据」。
+const DATA = ['个人信息', '隐私', '个人数据', '数据收集', '信息收集', '共享给第三方', '对外提供', '设备信息', '位置信息'];
+const PROC = ['送达', '通知', '公告', '格式', '表格', '联系地址', '联系人'];
+
+const SUBJ_BY_STANCE = {
+  student: ['学生', '本人'],
+  user: ['用户', '您'],
+  b: ['乙方', '丙方'],
+  a: ['甲方'],
+};
+const ADMIN_TOKENS = ['学校', '学院', '校方', '甲方', '平台', '本公司', '公司', '经营者', '教师', '辅导员', '医院', '机构'];
+
+const CONSEQUENCE_NAMES = {
+  lose_qualification: '失去资格',
+  requirement: '要你动手',
+  lose_money: '涉及钱',
+  lose_data: '交出数据',
+  procedural: '只是程序',
+  other: '其他',
+};
+
+const RANK = { lose_qualification: 5, requirement: 4, lose_money: 3, lose_data: 3, procedural: 1, other: 2 };
+const rankOf = (kind) => RANK[kind] ?? 2;
+
+function subjectNear(text, verbs, readerTokens, adminTokens) {
+  let best = -1;
+  let who = null;
+  for (const v of verbs) {
+    const i = text.indexOf(v);
+    if (i < 0) continue;
+    let pos = -1;
+    let tag = null;
+    for (const [list, t] of [[readerTokens, 'reader'], [adminTokens, 'admin']]) {
+      for (const s of list) {
+        const j = text.lastIndexOf(s, i);
+        if (j >= 0 && j > pos) { pos = j; tag = t; }
+      }
+    }
+    if (pos > best) { best = pos; who = tag; }
+  }
+  return who;
+}
+
+function consequenceOf(text, stance = 'user') {
+  const readerTokens = SUBJ_BY_STANCE[stance] || ['您'];
+  if (PROC.some((w) => text.includes(w)) && !IRREV.some((w) => text.includes(w)) && !ACTION.some((w) => text.includes(w))) {
+    return { kind: 'procedural', requiresAction: false, irreversible: false };
+  }
+  if (IRREV.some((w) => text.includes(w))) {
+    return { kind: 'lose_qualification', requiresAction: false, irreversible: true };
+  }
+  if (ACTION.some((w) => text.includes(w))) {
+    const who = subjectNear(text, ACTION, readerTokens, ADMIN_TOKENS);
+    if (who === 'reader') return { kind: 'requirement', requiresAction: true, irreversible: false };
+  }
+  if (MONEY.some((w) => text.includes(w))) return { kind: 'lose_money', requiresAction: false, irreversible: false };
+  if (DATA.some((w) => text.includes(w))) return { kind: 'lose_data', requiresAction: false, irreversible: false };
+  return { kind: 'other', requiresAction: false, irreversible: false };
+}
+
+// ---------- 相似度与去重 ----------
+function bigrams(s) {
+  const t = String(s).replace(/[^\u4e00-\u9fff]/g, '');
+  const set = new Set();
+  for (let i = 0; i < t.length - 1; i++) set.add(t.slice(i, i + 2));
+  return set;
+}
+
+function jaccard(a, b) {
+  let inter = 0;
+  for (const x of a) if (b.has(x)) inter++;
+  const uni = a.size + b.size - inter;
+  return uni ? inter / uni : 0;
+}
+
+// 后果短语：同一件事的不同写法（「视为放弃入学资格」出现两次）靠它归并
+const CONS_PATTERNS = [
+  /取消[^，。；：、]{0,14}/,
+  /视为(?:自动)?放弃[^，。；：、]{0,14}/,
+  /不予[^，。；：、]{0,12}/,
+  /不再受理[^，。；：、]{0,10}/,
+  /(?:开除学籍|退学|作废|失效)/,
+  /由[^，。；：、]{0,10}?(?:承担|负担)[^，。；：、]{0,8}/,
+  /(?:扣|罚)[^，。；：、]{0,8}分/,
+  /给予[^，。；：、]{0,12}(?:处分|警告)/,
+];
+
+function consequenceKey(text) {
+  for (const re of CONS_PATTERNS) {
+    const m = String(text).match(re);
+    if (m) return m[0].replace(/\s+/g, '');
+  }
+  return null;
+}
+
+// 归并用的键：后果短语太短（「不予受理」只有 4 个字）就说明不了「这是同一件事」，
+// 拿它合并会把「逾期不予受理」和「材料不全不予受理」压成一条。低于 6 个汉字不合并。
+function mergeKey(text) {
+  const k = consequenceKey(text);
+  if (!k) return null;
+  return k.replace(/[^\u4e00-\u9fff]/g, '').length >= 6 ? k : null;
+}
+
+// 同一件事只留一条：先按「后果短语」合并，再按字面相似度兜底。
+// 合并后保留后果最重的那条；同等后果取最短的表述，并记下出现了几次。
+function dedupeCandidates(list, threshold = 0.62) {
+  const groups = [];
+  for (const c of list) {
+    const g = bigrams(c.text);
+    const key = mergeKey(c.text);
+    let hit = null;
+    for (const grp of groups) {
+      if (key && grp.key === key) { hit = grp; break; }
+      if (jaccard(g, grp.grams) >= threshold) { hit = grp; break; }
+    }
+    if (hit) hit.items.push(c);
+    else groups.push({ grams: g, key, items: [c] });
+  }
+  return groups.map((grp) => {
+    const sorted = [...grp.items].sort((a, b) =>
+      (rankOf(b.consequence.kind) - rankOf(a.consequence.kind)) || (a.text.length - b.text.length));
+    return { ...sorted[0], occurrences: grp.items.length };
+  });
+}
+
+// ---------- 标题：从原文里摘「条件 + 后果」，不自己编 ----------
+const ACTORS = /^(?:学校|学院|校方|平台|公司|本公司|甲方|乙方|丙方|经营者|商家|教师|辅导员|医院|机构|我们|他们)$/;
+
+function conditionOf(text, cutAt) {
+  let head = text.slice(0, cutAt)
+    .replace(/^第[一二三四五六七八九十百零〇\d]+条\s*/, '')
+    .replace(/^[（(][一二三四五六七八九十\d]+[)）]\s*/, '')
+    .replace(/^[、，。；：\s]+/, '')
+    .trim();
+  const parts = head.split(/[，。；：、]/).map((s) => s.trim()).filter(Boolean);
+  let cond = parts.length ? parts[parts.length - 1] : head;
+  cond = cond.replace(/^(?:如果|若|如|凡是|对于|对|在)/, '').replace(/[时后]$/, '');
+  // 「逾期者，学校不再受理成绩核查」——紧挨后果的主语不是条件，扔掉
+  if (ACTORS.test(cond)) return '';
+  if (cond.length > 2) cond = cond.replace(/者$/, '');
+  if (cond.length > 12) {
+    const cut = Math.max(cond.lastIndexOf('且', 12), cond.lastIndexOf('或', 12), cond.lastIndexOf('以及', 12), cond.lastIndexOf('并', 12));
+    cond = cut >= 4 ? cond.slice(0, cut) : cond.slice(0, 12) + '…';
+  }
+  return cond.trim();
+}
+
+function titleOf(c) {
+  const text = String(c.text || '').replace(/\s+/g, '');
+  const key = consequenceKey(text);
+  if (!key) return (c.label || c.categoryName || '这条要看').slice(0, 30);
+  const cons = key.replace(/^取消其/, '取消').replace(/^视为放弃其/, '视为放弃');
+  const at = text.indexOf(key);
+  const cond = at > 0 ? conditionOf(text, at) : '';
+  let out = cond ? cond + '，' + cons : cons;
+  if (out.length > 30) out = cons;
+  return out.slice(0, 30);
+}
+
+function plainOf(c) {
+  const raw = c.advice || c.why || '';
+  if (raw) return raw.length > 46 ? raw.slice(0, 44) + '…' : raw;
+  switch (c.consequence.kind) {
+    case 'lose_qualification': return '这一步做错，资格就没了，事后补不回来。';
+    case 'requirement': return '这件事得你做，而且有截止时间。';
+    case 'lose_money': return '这件事最后会花你的钱。';
+    case 'lose_data': return '这里涉及你的个人信息。';
+    case 'procedural': return '只是流程要求，但漏了会卡住。';
+    default: return '原文这么说，具体影响要看你处在哪一方。';
+  }
+}
+
+// ---------- 池子与排序 ----------
+function preparePool(scanned, { stance = 'user', lexicon = null, rulebook = null } = {}) {
+  const lex = lexicon || scanned.lexicon || { entries: [], categories: {} };
+  const book = rulebook || scanned.rulebook || { rules: [] };
+  const entryById = new Map(lex.entries.map((e) => [e.id, e]));
+  for (const r of book.rules) entryById.set(r.id, r);
+
+  const raw = (scanned.candidates || []).map((c, i) => {
+    const top = c.hits.reduce((a, b) => (b.weight > a.weight ? b : a), c.hits[0]);
+    const entry = entryById.get(top.id) || {};
+    const kind = consequenceOf(c.text, stance);
+    return {
+      id: 'c' + (i + 1),
+      text: c.text,
+      label: top.label,
+      categoryName: lex.categories?.[top.category]?.name || top.category,
+      advice: entry.advice || '',
+      why: entry.why || '',
+      weight: top.weight,
+      stance,
+      consequence: kind,
+      // 不利后果落在别人头上 → 这条对读者有利，不该排在前面
+      favorsReader: !!(c.bearing && c.bearing.bearing && stance && c.bearing.bearing !== stance),
+      bearing: c.bearing ? c.bearing.bearing : null,
+      bearingKind: c.bearing ? c.bearing.kind : null,
+      bearingHolder: c.bearing ? c.bearing.holder : null,
+    };
+  });
+
+  const deduped = dedupeCandidates(raw);
+  const consequential = deduped.filter((c) => c.consequence.kind !== 'other' && c.consequence.kind !== 'procedural');
+  return {
+    chars: scanned.rawChars || (scanned.text || '').length,
+    sentences: scanned.sentences || 0,
+    gaps: scanned.gaps || null,
+    clusters: (scanned.clusters || []).length,
+    raw,
+    deduped,
+    consequential,
+    pool: consequential,
+  };
+}
+
+function sortPool(pool) {
+  return [...pool].sort((a, b) =>
+    // 「对你是保护」往后放，但要求你行动的除外——不勾就空着，不能不管
+    (Number(a.favorsReader && !a.consequence.requiresAction) - Number(b.favorsReader && !b.consequence.requiresAction))
+    || (rankOf(b.consequence.kind) - rankOf(a.consequence.kind))
+    || (Number(b.consequence.requiresAction) - Number(a.consequence.requiresAction))
+    || (b.weight - a.weight)
+    || (a.text.length - b.text.length));
+}
+
+// 多样性：同一种后果最多占 maxPerKind 格，避免 Top 10 全是「取消资格」。
+// 先按配额挑，配额挡住的好东西放 overflow，最后还有空位再按原顺序补回来。
+function pickTop(sorted, { topN = 10, maxPerKind = 3 } = {}) {
+  const counts = {};
+  const picked = [];
+  const overflow = [];
+  for (const c of sorted) {
+    if (picked.length >= topN) { overflow.push(c); continue; }
+    const k = c.consequence.kind;
+    if ((counts[k] || 0) >= maxPerKind) { overflow.push(c); continue; }
+    counts[k] = (counts[k] || 0) + 1;
+    picked.push(c);
+  }
+  for (const c of overflow) {
+    if (picked.length >= topN) break;
+    picked.push(c);
+  }
+  return picked;
+}
+
+function cardOf(c, rank) {
+  return {
+    rank,
+    id: c.id,
+    text: c.text,
+    title: titleOf(c),
+    plain: plainOf(c),
+    label: c.label,
+    categoryName: c.categoryName,
+    consequence: c.consequence.kind,
+    consequenceName: CONSEQUENCE_NAMES[c.consequence.kind] || c.consequence.kind,
+    requiresAction: c.consequence.requiresAction,
+    occurrences: c.occurrences || 1,
+    bearing: c.bearing,
+    bearingKind: c.bearingKind,
+    bearingHolder: c.bearingHolder,
+    favorsReader: c.favorsReader,
+    surprise: null,
+  };
+}
+
+function buildOfflineReport(prep, { stance = 'user', topN = 10, documentName = '未命名文档', mode = 'fallback' } = {}) {
+  const MIN_POOL = Math.min(topN, 3);
+  // 有后果的太少时，退回全部候选，避免「筛没了」
+  const fallbackPool = prep.consequential.length < MIN_POOL;
+  const pool = fallbackPool ? prep.deduped : prep.consequential;
+  const sorted = sortPool(pool);
+  const picked = pickTop(sorted, { topN });
+  const stats = {
+    chars: prep.chars,
+    sentences: prep.sentences,
+    candidatesRaw: prep.raw.length,
+    candidates: prep.deduped.length,
+    duplicates: prep.raw.length - prep.deduped.length,
+    consequential: prep.consequential.length,
+    shown: picked.length,
+  };
+  const summary = fallbackPool
+    // 没有一条能确认为「有后果」时，不许硬编一句结论去凑数
+    ? '这份 ' + stats.chars.toLocaleString() + ' 字的文件里，没找到明确有后果的句子。'
+      + '下面是命中最重的 ' + stats.shown + ' 条，仅供参考——也可能是我还不认识这类文本。'
+    : '这份 ' + stats.chars.toLocaleString() + ' 字的文件里，有 ' + stats.consequential
+      + ' 处会影响到你。以下是其中该看的 ' + stats.shown + ' 处'
+      + (mode === 'fallback' ? '（离线排序，未经模型）。' : '。');
+  return {
+    mode,
+    stance,
+    documentName,
+    stats,
+    gaps: prep.gaps,
+    clusters: prep.clusters,
+    summary,
+    picks: picked.map((c, i) => cardOf(c, i + 1)),
+    rest: sorted.slice(picked.length).map((c) => ({ id: c.id, text: c.text, categoryName: c.categoryName })),
+    pool,
+  };
+}
+
+window.DH={normalize,splitSentences,matchLexicon,matchRules,cluster,waterIndex,candidates,detectRegister,missingFields,scanText,segments,CHECKLISTS,bearingOfSentence,relationTo,PARTY_NAMES,RANK,rankOf,CONSEQUENCE_NAMES,consequenceOf,consequenceKey,bigrams,jaccard,dedupeCandidates,titleOf,plainOf,preparePool,sortPool,pickTop,buildOfflineReport};
 })();
 var DH = window.DH;
 var CAT = LEX.categories;
@@ -521,23 +877,51 @@ $('file').onchange = function (e) {
 
 $('clear').onclick = function () { $('input').value = ''; $('out').classList.add('hidden'); last = null; };
 
+// 页面被 serve.mjs 服务着的时候，能借到模型排序（L2）；双击打开或断网时，
+// 下面这套纯函数排序照样出完整报告。两条路径共用 lib/rank.mjs 的同一份判断。
+var API = null;
+fetch('/api/health').then(function (r) { return r.json(); })
+  .then(function (j) { if (j && j.ok) API = j; })
+  .catch(function () { API = null; });
+
+function analyze(raw, stance) {
+  var r = DH.scanText(LEX, RULES, raw);
+  var reg = $('reg').value;
+  if (reg !== 'auto') r.gaps = DH.missingFields(r.text, reg);
+  var prep = DH.preparePool(r, { stance: stance, lexicon: LEX, rulebook: RULES });
+  return { scan: r, report: DH.buildOfflineReport(prep, { stance: stance, topN: 10 }) };
+}
+
 function runNow() {
   var raw = $('input').value.trim();
   var btn = $('run');
   if (!raw) { $('hint').textContent = '先粘一段文本进来。'; return; }
   if (raw.length < 40) { $('hint').textContent = '太短了，至少 40 个字才看得出结构。'; return; }
   var label = btn.textContent;
+  var stance = $('stance').value;
   btn.disabled = true;
   btn.textContent = '脱水中…';
   // 先让浏览器画出禁用态，再跑同步计算，否则看不到任何反馈
   requestAnimationFrame(function () {
-    var r = DH.scanText(LEX, RULES, raw);
-    var reg = $('reg').value;
-    if (reg !== 'auto') r.gaps = DH.missingFields(r.text, reg);
-    last = r;
-    render(r);
+    var out = analyze(raw, stance);
+    last = { scan: out.scan, report: out.report };
+    render(out.scan, out.report);
     btn.disabled = false;
     btn.textContent = label;
+
+    if (API && API.llm && raw.length <= (API.maxChars || 20000)) {
+      $('modeNote').textContent = '模型排序中…（' + (API.config || '') + '）';
+      fetch('/api/dehydrate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: raw, stance: stance, topN: 10, name: '粘贴的文本' }),
+      }).then(function (r) { return r.json(); })
+        .then(function (rep) {
+          if (rep && rep.picks && rep.picks.length) { last.report = rep; render(last.scan, rep); }
+          else { $('modeNote').textContent = '模型没给出结果，以上是离线排序。'; }
+        })
+        .catch(function () { $('modeNote').textContent = '模型没应答，以上是离线排序。'; });
+    }
   });
 }
 $('run').onclick = runNow;
@@ -545,8 +929,38 @@ $('input').addEventListener('keydown', function (e) {
   if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') { e.preventDefault(); runNow(); }
 });
 
-function render(r) {
+var STANCE_NAME = { student: '学生', user: '用户', a: '甲方', b: '乙方' };
+var MODE_TEXT = {
+  live: '模型排序 · 标题和人话由模型按原文写，每条都能逐字校验',
+  fallback: '离线排序 · 本地词典 + 确定性规则挑出，未经模型改写',
+  fallback_error: '离线排序 · 模型调用失败，已自动降级（报告依然完整）',
+};
+
+function cardHTML(p, i) {
+  var tags = [];
+  if (p.consequenceName) {
+    tags.push('<span class="' + (p.consequence === 'lose_qualification' ? 'warn' : '') + '">' + p.consequenceName + '</span>');
+  }
+  if (p.requiresAction) tags.push('<span class="act">要求你行动</span>');
+  if (p.bearing && DH.PARTY_NAMES[p.bearing]) {
+    tags.push('<span>' + (p.bearingKind === 'power'
+      ? DH.PARTY_NAMES[p.bearingHolder] + ' 有权'
+      : '后果由 ' + DH.PARTY_NAMES[p.bearing] + ' 承担') + '</span>');
+  }
+  if (p.favorsReader) tags.push('<span>这条对你是保护</span>');
+  if (p.occurrences > 1) tags.push('<span>同后果 ' + p.occurrences + ' 处</span>');
+  return '<div class="card' + (i === 0 ? ' first' : '') + '">'
+    + '<div class="head"><span class="n">' + (i + 1) + '</span><span class="t">' + esc(p.title) + '</span>'
+    + (i === 0 ? '<span class="flag">如果只看一条</span>' : '') + '</div>'
+    + (p.plain ? '<div class="p">' + esc(p.plain) + '</div>' : '')
+    + '<div class="q">「' + esc(p.text) + '」</div>'
+    + (tags.length ? '<div class="tags">' + tags.join('') + '</div>' : '')
+    + '</div>';
+}
+
+function render(r, report) {
   $('out').classList.remove('hidden');
+  var st = report.stats;
 
   // 低命中不等于干净，可能是我还不认识这类文本 —— 必须说出来
   var warn = $('warn');
@@ -562,48 +976,32 @@ function render(r) {
   var real = DH.splitSentences(r.text).filter(function (s) {
     return r.text.slice(s.start, s.end).trim().length >= 15;
   });
-  var byCat = {};
-  r.clusters.forEach(function (c) { byCat[c.primary.category] = (byCat[c.primary.category] || 0) + 1; });
 
   $('stats').innerHTML = [
-    ['#', r.text.length.toLocaleString(), '字数'],
-    ['#', r.sentences.toLocaleString(), '句'],
-    ['#', r.candidates.length, '候选句'],
-    ['#', r.candidates.length + ' / ' + real.length, '句候选'],
-    ['#', r.clusters.length, '命中簇'],
-    ['#', r.gaps.name, '判定语域'],
+    [st.chars.toLocaleString(), '字数'],
+    [st.sentences.toLocaleString(), '句'],
+    [st.candidates + ' / ' + real.length, '候选句 / 实质句'],
+    [st.duplicates, '同一条规则已合并'],
+    [st.consequential, '有后果'],
+    [st.shown, '进清单'],
   ].map(function (x) {
-    return '<div class="stat"><b>' + x[1] + '</b><s>' + x[2] + '</s></div>';
+    return '<div class="stat"><b>' + x[0] + '</b><s>' + x[1] + '</s></div>';
   }).join('');
 
-  // 候选句：按最高权重排序
-  var cands = r.candidates.slice().sort(function (a, b) {
-    var wa = Math.max.apply(null, a.hits.map(function (h) { return h.weight; }));
-    var wb = Math.max.apply(null, b.hits.map(function (h) { return h.weight; }));
-    return wb - wa || b.hits.length - a.hits.length;
-  });
-  $('candCount').textContent = '共 ' + cands.length + ' 句 / 全文 ' + real.length + ' 句';
-  $('cands').innerHTML = cands.slice(0, 60).map(function (c) {
-    var top = c.hits.reduce(function (a, b) { return b.weight > a.weight ? b : a; }, c.hits[0]);
-    var w = top.weight;
-    var role = CAT[top.category].role;
-    var cls = role === 'dilution' ? 'dil' : 'w' + w;
-    var tags = c.hits.map(function (h) {
-      return '<span class="tag">' + CAT[h.category].name + '·' + h.label + '</span>';
-    });
-    // 只报事实，不下结论：谁有权 / 后果由谁承担
-    var b = DH.bearingOfSentence(c.text);
-    if (b.bearing) {
-      var fact = b.kind === 'power'
-        ? DH.PARTY_NAMES[b.holder] + ' 有权'
-        : '后果由 ' + DH.PARTY_NAMES[b.bearing] + ' 承担';
-      tags.push('<span class="tag" style="color:#bfe3ff;background:#10263a">' + fact + '</span>');
-    }
-    var sent = esc(c.text).replace(new RegExp(esc(top.matched).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')), '<span class="hit">$&</span>');
-    return '<div class="cand ' + cls + '"><div class="meta">' + tags.join('') +
-      (top.needsStance ? '<span class="tag" style="color:#e8b04b">需判立场</span>' : '') +
-      '</div><div class="sentence">' + sent + '</div></div>';
-  }).join('') || '<div class="note">这段没有命中任何套路。</div>';
+  $('modeNote').textContent = MODE_TEXT[report.mode] || '';
+  $('repCount').textContent = '全文 ' + st.consequential + ' 处有后果，这里挑了最该看的 ' + report.picks.length + ' 条';
+  $('cards').innerHTML = report.picks.map(cardHTML).join('')
+    || '<div class="note">这段没有找到有后果的句子——可能它真的干净，也可能是我还不认识这类文本。</div>';
+  $('stanceNote').textContent = '以上按「' + (STANCE_NAME[report.stance] || report.stance)
+    + '」的立场判断。同一句话，站的位置不同，结论就不同。';
+
+  // 未进清单的命中照样列出来：免得用户以为「没进这 10 条就是没事」
+  var rest = (report.rest || []).slice(0, 30);
+  $('restCount').textContent = (report.rest || []).length ? '（共 ' + report.rest.length + ' 条，显示前 30）' : '（无）';
+  $('rest').innerHTML = rest.map(function (c) {
+    return '<div class="cand w1"><div class="meta"><span class="tag">' + esc(c.categoryName || '') + '</span></div>'
+      + '<div class="sentence">' + esc(c.text) + '</div></div>';
+  }).join('') || '<div class="note">全文命中都已进清单。</div>';
 
   $('doc').innerHTML = DH.segments(r.text, r.clusters).map(function (g) {
     if (g.type === 'text') return esc(g.text);
@@ -624,12 +1022,23 @@ function render(r) {
 
 $('copy').onclick = function () {
   if (!last) return;
-  var lines = ['【文字脱水机 · 离线报告】', '字数 ' + last.text.length + ' / 句 ' + last.sentences + ' / 候选 ' + last.candidates.length + ' 句', ''];
-  last.candidates.slice(0, 20).forEach(function (c, i) {
-    var top = c.hits.reduce(function (a, b) { return b.weight > a.weight ? b : a; }, c.hits[0]);
-    lines.push((i + 1) + '. [' + CAT[top.category].name + '] ' + c.text);
+  var rep = last.report;
+  var lines = ['【文字脱水机】' + rep.summary, ''];
+  rep.picks.forEach(function (p) {
+    lines.push(p.rank + '. ' + p.title);
+    if (p.plain) lines.push('   ' + p.plain);
+    lines.push('   「' + p.text + '」');
+    var tags = [];
+    if (p.consequenceName) tags.push(p.consequenceName);
+    if (p.requiresAction) tags.push('要求你行动');
+    if (p.occurrences > 1) tags.push('同后果 ' + p.occurrences + ' 处');
+    if (tags.length) lines.push('   [' + tags.join(' · ') + ']');
+    lines.push('');
   });
-  lines.push('', '没写：' + last.gaps.missing.join('、'));
+  var g = last.scan.gaps;
+  if (g && !g.skipped) lines.push('没写：' + (g.missing.length ? g.missing.join('、') : '（必备项齐全）'));
+  else if (g) lines.push('缺口检查跳过：' + g.reason);
+  lines.push('', '以上按「' + (STANCE_NAME[rep.stance] || rep.stance) + '」的立场判断。');
   navigator.clipboard.writeText(lines.join('\n')).then(function () { $('copy').textContent = '已复制 ✓'; });
 };
 </script>

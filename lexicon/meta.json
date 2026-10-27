@@ -1,0 +1,103 @@
+{
+  "version": "0.3.0",
+  "locale": "zh-CN",
+  "name": "一人公司套路词典",
+  "license": "MIT",
+  "disclaimer": "本文件中的 example 为中文商业文本中的典型表述，用于模式匹配演示，并非引用任何特定公司、平台或个人的原文。命中结果只描述文本特征，不对任何主体作出道德或法律判断。",
+  "design_rules": [
+    "宁可漏，不可误：陷阱类单字或通用词不入库，每条 pattern 必须能自证。",
+    "多字优先：『有权』不入库，『有权随时』『有权扣除』才入库。",
+    "陷阱类要精度，泡泡词可以要召回：前者是指控，后者只影响水份计数。",
+    "每条必须能回答『为什么算套路』（why 字段），答不出的删掉。",
+    "v0.3 起，新增词条必须带 evidence 字段，指向真实语料里的具体句子；没有证据的不准入库。",
+    "只描述文本特征，不升级为对主体动机的指控。"
+  ],
+  "registers": {
+    "legal": "合同、协议、隐私政策、规章制度",
+    "client": "接单、外包、自由职业、客户需求",
+    "recruit": "招聘、面试、劳动合同、实习"
+  },
+  "categories": {
+    "fuzzy_promise": {
+      "name": "模糊承诺",
+      "role": "trap",
+      "register": [
+        "client",
+        "recruit"
+      ],
+      "icon": "target",
+      "desc": "把不确定的未来当成现在的筹码：画饼、白嫖、范围蔓延、模糊验收、不可验证的承诺。"
+    },
+    "unilateral": {
+      "name": "单方裁量",
+      "role": "trap",
+      "register": [
+        "legal",
+        "client",
+        "recruit"
+      ],
+      "icon": "gavel",
+      "desc": "规则的解释权、判定权、变更权单向归对方；或者把规定伸进你的私人领域。"
+    },
+    "silent_consent": {
+      "name": "沉默即同意",
+      "role": "trap",
+      "register": [
+        "legal",
+        "client"
+      ],
+      "icon": "clock",
+      "desc": "不回复、不操作、继续使用，就等于你答应了。"
+    },
+    "liability_shift": {
+      "name": "责任转移",
+      "role": "trap",
+      "register": [
+        "legal",
+        "client"
+      ],
+      "icon": "shield-off",
+      "desc": "出了事，责任与损失被单向推到你这边的条款。"
+    },
+    "duty_vague": {
+      "name": "虚化要求",
+      "role": "trap",
+      "register": [
+        "recruit",
+        "client"
+      ],
+      "icon": "help-circle",
+      "desc": "职责用『协助/参与/配合』开头，要求落在『积极/踏实/有执行力』上，读完还是不知道每天要做什么。"
+    },
+    "comp_erosion": {
+      "name": "待遇缩水",
+      "role": "trap",
+      "register": [
+        "recruit",
+        "client"
+      ],
+      "icon": "trending-down",
+      "desc": "钱的实感被稀释：非现金补贴、押薪、折算、面议、以后再说。"
+    },
+    "pressure": {
+      "name": "隐性压力",
+      "role": "trap",
+      "register": [
+        "recruit",
+        "client"
+      ],
+      "icon": "zap",
+      "desc": "没说出口的加班与加急：抗压、随时响应、能接受高强度、今天就要。"
+    },
+    "buzzword": {
+      "name": "泡泡词",
+      "role": "dilution",
+      "register": [
+        "client",
+        "recruit"
+      ],
+      "icon": "bubbles",
+      "desc": "说了等于没说：无法验收、无法证伪、无法落地的抽象概念。只计入水份，不计入套路。"
+    }
+  }
+}

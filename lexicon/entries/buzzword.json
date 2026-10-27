@@ -1,0 +1,231 @@
+{
+  "category": "buzzword",
+  "registers": [
+    "client",
+    "recruit"
+  ],
+  "note": "泡泡词：说了等于没说。只进水份计数，不进套路指控。",
+  "entries": [
+    {
+      "id": "bw-01",
+      "category": "buzzword",
+      "subtype": "verb",
+      "label": "赋能",
+      "weight": 3,
+      "terms": [
+        "赋能"
+      ],
+      "why": "『赋能』没有说明赋什么能、怎么赋、怎么验收。",
+      "advice": "要求换成：具体给谁、给了什么、怎么算给了。",
+      "example": "用 AI 赋能商家经营，实现全链路提效。"
+    },
+    {
+      "id": "bw-02",
+      "category": "buzzword",
+      "subtype": "noun",
+      "label": "抓手",
+      "weight": 1,
+      "terms": [
+        "抓手"
+      ],
+      "why": "不说清具体动作的『抓手』，等于没给方案。",
+      "advice": "问一句：这个抓手，下周由谁做什么。",
+      "example": "以内容为抓手，打开新的增长空间。"
+    },
+    {
+      "id": "bw-03",
+      "category": "buzzword",
+      "subtype": "noun",
+      "label": "闭环",
+      "weight": 1,
+      "terms": [
+        "闭环"
+      ],
+      "why": "闭环听起来完整，但没有任何一处可被检验。",
+      "advice": "要求画出从进入到退出的每一步。",
+      "example": "打通从流量到转化的完整闭环。"
+    },
+    {
+      "id": "bw-04",
+      "category": "buzzword",
+      "subtype": "verb",
+      "label": "打通",
+      "weight": 1,
+      "terms": [
+        "全链路打通",
+        "打通全链路",
+        "打通上下游",
+        "链路打通"
+      ],
+      "why": "『打通』掩盖了接口、字段、权限这些真正的工作量。",
+      "advice": "要求列出要打通的具体系统清单。",
+      "example": "本季度重点是打通全链路的业务数据。"
+    },
+    {
+      "id": "bw-05",
+      "category": "buzzword",
+      "subtype": "verb",
+      "label": "沉淀",
+      "weight": 1,
+      "terms": [
+        "沉淀方法论",
+        "能力沉淀",
+        "沉淀下来",
+        "数据沉淀"
+      ],
+      "why": "『沉淀』把『没有产出』说成了一种收获。",
+      "advice": "问一句：沉淀在哪，谁可以复用。",
+      "example": "把这次的经验沉淀成可复用的方法论。"
+    },
+    {
+      "id": "bw-06",
+      "category": "buzzword",
+      "subtype": "adj",
+      "label": "全域",
+      "weight": 1,
+      "terms": [
+        "全域经营",
+        "全域营销",
+        "全域增长",
+        "全渠道"
+      ],
+      "why": "『全域』通常意味着每个域都没做透。",
+      "advice": "要求指定优先的单一渠道和验证周期。",
+      "example": "构建全域经营能力，覆盖所有触点。"
+    },
+    {
+      "id": "bw-07",
+      "category": "buzzword",
+      "subtype": "noun",
+      "label": "生态",
+      "weight": 1,
+      "terms": [
+        "生态位",
+        "构建生态",
+        "生态闭环",
+        "开放生态"
+      ],
+      "why": "『生态』是一个没有边界的承诺。",
+      "advice": "要求说清你在生态里的确切位置和收益方式。",
+      "example": "共同构建开放共赢的内容生态。"
+    },
+    {
+      "id": "bw-08",
+      "category": "buzzword",
+      "subtype": "noun",
+      "label": "颗粒度",
+      "weight": 1,
+      "terms": [
+        "颗粒度"
+      ],
+      "why": "『颗粒度』常用来要求更细，但从不定义细到什么程度。",
+      "advice": "要求给出一个具体的示例输出。",
+      "example": "这个需求的颗粒度还不够，再细一点。"
+    },
+    {
+      "id": "bw-09",
+      "category": "buzzword",
+      "subtype": "noun",
+      "label": "顶层设计",
+      "weight": 1,
+      "terms": [
+        "顶层设计"
+      ],
+      "why": "『顶层设计』常常是一份没人执行的文档。",
+      "advice": "要求指明这次要落地的第一个具体模块。",
+      "example": "先做好顶层设计，再谈落地。"
+    },
+    {
+      "id": "bw-10",
+      "category": "buzzword",
+      "subtype": "verb",
+      "label": "对齐 / 拉齐",
+      "weight": 1,
+      "terms": [
+        "对齐一下",
+        "拉齐认知",
+        "对齐目标",
+        "对齐预期"
+      ],
+      "why": "『对齐』经常是没有结论的会议的委婉说法。",
+      "advice": "要求会后产出一句可执行的结论。",
+      "example": "我们下周先对齐一下目标。"
+    },
+    {
+      "id": "bw-11",
+      "category": "buzzword",
+      "subtype": "verb",
+      "label": "降本增效",
+      "weight": 1,
+      "terms": [
+        "降本增效",
+        "提质增效",
+        "提效降本"
+      ],
+      "why": "四个字同时承诺了降本和增效，通常两样都没做到。",
+      "advice": "要求指定一个可量化的指标和一个时间点。",
+      "example": "通过数字化手段实现降本增效。"
+    },
+    {
+      "id": "bw-12",
+      "category": "buzzword",
+      "subtype": "adj",
+      "label": "精细化运营",
+      "weight": 1,
+      "terms": [
+        "精细化运营",
+        "精细化",
+        "精益运营"
+      ],
+      "why": "『精细化』是一个方向，不是一个动作。",
+      "advice": "要求给出第一步的具体动作。",
+      "example": "用数据驱动精细化运营。"
+    },
+    {
+      "id": "bw-13",
+      "category": "buzzword",
+      "subtype": "noun",
+      "label": "组合拳",
+      "weight": 1,
+      "terms": [
+        "组合拳",
+        "一套组合拳"
+      ],
+      "why": "『组合拳』把多个不确定的动作打包成一个确定的承诺。",
+      "advice": "要求拆开：每一个动作各自的目标是什么。",
+      "example": "我们这次打一套组合拳。"
+    },
+    {
+      "id": "bw-14",
+      "category": "buzzword",
+      "subtype": "verb",
+      "label": "复盘",
+      "weight": 1,
+      "terms": [
+        "复盘一下",
+        "做个复盘",
+        "复盘会"
+      ],
+      "why": "『复盘』常被用来代替『结论』。",
+      "advice": "要求复盘必须落到一条要改的事上。",
+      "example": "这件事我们先复盘一下再说。"
+    },
+    {
+      "id": "bw-15",
+      "category": "buzzword",
+      "subtype": "verb",
+      "label": "全面拥抱 AI / 数智化",
+      "weight": 1,
+      "terms": [
+        "全面拥抱AI",
+        "全面拥抱 AI",
+        "数智化",
+        "全面接入AI",
+        "All in AI"
+      ],
+      "why": "『全面』与『拥抱』都是态度词，不是工作内容。",
+      "advice": "要求指出第一个要上 AI 的具体环节。",
+      "example": "公司决定全面拥抱 AI，实现数智化转型。"
+    }
+  ]
+}

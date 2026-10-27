@@ -12,7 +12,7 @@
 node scripts/selftest.mjs
 ```
 
-一条命令，八项自检：环境、词典、**单元测试**、构建、Gold 评测、端到端、模型传输、模型配置。
+一条命令，九项自检：环境、词典、**单元测试**、构建、**页面（把产物放进假 DOM 真跑一遍）**、Gold 评测、端到端、模型传输、模型配置。
 **不需要 key，不需要联网。** 全绿就说明这个仓库是活的。
 
 只想跑单元测试：
@@ -77,27 +77,38 @@ node scripts/scan.mjs corpus/raw/学生手册.txt --top=8 --show=10
 ## 目录
 
 ```
-lexicon/zh-cn.v1.json        91 条套路词条（固定短语层，高精度）
+lexicon/entries/*.json       91 条套路词条，按类别拆成 8 个文件（**改这里**）
+lexicon/meta.json            版本、许可、类别定义、语域说明、设计纪律
+lexicon/zh-cn.v1.json        词库产物（合并结果，勿手改）
 lexicon/rules.zh-cn.v1.json  12 条同句共现规则（高召回层，允许误报）
+lexicon/README.md            词条怎么写、校验会拦什么
 lib/engine.mjs               纯函数引擎：无 import、不碰文件系统、不联网
-lib/match.mjs                Node 侧封装（读词典文件）
+lib/rank.mjs                 纯函数排序层：代价门槛 + 去重 + 标题（浏览器与命令行共用）
+lib/pipeline.mjs             Node 侧封装：读提示词、调模型、任何一环失败就降级
+lib/lexicon.mjs              词库读写层：源 → 产物合并、结构校验
+lib/bundle.mjs               把引擎 + 排序层拼成浏览器可用的 IIFE
 ui/offline.template.html     离线版界面模板
 scripts/build-offline.mjs    打包成单文件 HTML
+scripts/build-lexicon.mjs    合并词库源文件 → zh-cn.v1.json（支持 --lint / --check）
+scripts/check-page.mjs       页面自检：把构建产物放进假 DOM 里真的跑一遍
 scripts/scan.mjs             命令行分析
 scripts/check-secrets.mjs    提交前密钥体检
 corpus/raw/                  真实语料（学生手册、两份 bilibili 协议、大学章程）
 ```
 
-## 架构（三层，只有第二层花 API 钱）
+## 架构（四段，只有第三段花 API 钱）
 
 ```
 长文本
-  ↓ L1 确定性：切句 + 词典 + 共现规则 → 候选句        ← 已完成，零成本
-  ↓ L2 模型：只读候选句，判断立场（对你不利/有利/中性）   ← 待做
-  ↓ L3 确定性：报告 + 缺口检测 + 压缩率                ← L1 里已实现
+  ↓ L1 确定性：切句 + 词典 + 共现规则 → 候选句        ← 零成本、零延迟
+  ↓ L1.5 确定性：代价门槛 → 有后果的句子               ← 30 条
+  ↓ L2 模型：只读这 30 条，写标题和一句人话            ← 可选，无 key 自动降级
+  ↓ L3 确定性：按后果去重 + 多样性排序 + 缺口检测      ← 与离线版同一条路径
 ```
 
-L1 在 10.2 万字的学生手册上把 2303 个实质句子压到 **91 句**。模型只需要读那 91 句。
+实测（学生手册 2025 版，19.9 万字）：**198,931 字 → 8,548 句 → 3,800 个实质句 → 131 条候选 → 30 处有后果 → 10 条清单**，全流程 130 ms（不含模型）。
+
+**离线版和命令行跑的是同一份排序代码**（`lib/rank.mjs`），不是两套实现——所以页面上的清单和终端里的清单一定一致。
 
 ## 密钥安全（三条，缺一不可）
 
@@ -108,12 +119,16 @@ L1 在 10.2 万字的学生手册上把 2303 个实质句子压到 **91 句**。
 另外：比赛用**专用 key**（不要用平时那个），额度只充够用的；赛后删掉即可——
 因为离线版不需要 key 也能完整运行。
 
-## 词典怎么改
+## 词库怎么改
 
-- 新增词条：往 `lexicon/zh-cn.v1.json` 的 `entries` 里加，必须带 `why` 和 `advice`
+- 新增词条：在 `lexicon/entries/` 里找到对应类别的文件（一个类别一个文件），在 `entries` 末尾加一条，
+  必须带 `why` 和 `advice`，建议带 `evidence`（真实语料里的原句）
 - 新增规则：往 `lexicon/rules.zh-cn.v1.json` 的 `rules` 里加，`groups` 是两组词，
   同句内间隔不超过 `gap` 就算命中
-- 改完跑一遍 `node scripts/build-offline.mjs` 重新打包
+- 改完跑 `node scripts/build-lexicon.mjs` 合并产物，再跑 `node scripts/check-all.mjs`
+
+**不要手改 `lexicon/zh-cn.v1.json`**——它是产物，会被下一次构建覆盖。
+合并只按源文件来，`check-all` 会比对两者是否一致。字段说明和校验规则见 `lexicon/README.md`。
 
 纪律：**词条要精度，规则要召回。** 前者直接给用户看，后者只用来把句子喂给模型。
 
@@ -139,7 +154,7 @@ L1 在 10.2 万字的学生手册上把 2303 个实质句子压到 **91 句**。
 ## 提交前检查清单
 
 ```bash
-node scripts/selftest.mjs     # 七项自检，全绿才能提交
+node scripts/selftest.mjs     # 九项自检，全绿才能提交
 node scripts/check-secrets.mjs  # 密钥体检（含 git 历史）
 ```
 

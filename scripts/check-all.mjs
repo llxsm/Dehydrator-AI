@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// 一键体检：数据格式 + 密钥 + 构建 + 产物一致性。
+// 一键体检：词库（结构 + 产物同步）+ 密钥 + 构建 + 产物一致性 + 页面自检。
 // 用法:
 //   node scripts/check-all.mjs          完整检查（提交前跑）
 //   node scripts/check-all.mjs --fast   只查格式和密钥（pre-commit 用，跳过构建）
@@ -7,6 +7,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { validateSources, staleReason } from '../lib/lexicon.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const R = (p) => path.join(ROOT, p);
@@ -16,16 +17,22 @@ let failed = 0;
 const ok = (m) => console.log('  ✓ ' + m);
 const bad = (m, hint) => { failed++; console.log('  ✕ ' + m); if (hint) console.log('     → ' + hint); };
 
-// ---------- 1. 词典结构 ----------
-console.log('\n[1/4] 词典结构');
-const lexPath = R('lexicon/zh-cn.v1.json');
+// ---------- 1. 词库 ----------
+console.log('\n[1/5] 词库（源结构 + 产物同步）');
 const rulesPath = R('lexicon/rules.zh-cn.v1.json');
-let lex, rules;
+let rules;
 try {
-  lex = JSON.parse(fs.readFileSync(lexPath, 'utf8'));
-  ok('zh-cn.v1.json 是合法 JSON');
+  const v = validateSources(ROOT);
+  for (const w of v.warnings) console.log('  · ' + w);
+  if (v.errors.length) for (const e of v.errors) bad(e);
+  else ok(v.stats.files + ' 个词条文件 / ' + v.stats.entries + ' 条 / ' + v.stats.categories + ' 类，字段完整、id 唯一、category 与文件一致');
+
+  // 只读比对，不写盘，所以 --fast 也能跑（钩子里不允许改工作区）
+  const why = staleReason(ROOT);
+  if (why) bad(why, '改完词条要跑 node scripts/build-lexicon.mjs，不要手改产物');
+  else ok('lexicon/zh-cn.v1.json 与源一致（可放心提交）');
 } catch (e) {
-  bad('zh-cn.v1.json 解析失败：' + e.message, '最常见原因是少一个逗号或多了个逗号');
+  bad('词库读取失败：' + e.message, '看 lexicon/meta.json 与 lexicon/entries/*.json 是不是合法 JSON');
 }
 try {
   rules = JSON.parse(fs.readFileSync(rulesPath, 'utf8'));
@@ -34,20 +41,7 @@ try {
   bad('rules.zh-cn.v1.json 解析失败：' + e.message);
 }
 
-if (lex && rules) {
-  const cats = new Set(Object.keys(lex.categories));
-  const ids = new Set();
-  const NEED = ['id', 'category', 'label', 'weight', 'why', 'advice', 'example'];
-  let entryIssues = 0;
-  for (const e of lex.entries) {
-    for (const k of NEED) if (e[k] === undefined || e[k] === '') { bad('词条 ' + (e.id || '?') + ' 缺字段 ' + k); entryIssues++; }
-    if (e.category && !cats.has(e.category)) { bad('词条 ' + e.id + ' 的 category「' + e.category + '」不在 categories 里'); entryIssues++; }
-    if (!Array.isArray(e.terms) || !e.terms.length) { bad('词条 ' + e.id + ' 的 terms 为空'); entryIssues++; }
-    if (ids.has(e.id)) { bad('词条 id 重复：' + e.id); entryIssues++; }
-    ids.add(e.id);
-  }
-  if (!entryIssues) ok(lex.entries.length + ' 条词条，字段完整、id 唯一、category 合法');
-
+if (rules) {
   const rids = new Set();
   let ruleIssues = 0;
   for (const r of rules.rules) {
@@ -60,7 +54,7 @@ if (lex && rules) {
 }
 
 // ---------- 2. 密钥 ----------
-console.log('\n[2/4] 密钥体检');
+console.log('\n[2/5] 密钥体检');
 try {
   execFileSync(process.execPath, [R('scripts/check-secrets.mjs')], { cwd: ROOT, stdio: 'inherit' });
 } catch {
@@ -69,7 +63,7 @@ try {
 }
 
 // ---------- 3. 构建 ----------
-console.log('\n[3/4] 构建离线版');
+console.log('\n[3/5] 构建离线版');
 if (fast) {
   console.log('  – 已跳过（--fast）');
 } else {
@@ -81,7 +75,7 @@ if (fast) {
 }
 
 // ---------- 4. 产物一致性 ----------
-console.log('\n[4/4] 产物一致性');
+console.log('\n[4/5] 产物一致性');
 if (fast) {
   console.log('  – 已跳过（--fast）');
 } else {
@@ -93,6 +87,17 @@ if (fast) {
     if (!a.includes('window.DH')) bad('产物里找不到引擎，可能占位符没替换成功');
   } catch (e) {
     bad('读不到产物：' + e.message);
+  }
+}
+
+console.log('\n[5/5] 页面自检（产物里的脚本真的跑一遍）');
+if (fast) {
+  console.log('  – 已跳过（--fast）');
+} else {
+  try {
+    execFileSync(process.execPath, [R('scripts/check-page.mjs')], { cwd: ROOT, stdio: 'inherit' });
+  } catch {
+    bad('页面跑不起来', '单独跑：node scripts/check-page.mjs');
   }
 }
 

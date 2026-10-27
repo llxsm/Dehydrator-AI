@@ -5,21 +5,22 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { buildEngineBundle } from '../lib/bundle.mjs';
+import { buildLexicon, loadBundle } from '../lib/lexicon.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const R = (p) => path.join(ROOT, p);
 
-const lex = JSON.parse(fs.readFileSync(R('lexicon/zh-cn.v1.json'), 'utf8'));
+// 词库源在 lexicon/entries/*.json，先合并成 zh-cn.v1.json，再打进页面。
+// 这样「改了词条忘了构建」不会让页面用着旧词库。
+buildLexicon(ROOT);
+const lex = loadBundle(ROOT);
 const rules = JSON.parse(fs.readFileSync(R('lexicon/rules.zh-cn.v1.json'), 'utf8'));
-const engineSrc = fs.readFileSync(R('lib/engine.mjs'), 'utf8');
 const tpl = fs.readFileSync(R('ui/offline.template.html'), 'utf8');
 
-// 去掉 ES module 的 export 关键字，包成 IIFE 挂到 window.DH
-const stripped = engineSrc.replace(/^export\s+/gm, '');
-const names = ['normalize', 'splitSentences', 'matchLexicon', 'matchRules', 'cluster', 'waterIndex',
-  'candidates', 'detectRegister', 'missingFields', 'scanText', 'segments', 'CHECKLISTS',
-  'bearingOfSentence', 'relationTo', 'PARTY_NAMES'];
-const engineBundle = '(function(){\n' + stripped + '\nwindow.DH={' + names.join(',') + '};\n})();';
+// 「引擎 + 排序层」一起包成 IIFE 挂到 window.DH（拼装逻辑在 lib/bundle.mjs，
+// 自检用的是同一个函数）。这样离线版和命令行跑的是同一份判断，不是两份实现。
+const engineBundle = buildEngineBundle(ROOT);
 
 const presets = [
   {
@@ -43,7 +44,6 @@ try {
 } catch { /* 没语料就用手写那段 */ }
 
 // 示例卡上的数字与两条要点：构建时从语料真跑一遍，避免写着「真实运行」却对不上
-const RANK = { lose_qualification: 5, requirement: 4, lose_money: 3, lose_data: 3, procedural: 1, other: 2 };
 // 卡片主条（示例）对应的原文，用来避免下面两条和它撞车
 const HERO_PROBE = '从处理、处分决定或者复查决定送达之日起，学生在10日内未提出申诉的视为放弃申诉，学校不再受理其提出的申诉';
 
@@ -58,26 +58,22 @@ function tidy(s, max = 42) {
 }
 
 // 后果键：不同触发条件但后果相同（都是「放弃入学资格」），只算一件事
-function consequenceKey(s) {
-  const x = String(s).replace(/\s+/g, '');
-  const m = x.match(/(取消[^，。；：、]{0,8}|视为放弃[^，。；：、]{0,8}|视为[^，。；：、]{0,8}|不予[^，。；：、]{0,8}|不再受理[^，。；：、]{0,8}|作废|开除学籍|退学)/);
-  return m ? m[1] : null;
+function consequenceKeyOf(s) {
+  return consequenceKey(s);
 }
 
 let HC = { chars: '198,931', cand: '123', cons: '33', m1: '重修报名逾期视为自动放弃', m2: '缺考或作弊取消下学期补考资格' };
 try {
   const { scan } = await import('../lib/match.mjs');
-  const { consequenceOf, dedupeCandidates, bigrams, jaccard } = await import('../lib/pipeline.mjs');
+  const { preparePool, bigrams, jaccard, consequenceKey, RANK } = await import('../lib/rank.mjs');
   const rawTxt = fs.readFileSync(R('corpus/raw/学生手册2025.txt'), 'utf8');
   const r = scan(rawTxt);
-  const withC = r.candidates.map((c) => ({ ...c, consequence: consequenceOf(c.text, 'student') }));
-  const deduped = dedupeCandidates(withC);
-  const cons = deduped.filter((c) => c.consequence.kind !== 'other' && c.consequence.kind !== 'procedural').length;
+  const prep = preparePool(r, { stance: 'student' });
+  const cons = prep.consequential.length;
 
   // 排序：优先「要求你行动」的（读起来最像一句提醒），再按后果轻重
   const heroGrams = bigrams(HERO_PROBE);
-  const ranked = deduped
-    .filter((c) => c.consequence.kind !== 'other' && c.consequence.kind !== 'procedural')
+  const ranked = prep.consequential
     .filter((c) => jaccard(bigrams(c.text), heroGrams) < 0.45)   // 不和示例撞车
     .sort((a, b) => (Number(b.consequence.requiresAction) - Number(a.consequence.requiresAction))
       || (RANK[b.consequence.kind] - RANK[a.consequence.kind])
