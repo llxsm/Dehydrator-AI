@@ -22,7 +22,7 @@ const ruleCount = r.rule.length;
 const dictCount = r.dict.length;
 
 console.log('文件  ' + file);
-console.log('字数  ' + r.text.length + ' | 句数 ' + r.sentences + ' | 候选句 ' + r.candidates.length
+console.log('字数  ' + (r.rawChars || r.text.length) + ' | 句数 ' + r.sentences + ' | 候选句 ' + r.candidates.length
   + ' (' + pct(r.candidates.length, r.sentences) + '% 的句子要给人看)');
 console.log('命中  固定短语 ' + dictCount + ' 处 / 共现规则 ' + ruleCount + ' 处 / 合并后 ' + r.clusters.length + ' 簇');
 console.log('水份  ' + r.water.pct + '%（覆盖 ' + r.water.covered + ' 字）');
